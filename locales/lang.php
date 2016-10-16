@@ -1,8 +1,8 @@
 <?php
 return array(
-'en' = 'English',
-'pt' = 'Português',
-'es' = 'Español',
+'en_US' = 'English',
+'pt_BR' = 'Português Brasileiro',
+'es_ES' = 'Español',
 'cn' = '中文'
 );
 

@@ -1,4 +1,4 @@
-Install:
+
 
 1 - Copy zabdash folder to Zabbix folder (/usr/share/zabbix);
 

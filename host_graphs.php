@@ -6,7 +6,7 @@ require_once '../include/actions.inc.php';
 require_once '../include/items.inc.php';
 
 include('config.php');
-include('inc/functions.inc.php');
+//include('inc/functions.inc.php');
 
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;

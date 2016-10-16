@@ -158,7 +158,7 @@ a {
 ---------------------------------------------------------------------------------------------- */
 .navbar.nav-delighted.navbar-default {
   height: 60px;
-  background-color: #4184f3; 
+  background-color: #cecece; /*#4184f3*/ 
   border-width: 0px;
   border-radius: 0px;
   margin-bottom: 0px;

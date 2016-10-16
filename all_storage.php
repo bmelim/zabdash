@@ -1,5 +1,4 @@
 <?php
-
 	
 	$dbHosts = DBselect( 'SELECT hostid, name, status, snmp_available AS sa, snmp_disable_until AS sd, flags FROM hosts ORDER BY name ASC'	);	
 	

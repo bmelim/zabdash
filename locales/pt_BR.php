@@ -49,6 +49,7 @@ return array(
 'Memory' => 'Memória',
 'Network Interfaces' => 'Interfaces de Rede',
 'Triggers' => 'Triggers',
+'Logout' => 'Sair',
 
 
 

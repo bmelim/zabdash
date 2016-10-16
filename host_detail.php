@@ -5,16 +5,13 @@ require_once '../include/actions.inc.php';
 require_once '../include/items.inc.php';
 
 include('config.php');
-include('inc/functions.inc.php');
+//include('inc/functions.inc.php');
 
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
 $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
 
 $hostid = $_REQUEST['hostid'];
-
-//Translate
-$labels = include_once 'locales/en.php';
 
 if(isset($hostid)) {
 
@@ -265,14 +262,16 @@ include('host_info.php');
 				
 		echo "<tr>\n";	
 			echo "<td>\n";		
-				echo "<select id='graphid' name='graphid' onChange=\"getVal();\" style='height: 27px;' autofocus data-placeholder=''>\n";
+				echo "<select id='graphid' name='graphid' onChange=\"getVal();\" style='width:97% !important; height: 27px;' autofocus data-placeholder=''>\n";
 					echo "<option value='0'>------</option>\n";	
 													
 					foreach($graphs as $g) {
 						echo "<option value='".$g->graphid."'>".$g->name."</option>\n";							
 					}												
 				echo "</select>\n";
-	
+				echo "</td>\n";
+				
+				echo "<td width='20%' >\n";	
 				echo "<select id='period' name='period' onChange=\"getVal();\" style='height: 27px; width:75px;' autofocus >\n";
 					echo "<option value='1800'> 30m </option>\n";	
 					echo "<option value='3600' selected> 1h </option>\n";	
@@ -284,13 +283,13 @@ include('host_info.php');
 					echo "<option value='604800'> 7d </option>\n";																			
 				echo "</select>\n";
 			echo "</td>\n";
-			echo "<td>\n";
+			echo "<td width='20%'>\n";
 				echo '<button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off" onclick="graphPage();"> Todos os gráficos </button>';																
 			echo "</td>\n";																
 		echo "</tr>\n";
 		
 		echo "<tr>\n";	
-			echo "<td colspan='2'>\n";
+			echo "<td colspan='3'>\n";
 				echo "<div class='col-md-10' id='showgraph' style='float:left; margin:auto;'></div>\n";
 			echo "</td>\n";		
 		echo "</tr>\n";		

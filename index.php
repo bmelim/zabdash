@@ -1,13 +1,13 @@
 <?php
 
 require_once '../include/config.inc.php';
-require_once '../include/hosts.inc.php';
-require_once '../include/actions.inc.php';
-
+/*require_once '../include/hosts.inc.php';
+require_once '../include/actions.inc.php';*/
+require_once('config.php');
 require_once 'inc/functions.inc.php';
 
 //Translate
-$labels = include_once 'locales/en.php';
+//$labels = include_once 'locales/en.php';
 
  switch (date("m")) {
  case "01": $mes = $labels['January']; break;
@@ -32,7 +32,14 @@ switch (date("w")) {
  case "4": $dia = $labels['Thursday']; break;
  case "5": $dia = $labels['Friday']; break;
  case "6": $dia = $labels['Saturday']; break;  
- }   
+ }  
+ 
+
+//User id 
+$userid = get_userid(CWebUser::getSessionCookie());
+//echo "user ".$userid;  
+//$ses = CWebUser::getSessionCookie();
+//echo $ses;
   
 ?>
 
@@ -43,7 +50,7 @@ switch (date("w")) {
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">
-    <meta http-equiv="refresh" content="600; url=index.php" />
+    <!--<meta http-equiv="refresh" content= "600"/>-->
     
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 	 <link rel="shortcut icon" href="img/dash.ico" type="image/x-icon" />    
@@ -233,7 +240,7 @@ switch (date("w")) {
                                        <span class='hidden-minibar'> <?php echo $labels['Memory']; ?> </span>
                                    </a>
                                </li>
-                               <li class=' '>
+                               <!-- <li class=' '>
                                      <a href="./tickets/select_grupo.php" data-original-title=' por Grupo' target="_blank">
                                        <i class="fa fa-angle-right"></i>
                                        <span class='hidden-minibar'> <?php echo __('by Group'); ?> </span>
@@ -261,20 +268,27 @@ switch (date("w")) {
                                       </a>
                                   </li>
                                   </ul>
-                                 </li>                              
+                                 </li> -->                             
                            	</ul>                                    
                        </li>
                                   
                     		<li class=' '>
-                        <a href='#' onclick="window.open('events.php','iframe1'); scrollWin();" data-original-title='Events'>
-                            <i class='fa fa-edit'></i>
-                            <span class='hidden-minibar'><?php echo $labels['Events']; ?>
-                            </span>
-                        </a>  
+	                        <a href='#' onclick="window.open('triggers.php','iframe1'); scrollWin();" data-original-title='Events'>
+	                            <i class='fa fa-edit'></i>
+	                            <span class='hidden-minibar'><?php echo $labels['Triggers']; ?>
+	                            </span>
+	                        </a>  
+                    		</li>  
+                  		
+					    		<li class=' '>
+	                        <a href='#' onclick="window.open('logout.php','_self'); scrollWin();" data-original-title='Events'>
+	                            <i class='fa fa-sign-out'></i>
+	                            <span class='hidden-minibar'><?php echo $labels['Logout']; ?>
+	                            </span>
+	                        </a>  
                     		</li>                                		
-                                                                                     												                                
-                       
-                       <li class='submenu'>
+                                                                                     												                                                       
+                       <!-- <li class='submenu'>
                            <a class='dropdown' onClick='return false;' href='#' data-original-title='Gráficos'>
                                <i class="fa fa-bar-chart-o"></i>
                                <span class='hidden-minibar'><?php echo $labels['Charts']; ?>
@@ -303,7 +317,7 @@ switch (date("w")) {
                                
                   
                            </ul>
-                       </li><!-- delighted pages -->  				
+                       </li>  				
                        
                        <li class=' '>
                            <a href='metrics/index.php' target="_blank" data-original-title='Metrics'>
@@ -327,7 +341,7 @@ switch (date("w")) {
                                <span class='hidden-minibar'><?php echo $labels['Info']; ?>
                                </span>
                            </a>  
-                       </li>
+                       </li> 
                        
                      <li class=' '>
                            <a href='https://forge.glpi-project.org/projects/dashboard/wiki' target="_blank" data-original-title='Help'>
@@ -335,9 +349,8 @@ switch (date("w")) {
                                <span class='hidden-minibar'><?php echo $labels['Help']; ?>
                                </span>
                            </a>  
-                     </li>                                
-	 						<li>
-   						</li>                                                                                                                               
+                     </li>  -->                              
+	 						<li></li>                                                                                                                               
    				</ul>
   		<!-- /.Menu -->
   		</div>
@@ -348,7 +361,7 @@ switch (date("w")) {
 		        
 			echo '<h5 class="label1 label-default"> <i class="fa fa-info-circle"></i>&nbsp;  Server Info</h5>
 				
-				<ul class="list-unstyled list-info-sidebar" style="color: #cecece;">
+				<ul class="list-unstyled list-info-sidebar" style="color: #cecece; margin-left:-15px;">
 					<li class="data-row">
 						<span class="data-name" >OS:</span>
 						<span class="data-value">'; include './sh/issue.php'; 
@@ -385,14 +398,14 @@ switch (date("w")) {
 		}		
 		?>	   
 
-	<div id="donate" style="margin-top:30px; margin-left:60px;">
+<!--	<div id="donate" style="margin-top:30px; margin-left:60px;">
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="3SN6KVC4JSB98">
 		<input type="image" src="./img/paypal.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 		<img alt="" border="0" src="./img/paypal.png" width="1" height="1">
 		</form>
-	</div>
+	</div>-->
                            
 </div>
  <!-- /.left-sidebar -->

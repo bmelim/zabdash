@@ -7,8 +7,7 @@ $triggers = $api->triggerGet(array(
 	'sortorder' => 'DESC',
 	'only_true' => '1',
 	'active' => '1', // include trigger state active not active
-	/*'withUnacknowledgedEvents' => '1',*/ 
-	/*'expandDescription' => '1',*/
+	/*'withUnacknowledgedEvents' => '1',*/ 	
 	'selectHosts' => 1					
 ));	
 
@@ -41,7 +40,6 @@ $hosts = array_slice($hosts,0,10);
 $names2 = array_keys($hosts) ;
 $names1 = implode("','",$names2);
 $names = "'$names1'";
-//$soma3 = array_sum($hosts);
 
 $values1 = array_values($hosts) ;
 

@@ -49,6 +49,7 @@ return array(
 'Memory' => 'Memory',
 'Network Interfaces' => 'Network Interfaces',
 'Triggers' => 'Triggers',
+'Logout' => 'Logout',
 
 
 );

@@ -214,10 +214,42 @@ function get_hostname($hostid) {
 }
 
 
+
+function get_userid($session) {
+
+	$dbUser = DBselect( 'SELECT sessionid, userid, lastaccess FROM sessions WHERE sessionid ="'.$session.'"');
+	$dbID = DBFetch($dbUser);	
+	
+	//if($dbID['userid'] != '' ) {
+		$userid = $dbID['userid'];
+	//}
+	//else {
+		//$userid = '';
+	//}
+	
+	return $userid;
+}
+
+
+function get_user_lang($userid) {
+
+	$dbUser = DBselect( 'SELECT lang FROM users WHERE userid ="'.$userid.'"');
+	$dbLang = DBFetch($dbUser);	
+	
+	if($dbLang['lang'] == 'pt_BR' ) {
+		$userLang = $dbLang['lang'];
+	}
+	else {
+		$userLang = 'en_US';
+	}
+	
+	return $userLang;
+}
+
+
 //convert date and time
 function from_epoch($epoch) {
-    return date('d/m/Y H:i', $epoch); // output as RFC 2822 date - returns local time 
-	
+    return date('d/m/Y H:i', $epoch); // output as RFC 2822 date - returns local time 	
 }	
 
 
@@ -226,6 +258,7 @@ function get_severity($value) {
 	$severity = $value;
 	
 	switch ($severity) {
+	 case "0": $severity = 'Not classified'; break;
 	 case "1": $severity = 'Information'; break;
 	 case "2": $severity = 'Warning'; break;
 	 case "3": $severity = 'Average'; break;
@@ -234,8 +267,13 @@ function get_severity($value) {
 	 }
 	 
 	 return $severity;
-
 }
+
+
+function percent ( $value, $total ) {
+	return round(( $value * 100 ) / $total,1);
+}
+
 
 function getLang() {
 
@@ -244,10 +282,8 @@ function getLang() {
 	//$lang = $dbLang['lang'];
 	$lang = "pt_BR";
 	
-	$_SESSION['zablang'] = $lang;
-	
+	$_SESSION['zablang'] = $lang;	
 	//return $_SESSION['zablang'];
-
 }
 
 
