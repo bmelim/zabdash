@@ -2,9 +2,7 @@
 require_once '../include/config.inc.php';
 require_once '../include/hosts.inc.php';
 require_once '../include/actions.inc.php';
-
 include('config.php');
-
 
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
@@ -44,7 +42,7 @@ else {
 	<!--<meta http-equiv='refresh' content='120'>-->
 	<title>Zabbix Hosts Memory</title>	
 
-	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/font-awesome.css" rel="stylesheet">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
@@ -59,8 +57,7 @@ else {
 <body>
 	<div class="row col-md-11 col-sm-11" style="margin-top:0px; margin-bottom: 70px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 
-	<form id="form1" name="form1" class="form_rel" method="post" action="hosts_memory.php?sel=1" style="margin-top:30px; margin-bottom: -10px;" onchange='javascript:form1.submit();'>
-	<!-- <label>Selecione um ou mais Grupos:</label><br> -->
+	<form id="form1" name="form1" class="form_rel" method="post" action="hosts_memory.php?sel=1" style="margin-top:30px; margin-bottom: -10px;" onchange='javascript:form1.submit();'>	
 		<select id='groupid' name='groupid' style='width: 300px; height: 27px;' autofocus data-placeholder="Selecione um Grupo">
 			<option value='-2'> <?php echo __('-- Selecione um Grupo --'); ?> </option>
 			<option value='-1'> Todos </option>

@@ -6,40 +6,44 @@ require_once '../include/actions.inc.php';*/
 require_once('config.php');
 require_once 'inc/functions.inc.php';
 
-//Translate
-//$labels = include_once 'locales/en.php';
-
- switch (date("m")) {
- case "01": $mes = $labels['January']; break;
- case "02": $mes = $labels['February']; break;
- case "03": $mes = $labels['March']; break;
- case "04": $mes = $labels['April']; break;
- case "05": $mes = $labels['May']; break;
- case "06": $mes = $labels['June']; break;
- case "07": $mes = $labels['July']; break;
- case "08": $mes = $labels['August']; break;
- case "09": $mes = $labels['September']; break;
- case "10": $mes = $labels['October']; break;
- case "11": $mes = $labels['November']; break;
- case "12": $mes = $labels['December']; break;
- }
+switch (date("m")) {
+ case "01": $mes = _('January'); break;
+ case "02": $mes = _('February'); break;
+ case "03": $mes = _('March'); break;
+ case "04": $mes = _('April'); break;
+ case "05": $mes = _('May'); break;
+ case "06": $mes = _('June'); break;
+ case "07": $mes = _('July'); break;
+ case "08": $mes = _('August'); break;
+ case "09": $mes = _('September'); break;
+ case "10": $mes = _('October'); break;
+ case "11": $mes = _('November'); break;
+ case "12": $mes = _('December'); break;
+}
 
 switch (date("w")) {
- case "0": $dia = $labels['Sunday']; break;    
- case "1": $dia = $labels['Monday']; break;
- case "2": $dia = $labels['Tuesday']; break;
- case "3": $dia = $labels['Wednesday']; break;
- case "4": $dia = $labels['Thursday']; break;
- case "5": $dia = $labels['Friday']; break;
- case "6": $dia = $labels['Saturday']; break;  
- }  
- 
+ case "0": $dia = _('Sunday'); break;    
+ case "1": $dia = _('Monday'); break;
+ case "2": $dia = _('Tuesday'); break;
+ case "3": $dia = _('Wednesday'); break;
+ case "4": $dia = _('Thursday'); break;
+ case "5": $dia = _('Friday'); break;
+ case "6": $dia = _('Saturday'); break;  
+}   
 
 //User id 
 $userid = get_userid(CWebUser::getSessionCookie());
-//echo "user ".$userid;  
-//$ses = CWebUser::getSessionCookie();
-//echo $ses;
+	  
+//check new version 																																																			
+$urlv = "https://sourceforge.net/p/zabdash/screenshot/".$version.".png";
+$headers = get_headers($urlv, 1);										
+
+if($headers[0] != '') {
+
+	if ($headers[0] == 'HTTP/1.0 404 Not Found' || $headers[0] == 'HTTP/1.1 404 Not Found') {
+		$newversion = "<a href='https://sourceforge.net/projects/zabdash/' target='_blank' style='margin-top:10px; margin-right: 12px; color:#fff;' class='blink_me'><i class='fa fa-refresh'></i><span>&nbsp;&nbsp;".  $labels['New version avaliable']. " </span></a>";		
+	}
+}  
   
 ?>
 
@@ -52,8 +56,8 @@ $userid = get_userid(CWebUser::getSessionCookie());
 	 <meta http-equiv="Pragma" content="public">
     <!--<meta http-equiv="refresh" content= "600"/>-->
     
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-	 <link rel="shortcut icon" href="img/dash.ico" type="image/x-icon" />    
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+	 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />    
     <link href="css/bootstrap.css" rel="stylesheet">     
 
     <!-- Styles -->   
@@ -123,7 +127,7 @@ $userid = get_userid(CWebUser::getSessionCookie());
 		<!-- /NAVBAR LEFT -->					
 		<ul class="nav navbar-nav pull-right hidden-xs">
 			<li id="header-user" class="user" style="color:#FFF; margin-top: 8px; margin-right:8px;">
-				<!--<a  href="#" style="color:#FFF; font-size:10pt; margin-top:5px;">-->							
+				<span><?php echo $newversion; ?></span>						
 				<span class="username">				
 					<script type="text/javascript">
 					
@@ -145,7 +149,7 @@ $userid = get_userid(CWebUser::getSessionCookie());
 						var curr_month = d.getMonth();
 						var curr_year = d.getFullYear();
 						
-						document.write("<i class='fa fa-calendar-o' style='color:#fff;'> </i>  " + d_names + ", " + curr_date + " " + m_names + " " + curr_year );									
+						document.write("<i class='fa fa-calendar' style='color:#fff;'> </i>  " + d_names + ", " + curr_date + " " + m_names + " " + curr_year );									
 					</script> 
 				</span>
 				<div id="clock" style="text-align:right;"></div>											
@@ -207,13 +211,13 @@ $userid = get_userid(CWebUser::getSessionCookie());
                            <a href='#' onclick="window.open('hosts_groups.php','iframe1'); scrollWin();" data-original-title='Hosts'>
                                <!--<i><img src="img/icon/group.png" alt="" style="width:20px;"></img></i>-->
                                <i class="fa fa-sitemap"></i>
-                               <span class='hidden-minibar'><?php echo $labels['Host Groups']; ?>
+                               <span class='hidden-minibar'><?php echo _('Host groups'); ?>
                                </span>
                            </a>  
                        		</li>                              
                        		
                        	  <li class=''>
-	                          <a href='#' onclick="window.open('groups.php','_blank'); scrollWin();" data-original-title='Panel'>
+	                          <a href='#' onclick="window.open('groups.php','iframe1'); scrollWin();" data-original-title='Panel'>
                                <i class="fa fa-desktop" aria-hidden="true"></i>
                                <span class='hidden-minibar'><?php echo $labels['Hosts Panel']; ?>
                                </span>
@@ -275,15 +279,22 @@ $userid = get_userid(CWebUser::getSessionCookie());
                     		<li class=' '>
 	                        <a href='#' onclick="window.open('triggers.php','iframe1'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-edit'></i>
-	                            <span class='hidden-minibar'><?php echo $labels['Triggers']; ?>
+	                            <span class='hidden-minibar'><?php echo _('Triggers'); ?>
 	                            </span>
 	                        </a>  
                     		</li>  
+                    		<li class=' '>
+                            <a href='#' onclick="window.open('info.php','iframe1'); scrollWin();" target="iframe1" data-original-title='Info'>
+                               <i class='fa fa-info-circle'></i>
+                               <span class='hidden-minibar'><?php echo $labels['About']; ?>
+                               </span>
+                           </a>  
+                        </li> 
                   		
 					    		<li class=' '>
 	                        <a href='#' onclick="window.open('logout.php','_self'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-sign-out'></i>
-	                            <span class='hidden-minibar'><?php echo $labels['Logout']; ?>
+	                            <span class='hidden-minibar'><?php echo $labels['Exit']; ?>
 	                            </span>
 	                        </a>  
                     		</li>                                		
@@ -333,15 +344,7 @@ $userid = get_userid(CWebUser::getSessionCookie());
                                <span class='hidden-minibar'><?php echo $labels['Setup']; ?>
                                </span>
                            </a>  
-                       </li>
-                       
-                       <li class=' '>
-                            <a href='#' onclick="window.open('info.php','iframe1'); scrollWin();" target="iframe1" data-original-title='Info'>
-                               <i class='fa fa-info-circle'></i>
-                               <span class='hidden-minibar'><?php echo $labels['Info']; ?>
-                               </span>
-                           </a>  
-                       </li> 
+                       </li>                       
                        
                      <li class=' '>
                            <a href='https://forge.glpi-project.org/projects/dashboard/wiki' target="_blank" data-original-title='Help'>

@@ -65,10 +65,10 @@ $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .
 			<table id='triggers' class='box table table-striped table-hover table-condensed' border='0' style='height:250px;'>
 			<thead>
 				<tr>
-					<th style='text-align:center; width:15%;'>Lastchange</th>
-					<th style='text-align:center;'>Severity</th>
-					<th style='text-align:center;'>Host</th>
-					<th style='text-align:center;'>Description</th>
+					<th style='text-align:center; width:15%;'>". _('Last change')."</th>
+					<th style='text-align:center;'>". _('Severity')."</th>
+					<th style='text-align:center;'>". _('Host')."</th>
+					<th style='text-align:center;'>". _('Description')."</th>
 					<!--<th style='text-align:center;'>Acknowledged</th>-->
 				</tr>\n								
 			</thead>\n
@@ -83,7 +83,7 @@ $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .
 			//echo "<td style='text-align:center;'>".$t->priority."</td>";
 			echo "<td style='vertical-align: middle !important;'>
 						<div class='hostdiv nok". $tu->priority ." hostevent trig_radius' style='height:21px !important; margin-top:0px; !important;' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=". $tu->hosts[0]->hostid ."&show_triggers=1')\">
-						<p class='severity' style='margin-top: -2px;'>". get_severity($tu->priority) ."</p>									
+						<p class='severity' style='margin-top: -2px;'>". _(get_severity($tu->priority)) ."</p>									
 						</div>
 					</td>";				            
 			echo "<td style='text-align:left; vertical-align: middle !important;'>". get_hostname($tu->hosts[0]->hostid)."</td>";				            

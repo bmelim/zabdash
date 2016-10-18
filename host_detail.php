@@ -32,7 +32,7 @@ include('host_info.php');
 	<title>Zabbix Host Details</title>
 	
 	<!-- Bootstrap -->
-	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/font-awesome.css" rel="stylesheet">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
@@ -121,11 +121,11 @@ include('host_info.php');
 		//CPU Load
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2;'>
 				<tr>					
-					<td colspan='5' style='font-weight:bold;'><img src='img/icon/electronics-24.png' alt=''/> ".$labels['Processor']." </td>
+					<td colspan='5' style='font-weight:bold;'><img src='img/icon/electronics-24.png' alt=''/> ". _('CPU')." </td>
 				</tr>\n"; 										
 
 		echo "<tr>
-					<td colspan='4'> ".$labels['Average'].": ".$avgCPU."% </td>
+					<td colspan='4'> "._('Average').": ".$avgCPU."% </td>
 				</tr>\n"; 
 			
 				for($i=0; $i<$cpuNum; $i++) {
@@ -137,13 +137,13 @@ include('host_info.php');
 		//Memory		 
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2;'>
 				<tr>\n";					
-			echo "<td colspan='5' style='font-weight:bold;'><img src='img/icon/memory_slot-24.png' alt=''/>  ".$labels['Memory']." </td>
+			echo "<td colspan='5' style='font-weight:bold;'><img src='img/icon/memory_slot-24.png' alt=''/>  ". $labels['Memory']." </td>
 				</tr>\n"; 										
 
 		echo "<tr>\n";
-			echo "<td colspan='2' style='width:50%;'> ".$labels['Type']." </td>
-					<td> ".$labels['Used']." </td>
-					<td> ".$labels['Total']." </td>
+			echo "<td colspan='2' style='width:50%;'> ". _('Type')." </td>
+					<td> ". $labels['Used']." </td>
+					<td> ". _('Total')." </td>
 					<td> % ".$labels['Used']." </td>
 				</tr>\n"; 
 
@@ -215,7 +215,7 @@ include('host_info.php');
 		echo "<tr>
 					<td colspan='2' style='width:50%;'> ".$labels['Unity']." </td>
 					<td> ".$labels['Used']." </td>
-					<td> ".$labels['Total']." </td>
+					<td> ". _('Total')." </td>
 					<td> % ".$labels['Used']." </td>
 				</tr>\n"; 		
 		
@@ -257,7 +257,7 @@ include('host_info.php');
 		//Graphs				
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2; margin-bottom:20px;'>
 				<tr>					
-					<td colspan='5' style='font-weight:bold;'><img src='img/icon/graph.png' alt='' style='width:24px;' /> ".$labels['Charts']." </td>					
+					<td colspan='5' style='font-weight:bold;'><img src='img/icon/graph.png' alt='' style='width:24px;' /> ". _('Graphs')." </td>					
 				</tr>\n"; 	
 				
 		echo "<tr>\n";	
@@ -284,7 +284,7 @@ include('host_info.php');
 				echo "</select>\n";
 			echo "</td>\n";
 			echo "<td width='20%'>\n";
-				echo '<button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off" onclick="graphPage();"> Todos os gráficos </button>';																
+				echo '<button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off" onclick="graphPage();"> '.$labels['All graphs'].' </button>';																
 			echo "</td>\n";																
 		echo "</tr>\n";
 		
@@ -303,7 +303,7 @@ include('host_info.php');
 					</tr>\n"; 										
 	
 			echo "<tr>
-						<td colspan='2' style='width:65%;'> ".$labels['Name']."  </td>
+						<td colspan='2' style='width:65%;'> ". _('Name')."  </td>
 						<td> In </td>
 						<td> Out </td>				
 					</tr>\n";

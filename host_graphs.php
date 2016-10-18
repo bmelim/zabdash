@@ -14,9 +14,6 @@ $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .
 
 $hostid = $_REQUEST['hostid'];
 
-//Translate
-$labels = include_once 'locales/pt.php';
-
 if(isset($hostid)) {
 	
 	$period = $_REQUEST['period'];
@@ -56,7 +53,7 @@ else {
 
 <title>Zabbix Host Graphs</title>
 
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/styles.css" />

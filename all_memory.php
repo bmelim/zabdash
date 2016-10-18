@@ -84,9 +84,9 @@
 									<tr>					
 										<td style='background:".$cor."; width:1%;' title='".$conn."'></td>
 										<td colspan='1' class='linkb' style='width:50%; font-weight:bold; text-align:left;'><a href='host_detail.php?hostid=".$hosts['hostid']."'> ".$hosts['name']." </a></td>
-										<td colspan='1' style='width:18%; text-align:left;'> Usado </td>
-										<td colspan='1' style='text-align:left;'> Total </td>
-										<td colspan='1' style='text-align:left;'> % Usado </td>
+										<td colspan='1' style='width:18%; text-align:left;'>". $labels['Usado'] ."</td>
+										<td colspan='1' style='text-align:left;'> ". _('Total') ." </td>
+										<td colspan='1' style='text-align:left;'> % ". $labels['Usado'] ." </td>
 									</tr>
 								</thead>
 								<tbody>\n"; 										

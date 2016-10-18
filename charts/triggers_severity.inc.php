@@ -22,16 +22,11 @@ foreach($contagem AS $numero => $vezes) {
 }
 
 $conta = count($valores);
-//$total = array_sum($valores);
-//echo $conta_pri."<br><p>";
 
-//$priori = array('Disaster' => 1,'High' => 34,'Average' => 4,'Warning' => 11,'Information' => 2,'Not Classified' => 1);
 $severity = array('Disaster' => 0,'High' => 0,'Average' => 0,'Warning' => 0,'Information' => 0,'Not Classified' => 0);
+$colors = array('Disaster' => '#B10505','High' => '#E97659','Average' => '#FFA059','Warning' => '#FFC859','Information' => '#59DB8F','Not Classified' => '#CECECE');
 
 krsort($priori);
-//print_r($priori)."<br><p>";
-//$colors = array('#B10505','#E97659','#FFA059','#FFC859','#59DB8F','#4BAC64');
-$colors = array('Disaster' => '#B10505','High' => '#E97659','Average' => '#FFA059','Warning' => '#FFC859','Information' => '#59DB8F','Not Classified' => '#CECECE');
 
 $arrDiff = array_diff_key($severity,$priori);
 
@@ -49,8 +44,8 @@ $names = array_keys($priority);
 $values = array_values($priority);
 
 $arrCor = array_intersect_key($colors,$priori);
+
 krsort($arrCor);
-//print_r($arrCor);
 
 $colorsCod = array_values($arrCor);
 
@@ -62,7 +57,7 @@ $(function () {
       element: 'severity',
       data: [";
 		for($i=0; $i < count($names); $i++) {      
-			echo "{value: ". percent($values[$i],$conta).", label: '".$names[$i]."'},";
+			echo "{value: ". percent($values[$i],$conta).", label: '". _($names[$i])."'},";
 		}
 		        
 		echo "],

@@ -85,9 +85,9 @@ foreach( $groupID as $g ) {
 								<tr>					
 									<th style='background:".$cor."; width:1%;' title='".$conn."'></th>
 									<th colspan='1' class='linkb' style='width:50%; font-weight:bold; text-align:left;'><a href='host_detail.php?hostid=".$hosts['hostid']."'> ".$hosts['name']." </a></th>
-									<th colspan='1' style='width:16%; text-align:left;'> Usado </th>
-									<th colspan='1' style='text-align:left;'> Total </th>
-									<th colspan='1' style='text-align:left;'> % Usado </th>
+									<th colspan='1' style='width:18%; text-align:left;'>". $labels['Usado'] ."</th>
+									<th colspan='1' style='text-align:left;'> ". _('Total') ." </th>
+									<th colspan='1' style='text-align:left;'> % ". $labels['Usado'] ." </th>
 								</tr>
 								</thead>
 								<tbody>\n"; 														

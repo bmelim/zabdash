@@ -20,7 +20,7 @@ include('config.php');
 
 <title>Zabbix - Groups</title>
 
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/font-awesome.css" rel="stylesheet">
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -50,8 +50,8 @@ include('config.php');
 			<thead>
 				<tr>
 					<th width='8px'></th>
-					<th style='text-align:center;'>Groups (".$groupsCount['hc'].")</th>
-					<th style='text-align:center;'>Hosts</th>										
+					<th style='text-align:center;'>". _('Groups')." (".$groupsCount['hc'].")</th>
+					<th style='text-align:center;'>". _('Hosts')."</th>										
 				</tr>								
 			</thead> ";
 	

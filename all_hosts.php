@@ -14,10 +14,10 @@
 				<tr>
 					<th width='5px;' style='padding:3px !important;'></th>
 					<th style='text-align:center;'>Hosts (".$hostsCount['hc'].")</th>
-					<th style='text-align:center;'>S.O.</th>
-					<th style='text-align:center;'>IP</th>
-					<th style='text-align:center;'>Eventos</th>
-					<th style='text-align:center;'>Status</th>
+					<th style='text-align:center;'>". $labels['O.S.']."</th>
+					<th style='text-align:center;'>". _('IP')."</th>
+					<th style='text-align:center;'>". _('Triggers')."</th>
+					<th style='text-align:center;'>". _('Status')."</th>
 				</tr>								
 			</thead>
 			<tbody> ";

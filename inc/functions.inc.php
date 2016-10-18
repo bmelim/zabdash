@@ -74,10 +74,10 @@ function formatBytesNet($bytes, $precision = 2)
 function hostStatus($stat) {
 
 	if($stat == 0) {
-		$status = "<span class='label label-success'>Ativo</span>\n";	
+		$status = "<span class='label label-success'>". _('Enabled')."</span>\n";	
 	}	
 	else {
-		$status = "<span class='label label-danger'>Inativo</span>\n";
+		$status = "<span class='label label-danger'>". _('Disabled')."</span>\n";
 	}
 
 return $status;
@@ -251,6 +251,11 @@ function get_user_lang($userid) {
 function from_epoch($epoch) {
     return date('d/m/Y H:i', $epoch); // output as RFC 2822 date - returns local time 	
 }	
+
+//convert only date
+function from_epoch_date($epoch) {
+    return date('d/m/Y', $epoch); // output as RFC 2822 date - returns local time 	
+}
 
 
 function get_severity($value) {

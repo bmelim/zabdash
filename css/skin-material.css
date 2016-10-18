@@ -231,7 +231,7 @@ a {
 ---------------------------------------------------------------------------------------------- */
 .left-sidebar {
   position: absolute;
-  background-color: #eee;  
+  background-color: #fff;  
   /*width: 220px;*/
   z-index: 1001;
   height: 100%;

@@ -37,7 +37,7 @@ else {
 <title>Zabbix Hosts</title>
 
 <!-- Bootstrap -->
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/font-awesome.css" rel="stylesheet">
 <script type="text/javascript" src="js/jquery.min.js"></script>

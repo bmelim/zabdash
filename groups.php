@@ -24,7 +24,7 @@ $dbGroups = DBselect( 'SELECT * FROM groups WHERE groupid <> 1 ORDER BY name ASC
 
 <title>Zabbix Hosts Groups</title>
 
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/font-awesome.css" rel="stylesheet">
 <link href="./inc/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
@@ -56,7 +56,8 @@ $dbGroups = DBselect( 'SELECT * FROM groups WHERE groupid <> 1 ORDER BY name ASC
 
 if($group != '') {	
 	
-	echo '<script language="javascript"> location.href="hosts.php?groupid='.implode(",",$group).'"; </script>';
+	//echo '<script language="javascript"> location.href="hosts.php?groupid='.implode(",",$group).'"; 
+	echo '<script language="javascript"> window.open(\'hosts.php?groupid='.implode(",",$group).'\',\'_blank\'); </script>';
 }
 
 ?>		

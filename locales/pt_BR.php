@@ -34,10 +34,11 @@ return array(
 'Inactive' => 'Inativo',
 'Average' => 'Média',
 'Events' => 'Eventos',
-'Info' => 'Informação',
+'About' => 'Sobre',
 'Charts' => 'Gráficos',
 'Memory' => 'Memória',
 'Storage' => 'Armazenamento',
+'Hosts' => 'Hosts',
 'Host Groups' => 'Grupos de Hosts',
 'Hosts Health' => 'Saúde dos Hosts',
 'Hosts Panel' => 'Painel Hosts',
@@ -49,10 +50,20 @@ return array(
 'Memory' => 'Memória',
 'Network Interfaces' => 'Interfaces de Rede',
 'Triggers' => 'Triggers',
-'Logout' => 'Sair',
-
-
-
+'Exit' => 'Sair',
+'Version' => 'Versão',
+'Developed by' => 'Desenvolvido por',
+'New version avaliable' => 'Nova versão disponível',
+'O.S.' => 'S.O.',
+'Disaster' => 'Disastre',
+'High' => 'Alta', 
+'Warning' => 'Atenção',
+'Information' => 'Informação', 
+'Not Classified' => 'Não Classificado',
+'All graphs' => 'Todos os gráficos',
+'Triggers by host - Top 10' => 'Triggers por host - Top 10',
+'Triggers by Severity' => 'Triggers por Severidade',
+'Unacknowledged Triggers' => 'Triggers não Reconhecidos',
 
 
 );

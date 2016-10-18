@@ -61,8 +61,8 @@ $users = $api->userGet(array(
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">           
     
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-	 <link rel="shortcut icon" href="img/dash.ico" type="image/x-icon" />    
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+	 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />    
     <link href="css/bootstrap.css" rel="stylesheet">        		   
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <meta http-equiv="refresh" content= "300"/>
@@ -138,7 +138,7 @@ $users = $api->userGet(array(
 
 					   <div class="panel-right right" style='cursor:pointer;' onclick="window.open('../hosts.php');">
 							<span style="float:left; margin-top:18px;"><i class="fa fa-desktop fa-3x"></i></span>
-         				<span class="chamado"><?php echo __('Hosts'); ?></span><br>
+         				<span class="chamado"><?php echo _('Hosts'); ?></span><br>
 					     	<div id="odometer1" class="odometer" style="font-size: 25px;">   </div><p></p>
             				<span class="date" title="Active/Inactive"><b><?php echo $hostsCount['active']." / ".$hostsCount['inactive']; ?> </b></span>												
 					   </div>
@@ -152,7 +152,7 @@ $users = $api->userGet(array(
 
 					   <div class="panel-right right" style='cursor:pointer;' onclick="window.open('../tr_status.php');">	
 					   	<span style="float:left; margin-top:18px;"><i class="fa fa-warning fa-3x"></i></span>									 
-         				<span class="chamado"><?php echo __('Triggers'); ?></span><br>
+         				<span class="chamado"><?php echo _('Triggers'); ?></span><br>
 							<div id="odometer2" class="odometer" style="font-size: 25px;">   </div><p></p>
          				<span class="date" title="Unack/Ack"><b><?php echo count($triggerUnack)." / ". (count($trigger) - count($triggerUnack)); ?></b></span>
 					   </div>
@@ -166,7 +166,7 @@ $users = $api->userGet(array(
 
 					   <div class="panel-right right" style='cursor:pointer;' onclick="window.open('../hostgroups.php');">
 					   	<span style="float:left; margin-top:18px;"><i class="fa fa-sitemap fa-3x"></i></span>
-         				<span class="chamado"><?php echo $labels['Host Groups']; ?></span><br>
+         				<span class="chamado"><?php echo _('Host groups'); ?></span><br>
 							<div id="odometer3" class="odometer" style="font-size: 25px;">   </div><p></p>
          				<span class="date"><b>&nbsp;</b></span>
 					   </div>										   
@@ -176,10 +176,9 @@ $users = $api->userGet(array(
 			  <div class="col-sm-3 col-md-3">
 				 <div class="dashbox shad panel panel-default db-orange">
 					<div class="panel-body">
-
 			   		<div class="panel-right right" style='cursor:pointer;' onclick="window.open('../users.php');">	
 			   		<span style="float:left; margin-top:18px;"><i class="fa fa-users fa-3x"></i></span>
-         				<span class="chamado"><?php echo $labels['Users']; ?></span><br>                        				
+         				<span class="chamado"><?php echo _('Users'); ?></span><br>                        				
 							<div id="odometer4" class="odometer" style="font-size: 25px;">   </div><p></p>
          				<span class="date"><b>&nbsp;</b></span>
 					   </div>
@@ -211,7 +210,7 @@ setTimeout(function(){
 	<div class="col-sm-6 col-md-6 align" style="float:left; margin-left: 0px;"> 	 				              
 	   <div id="tickets_status" class="widget2 widget-table action-table striped card1" >
 	      <div class="widget-header">                 
-	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Triggers by host - Top 10'); ?></h3>
+	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Triggers by host - Top 10']; ?></h3>
 	      	 <span  class=""></span>               
 	      </div> 
 	      <!-- /widget-header -->      
@@ -226,7 +225,7 @@ setTimeout(function(){
 	<div class="col-sm-6 col-md-6 align" style="float:left; margin-left: 0px;"> 	 				              
 	   <div id="triggers_severity" class="widget2 widget-table action-table striped card1" >
 			<div class="widget-header">                 
-	      	<h3><i class="fa fa-pie-chart" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Triggers by Severity'); ?></h3>
+	      	<h3><i class="fa fa-pie-chart" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Triggers by Severity']; ?></h3>
 	      	 <span  class=""></span>               
 	      </div>
 	      <!-- /widget-header -->      
@@ -237,39 +236,39 @@ setTimeout(function(){
 					?> 	 						            
 				</div>
 				<div id="legend" class="col-sm-12 col-md-12 align" style="margin-top:35px; text-align:center;">
-		  		  <button type="button" class="btn btn-sm btn-success" style="background: #59DB8F !important; border: 1px solid #59DB8F;">Information</button>
-	           <button type="button" class="btn btn-sm btn-success" style="background: #FFC859 !important; border: 1px solid #FFC859; width:70px;">Warning</button>
-	           <button type="button" class="btn btn-sm btn-danger"  style="background: #FFA059 !important; border: 1px solid #FFA059; width:70px;">Average</button>
-	           <button type="button" class="btn btn-sm btn-warning" style="background: #E97659 !important; border: 1px solid #E97659; width:70px;">High</button>
-	           <button type="button" class="btn btn-sm btn-warning" style="background: #B10505 !important; border: 1px solid #B10505; width:70px;">Disaster</button>
+		  		  <button type="button" class="btn btn-sm btn-success" style="background: #59DB8F !important; border: 1px solid #59DB8F;"><?php echo _('Information'); ?></button>
+	           <button type="button" class="btn btn-sm btn-success" style="background: #FFC859 !important; border: 1px solid #FFC859; width:70px;"><?php echo _('Warning'); ?></button>
+	           <button type="button" class="btn btn-sm btn-danger"  style="background: #FFA059 !important; border: 1px solid #FFA059; width:70px;"><?php echo _('Average'); ?></button>
+	           <button type="button" class="btn btn-sm btn-warning" style="background: #E97659 !important; border: 1px solid #E97659; width:70px;"><?php echo _('High'); ?></button>
+	           <button type="button" class="btn btn-sm btn-warning" style="background: #B10505 !important; border: 1px solid #B10505; width:70px;"><?php echo _('Disaster'); ?></button>
 				</div>  
 			</div>  
 		</div>
 	</div>
-	
-<!--	<div class="col-sm-6 col-md-6 align" style="float:right; height:400px !important; background:#fff;"> 	 				              
-	   <div id="triggers_severity" class="widget2 widget-table action-table striped card1" >
-	      <div class="widget-header">                 
-	      	<h3><i class="fa fa-pie-chart" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Triggers by Severity'); ?></h3>
-	      	 <span  class=""></span>               
-	      </div> 
-	          
-	      <div id="severity" style="height:250px !important; background:#fff;">	 			
-					<?php
-						include ("charts/triggers_severity.inc.php");
-					?> 	 						            
-			</div> 
-		</div>
-	</div>-->
 
 </div>
 
 <div id="widgets" class="row" style="margin-top: 0px;">	
+
+	<div class="col-sm-12 col-md-12 align" style="margin-left: 0px;"> 	 				              
+	   <div id="time" class="widget2 widget-table action-table striped card1" >
+	      <div class="widget-header">                 
+	      	<h3><i class="fa fa-calendar" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Triggers']." last 7 days"; ?></h3>
+	      	 <span  class=""></span>               
+	      </div> 
+	      <!-- /widget-header -->      
+	      <div id="triggers_time" style='height:350px !important; background:#fff; '>	 			
+					<?php
+						include ("charts/triggers_time.inc.php");
+					?> 	 						            
+			</div> 
+		</div>
+	</div>
 	
 	<div class="col-sm-12 col-md-12 align" style="margin-left: 0px;"> 	 				              
 	   <div id="tickets_status" class="widget2 widget-table action-table striped card1" >
 	      <div class="widget-header">                 
-	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo __('Unacknowledged Triggers'); ?></h3>
+	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Unacknowledged Triggers']; ?></h3>
 	      	 <span  class=""></span>               
 	      </div> 
 	      <!-- /widget-header -->      
@@ -279,7 +278,7 @@ setTimeout(function(){
 					?> 	 						            
 			</div> 
 		</div>
-	</div>	
+	</div>		
 
 </div> <!-- end widgets -->                   		
 

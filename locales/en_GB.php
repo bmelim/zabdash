@@ -34,7 +34,7 @@ return array(
 'Inactive' => 'Inactive',
 'Average' => 'Average',
 'Events' => 'Events',
-'Info' => 'Info',
+'About' => 'About',
 'Charts' => 'Charts',
 'Memory' => 'Memory',
 'Storage' => 'Storage',
