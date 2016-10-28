@@ -41,7 +41,7 @@ foreach( $groupID as $g ) {
 									<a href='".$zabURL."tr_status.php?fullscreen=0&groupid=0&source=0&hostid=".$hosts['hostid']."' target='_blank' >".$hosts['name']."</a>
 								</td>
 								<td rowspan='2' style='font-size:20px;' width='22px' height='50%'>
-									<img src='img/os/".getOS($hosts['hostid']).".png'/>
+									<img src='img/os/".getOS($hosts['hostid']).".png' alt=''/>
 								</td>
 							</tr>
 							<tr>
@@ -84,27 +84,15 @@ foreach( $groupID as $g ) {
 
 					// Highest Priority error
 					$hostdivprio = $trigger[0]->priority;
-					//First filter the hosts that are in maintenance and assign the maintenance class if is true
-					//if ($maintenance != "0") {
-						//echo "<div class=\"hostdiv maintenance\">";
-					//} 
-					// If hosts are not in maintenance, check for trigger(s) and assign the appropriate class to the box 
-					//else {
-						//echo "<div class=\"hostdiv nok" . $hostdivprio . "\">";
-					//}
-					//echo "<div class=\"title\">" . $hostname . "</div><div class=\"hostid\">" . $hostid . "</div>";
-					//$count = "0";
-					//foreach ($trigger as $event) {
-						//if ($count++ <= 2 ) { 
-       	        		$priority = $event->priority;
-       					$description = $event->description;
-				
+
+/* 	        		$priority = $event->priority;
+ 					$description = $event->description;				
 					// Remove hostname or host.name in description
-							$search = array('{HOSTNAME}', '{HOST.NAME}');
-							$description = str_replace($search, "", $description);
+					$search = array('{HOSTNAME}', '{HOST.NAME}');
+					$description = str_replace($search, "", $description);*/
 				
 					// View
-       							//echo "<div class=\"description nok" . $priority ."\">" . $description . "</div>";
+       					//echo "<div class=\"description nok" . $priority ."\">" . $description . "</div>";
        					$icon = "fa fa-exclamation-circle";		
        					echo "
 							<div class='hostdiv nok". $hostdivprio ." col-md-".$md." col-sm-".$md."'>
@@ -117,7 +105,7 @@ foreach( $groupID as $g ) {
 											<a href='".$zabURL."tr_status.php?fullscreen=0&groupid=0&source=0&hostid=".$hosts['hostid']."' target='_blank' >".$hosts['name']."</a>
 										</td>
 										<td rowspan='2' style='font-size:20px;' width='22px' height='50%'>
-											<img src='img/os/".getOS($hosts['hostid']).".png'/>
+											<img src='img/os/".getOS($hosts['hostid']).".png' alt=''/>
 										</td>										
 									</tr>
 									<tr>
@@ -125,14 +113,8 @@ foreach( $groupID as $g ) {
 											".$IP['ip']."
 										</td>
 									</tr>					
-								</table>
-								
-							</div>\n";
-						//} else {
-							//break;
-						//}		
-					//}
-					
+								</table>								
+							</div>\n";					
 					}
 				
 				else {
@@ -148,7 +130,7 @@ foreach( $groupID as $g ) {
 									<a href='".$zabURL."tr_status.php?fullscreen=0&groupid=0&source=0&hostid=".$hosts['hostid']."' target='_blank' >".$hosts['name']."</a>
 								</td>
 								<td rowspan='2' style='font-size:20px;' width='22px' height='50%'>
-									<img src='img/os/".getOS($hosts['hostid']).".png'/>
+									<img src='img/os/".getOS($hosts['hostid']).".png' alt=''/>
 								</td>
 							</tr>
 							<tr>

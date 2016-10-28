@@ -64,7 +64,10 @@ return array(
 'Triggers by host - Top 10' => 'Triggers by host - Top 10',
 'Triggers by Severity' => 'Triggers by Severity',
 'Unacknowledged Triggers' => 'Unacknowledged Triggers',
- 
+'Triggers last 7 days' => 'Triggers last 7 days',
+'Select group' => 'Select group',
+'Select one or more groups' => 'Select one or more groups',
+'Hosts Map' => 'Hosts Map',
 
 );
 ?> 

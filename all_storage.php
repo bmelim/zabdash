@@ -1,6 +1,6 @@
 <?php
 	
-	$dbHosts = DBselect( 'SELECT hostid, name, status, snmp_available AS sa, snmp_disable_until AS sd, flags FROM hosts ORDER BY name ASC'	);	
+	$dbHosts = DBselect( 'SELECT hostid, name, status, available, snmp_available AS sa, snmp_disable_until AS sd, flags FROM hosts ORDER BY name ASC'	);	
 	
 	$groupName = "Hosts Storage";
 
@@ -13,20 +13,26 @@
 
 		while ($hosts = DBFetch($dbHosts)) {
 			
-			if($hosts['status'] == 0 && $hosts['flags'] == 0) {						
+			if($hosts['status'] == 0 && $hosts['flags'] == 0) {	
+			
+				if($hosts['available'] == 1 && $hosts['sa'] == 0) { $keyValue = 'vfs.fs.size'; }
+				else { $keyValue = 'inbytes'; }															
 				
 				 // get all items
 				 $disks = $api->itemGet(array(
 				     'output' => 'extend',
 				     'hostids' => $hosts['hostid'],
-				     'search' => array('key_' => 'inbytes')
+				     'search' => array('key_' => $keyValue)
 				 ));
 				
 				 // print disks ID with graph name
 				 foreach($disks as $disk) {    
 									            
-				    $diskSize = get_item_values($disk->itemid, 'hrStorageSizeinBytes');
-				    $diskUsed = get_item_values($disk->itemid, 'hrStorageUsedinBytes');
+				 	if($hosts['available'] == 1 && $hosts['sa'] == 0) { $searchValSize = 'total'; $searchValUsed = 'used'; }
+					else { $searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; }
+									           
+				    $diskSize = get_item_values($disk->itemid, $searchValSize);
+				    $diskUsed = get_item_values($disk->itemid, $searchValUsed);
 
 					//Size
 					if(strchr(get_item_label($diskSize['key_']),":") != '') {
@@ -75,9 +81,9 @@
 								<tr>					
 									<th style='background:".$cor."; width:1%;' title='".$conn."'></th>
 									<th colspan='1' class='linkb' style='width:50%; font-weight:bold; text-align:left;'><a href='host_detail.php?hostid=".$hosts['hostid']."'> ".$hosts['name']." </a></th>
-									<th colspan='1' style='width:18%; text-align:left;'>". $labels['Usado'] ."</th>
+									<th colspan='1' style='width:18%; text-align:left;'>". $labels['Used'] ."</th>
 									<th colspan='1' style='text-align:left;'> ". _('Total') ." </th>
-									<th colspan='1' style='text-align:left;'> % ". $labels['Usado'] ." </th>
+									<th colspan='1' style='text-align:left;'> % ". $labels['Used'] ." </th>
 								</tr>
 								</thead>
 								<tbody>\n"; 										
@@ -87,6 +93,11 @@
 						
 							$s = explode(",",$arrSize[$i]);
 							$u = explode(",",$arrUsed[$i]); 
+				
+							if(isset($u[2])) {
+								$s[1] = $s[2];						
+								$u[1] = $u[2];
+							}	
 								
 							if( stripos($s[0] , 'Memory') != true ) {
 								

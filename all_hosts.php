@@ -24,7 +24,8 @@
 		
 			while ($hosts = DBFetch($dbHosts)) {				
 			
-				if($hosts['sd'] <> 0) { $conn = "Offline"; $cor = "#E3573F";  } else { $conn = "Online"; $cor = "#4BAC64"; } 	
+				if($hosts['sd'] <> 0) { $conn = "Offline"; $cor = "#E3573F"; $value = 1; } 
+				else { $conn = "Online"; $cor = "#4BAC64"; $value = 0; } 	
 					
 				$dbIP = DBSelect('SELECT DISTINCT ip FROM interface WHERE hostid ='.$hosts['hostid']);
 				$IP = DBFetch($dbIP);
@@ -51,13 +52,13 @@
 				
 				echo "
 						<tr>
-							<td  style='background-color:".$cor.";' title='".$conn."'>
+							<td  style='background-color:".$cor.";' title='".$conn."' data-order='".$value."'>
 							</td>
 							<td class='link2' style='vertical-align:middle; text-align:left; padding:5px;'>
 								<a href='host_detail.php?hostid=".$hosts['hostid']."' target='_self' >".$hosts['name']."</a>
 							</td>
-							<td style='text-align:center;'>
-								<img src='img/os/".$hostOS.".png' title='".$hostOS."'/>
+							<td style='text-align:center;' data-order='".$hostOS."'>
+								<img src='img/os/".$hostOS.".png' title='".$hostOS."' alt=''/>
 							</td>
 							<td style='text-align:center; vertical-align:middle; '>
 								".$IP['ip']."
@@ -76,13 +77,13 @@
 					
 					echo "
 						<tr>
-							<td  style='background-color:".$cor.";' title='".$conn."'>
+							<td  style='background-color:".$cor.";' title='".$conn."' data-order='".$value."'>
 							</td>
 							<td class='link2' style='vertical-align:middle; text-align:left; padding:5px;'>
 								<a href='host_detail.php?hostid=".$hosts['hostid']."' target='_self' >".$hosts['name']."</a>
 							</td>
-							<td style='text-align:center;'>
-								<img src='img/os/".$hostOS.".png' title='".$hostOS."'/>
+							<td style='text-align:center;' data-order='".$hostOS."'>
+								<img src='img/os/".$hostOS.".png' title='".$hostOS."' alt=''/>
 							</td>
 							<td style='text-align:center; vertical-align:middle; '>
 								".$IP['ip']."
@@ -110,11 +111,12 @@ $(document).ready(function() {
 	
     $('#tab_hosts').DataTable({
 
-		  "select": false,
+		  "select":   false,
 		  "paging":   true,
-        "ordering": false,
         "info":     true,
-        "filter":     true,
+        "filter":   true,
+        "ordering": true,
+        "order": [[ 1, "asc" ]],
         pagingType: "full_numbers",        
 		  displayLength: 15,
         lengthMenu: [[15,25, 50, 100, -1], [15,25, 50, 100, "All"]],	    	    	   

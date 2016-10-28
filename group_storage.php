@@ -2,8 +2,8 @@
 
 foreach( $groupID as $g ) {
 	
-	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags FROM hosts h, hosts_groups hg WHERE hg.groupid = '.$g.' AND h.hostid = hg.hostid ORDER BY h.name ASC'	);
-	$dbHostsOk = DBselect( 'SELECT h.hostid, h.name, h.status, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags FROM hosts h, hosts_groups hg WHERE hg.groupid = '.$g.' AND h.hostid = hg.hostid ORDER BY h.name ASC'	);
+	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.available, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags FROM hosts h, hosts_groups hg WHERE hg.groupid = '.$g.' AND h.hostid = hg.hostid ORDER BY h.name ASC'	);
+	$dbHostsOk = DBselect( 'SELECT h.hostid, h.name, h.status, h.available, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags FROM hosts h, hosts_groups hg WHERE hg.groupid = '.$g.' AND h.hostid = hg.hostid ORDER BY h.name ASC'	);
 
 	//get group name
 	$group = get_hostgroup_by_groupid($g);
@@ -19,32 +19,35 @@ foreach( $groupID as $g ) {
 
 		while ($hosts = DBFetch($dbHosts)) {
 			
-			if($hosts['status'] == 0 && $hosts['flags'] == 0) {						
+			if($hosts['status'] == 0 && $hosts['flags'] == 0) {
+				
+				if($hosts['available'] == 1 && $hosts['sa'] == 0) { $keyValue = 'vfs.fs.size'; }
+				else { $keyValue = 'inbytes'; }						
 				
 				 // get all items
 				 $disks = $api->itemGet(array(
 				     'output' => 'extend',
 				     'hostids' => $hosts['hostid'],
-				     'search' => array('key_' => 'inbytes')
+				     'search' => array('key_' => $keyValue)
 				 ));
 				
 				 // print disks ID with graph name
 				 foreach($disks as $disk) {    
-				
-					 //$diskInfo = get_item_by_itemid_disk($disk->itemid);             
-				    $diskSize = get_item_values($disk->itemid, 'hrStorageSizeinBytes');
-				    $diskUsed = get_item_values($disk->itemid, 'hrStorageUsedinBytes');
+				 
+				 	if($hosts['available'] == 1 && $hosts['sa'] == 0) { $searchValSize = 'total'; $searchValUsed = 'used'; }
+					else { $searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; }
+									           
+				    $diskSize = get_item_values($disk->itemid, $searchValSize);
+				    $diskUsed = get_item_values($disk->itemid, $searchValUsed);
 
 					//Size
 					if(strchr(get_item_label($diskSize['key_']),":") != '') {
-						if($diskSize['value_max'] != 0) {
-						//if($diskSize['value_max'] != 0 || get_item_label($diskSize['key_']) != '') {						
-						$arrSize[]= get_item_label($diskSize['key_']).",".$diskSize['value_max'];
+						if($diskSize['value_max'] != 0) {												
+							$arrSize[]= get_item_label($diskSize['key_']).",".$diskSize['value_max'];
 						}
 					}		
 
-					else {				
-						//if($diskSize['value_max'] != 0) {
+					else {										
 						if($diskSize['value_max'] != 0 || get_item_label($diskSize['key_']) != '') {						
 							$arrSize[]= get_item_label($diskSize['key_']).",".$diskSize['value_max'];
 						}
@@ -69,7 +72,6 @@ foreach( $groupID as $g ) {
 					sort($arrSize);
 					sort($arrUsed);
 
-
 					if($arrSize[0] != '') {
 							
 						//hosts 				
@@ -85,18 +87,24 @@ foreach( $groupID as $g ) {
 								<tr>					
 									<th style='background:".$cor."; width:1%;' title='".$conn."'></th>
 									<th colspan='1' class='linkb' style='width:50%; font-weight:bold; text-align:left;'><a href='host_detail.php?hostid=".$hosts['hostid']."'> ".$hosts['name']." </a></th>
-									<th colspan='1' style='width:18%; text-align:left;'>". $labels['Usado'] ."</th>
+									<th colspan='1' style='width:18%; text-align:left;'>". $labels['Used'] ."</th>
 									<th colspan='1' style='text-align:left;'> ". _('Total') ." </th>
-									<th colspan='1' style='text-align:left;'> % ". $labels['Usado'] ." </th>
+									<th colspan='1' style='text-align:left;'> % ". $labels['Used'] ." </th>
 								</tr>
 								</thead>
-								<tbody>\n"; 														
+								<tbody>\n"; 			
+																			
 		
-						for($i=0;$i<count($arrUsed);$i++) {
+						for($i=0;$i<count($arrUsed);$i++) {						
 						
 							$s = explode(",",$arrSize[$i]);
 							$u = explode(",",$arrUsed[$i]); 
 								
+							if(isset($u[2])) {
+								$s[1] = $s[2];						
+								$u[1] = $u[2];
+							}						
+						
 							if( stripos($s[0] , 'Memory') != true ) {
 								
 								if($s[1] != 0) {

@@ -1,8 +1,5 @@
 <?php
 
-//Translate
-//$labels = include_once 'locales/pt.php';
-
 function formatBytesx($size, $precision = 0)
 {
     $base = log($size, 1024);
@@ -83,6 +80,15 @@ function hostStatus($stat) {
 return $status;
 
 }
+
+
+
+function hostIP($hostid) {
+	$dbIP = DBSelect('SELECT DISTINCT ip FROM interface WHERE hostid ='.$hostid);
+	$IP = DBFetch($dbIP);
+	return $IP;
+}
+
 
 
 function getOS($hostid) {
@@ -280,265 +286,27 @@ function percent ( $value, $total ) {
 }
 
 
-function getLang() {
+function color_bar($value) {
 
-	$dbLang = DBselect( 'SELECT lang FROM users WHERE userid = 3');
-	$getLang = DBFetch($dbLang);	
-	//$lang = $dbLang['lang'];
-	$lang = "pt_BR";
+	$barra = $value;	
+	$barraValue = $barra;
+
+	// cor barra disks
+	if($barra >= 100) { $cor = "progress-bar-danger"; $perc_cor = "#fff"; $barraValue = 100;}
+	if($barra >= 80 and $barra <= 100) { $cor = "progress-bar-danger"; $perc_cor = "#fff"; }
+	if($barra >= 61 and $barra <= 79) { $cor = "progress-bar-warning"; $perc_cor = "#fff"; }
+	if($barra >= 26 and $barra <= 60) { $cor = " "; $perc_cor = "#fff"; }
+	if($barra >= 0 and $barra <= 25) { $cor = "progress-bar-success"; $perc_cor = "#000";}	
+	if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
 	
-	$_SESSION['zablang'] = $lang;	
-	//return $_SESSION['zablang'];
+/*	return $barra;			
+	return $cor;			
+	return $perc_cor;	*/
+	
+	$arrBar = array($barra,$cor,$perc_cor);	
+	return $arrBar;	
+														
 }
 
-
-/// Translation functions
-/// since version 0.84
-
-/**
- * For translation
- *
- * @param $str      string
- * @param $domain   string domain used (default is glpi, may be plugin name)
- *
- * @return translated string
-**/
-function __($str) {
-   global $TRANSLATE;
-
-   if (is_null($TRANSLATE)) { // before login
-      return $str;
-   }
-   $trans = $TRANSLATE->translate($str);
-   // Wrong call when plural defined
-   if (is_array($trans)) {
-      return $trans[0];
-   }
-   return  $trans;
-}
-
-
-/**
- * For translation
- *
- * @param $str      string
- * @param $domain   string domain used (default is glpi, may be plugin name)
- *
- * @return protected string (with htmlentities)
-**/
-function __s($str) {
-   return htmlentities(__($str), ENT_QUOTES, 'UTF-8');
-}
-
-
-/**
- * For translation
- *
- * @since version 0.84
- *
- * @param $ctx       string    context
- * @param $str       string   to translate
- * @param $domain    string domain used (default is glpi, may be plugin name)
- *
- * @return protected string (with htmlentities)
-**/
-function _sx($ctx, $str) {
-   return htmlentities(_x($ctx, $str), ENT_QUOTES, 'UTF-8');
-}
-
-
-/**
- * to delete echo in translation
- *
- * @param $str      string
- * @param $domain   string domain used (default is glpi, may be plugin name)
- *
- * @return echo string
-**/
-function _e($str) {
-   echo __($str);
-}
-
-
-/**
- * For translation
- *
- * @param $sing      string in singular
- * @param $plural    string in plural
- * @param $nb               to select singular or plurial
- * @param $domain    string domain used (default is glpi, may be plugin name)
- *
- * @return translated string
-**/
-/*
-function _n($sing, $plural, $nb) {
-   global $TRANSLATE;
-
-   return $TRANSLATE->translatePlural($sing, $plural, $nb);
-}
-*/
-
-/**
- * For translation
- *
- * @since version 0.84
- *
- * @param $sing      string in singular
- * @param $plural    string in plural
- * @param $nb               to select singular or plurial
- * @param $domain    string domain used (default is glpi, may be plugin name)
- *
- * @return protected string (with htmlentities)
-**/
-function _sn($sing, $plural, $nb) {
-   global $TRANSLATE;
-
-   return htmlentities(_n($sing, $plural, $nb), ENT_QUOTES, 'UTF-8');
-}
-
-
-/**
- * For context in translation
- *
- * @param $ctx       string   context
- * @param $str       string   to translate
- * @param $domain    string domain used (default is glpi, may be plugin name)
- *
- * @return string
-**/
-/*
-function _x($ctx, $str) {
-
-   // simulate pgettext
-   $msg   = $ctx."\004".$str;
-   $trans = __($msg);
-
-   if ($trans == $msg) {
-      // No translation
-      return $str;
-   }
-   return $trans;
-}
-*/
-
-/**
- * Echo for context in translation
- *
- * @param $ctx       string   context
- * @param $str       string   to translated
- * @param $domain    string domain used (default is glpi, may be plugin name)
- *
- * @return string
-**/
-function _ex($ctx, $str) {
-
-   // simulate pgettext
-   $msg   = $ctx."\004".$str;
-   $trans = __($msg);
-
-   if ($trans == $msg) {
-      // No translation
-      echo $str;
-   }
-   echo $trans;
-}
-
-
-/**
- * For context in plural translation
- *
- * @param $ctx       string   context
- * @param $sing      string   in singular
- * @param $plural    string   in plural
- * @param $nb                 to select singular or plurial
- * @param $domain    string domain used (default is glpi, may be plugin name)
- *
- * @return string
-**/
-/*
-function _nx($ctx, $sing, $plural, $nb) {
-
-   // simulate pgettext
-   $singmsg    = $ctx."\004".$sing;
-   $pluralmsg  = $ctx."\004".$plural;
-   $trans      = _n($singmsg, $pluralmsg, $nb);
-
-   if ($trans == $singmsg) {
-      // No translation
-      return $sing;
-   }
-   if ($trans == $pluralmsg) {
-      // No translation
-      return $plural;
-   }
-   return $trans;
-}
-
-*/
-
-
-
-/*
-    $epoch = 1340000000;
-    echo date('r', $epoch); // output as RFC 2822 date - returns local time
-    echo gmdate('r', $epoch); // returns GMT/UTC time
-
-    $epoch = 1344988800; 
-    $dt = new DateTime("@$epoch");  // convert UNIX timestamp to PHP DateTime
-    echo $dt->format('Y-m-d H:i:s'); // output = 2012-08-15 00:00:00 
-
-
-function get_item_by_itemid_disk1($itemid) {
-	$row = DBfetch(DBselect(
-		'SELECT i.itemid,i.name,i.key_,i.status,i.type,t.num, t.value_min,'. 
-		't.value_avg,t.value_max,from_unixtime(t.clock)'.			
-		'FROM items i, trends_uint t, hosts h'.
-		'WHERE i.hostid=h.hostid'.
-		'AND t.itemid=i.itemid'.		  	   	
-		'AND i.itemid=27435'.
-		'ORDER BY t.clock DESC'.
-		'LIMIT 1'));
-	if ($row) {
-		return $row;
-	}
-	error(_s('No item with itemid "%1$s".', $itemid));
-	return false;
-}
-*/
-
-/*
-
-SELECT i.itemid,i.name,i.key_,i.delay,i.history,i.status,i.type,t.num, t.value_min, 
-t.value_avg,t.value_max,from_unixtime(t.clock)			
-FROM items i, trends_uint t, hosts h
-WHERE i.itemid=27435
-AND i.hostid=h.hostid
-AND t.itemid=i.itemid
-AND t.value_max > 0   	   	
-ORDER BY t.clock DESC
-LIMIT 1
- 		
- 		
-function get_item_by_itemid_disk($itemid) {
-	$row = DBfetch(DBselect(
-		'SELECT i.itemid,i.name,i.key_,i.delay,i.history,i.status,i.type,'.
-			'i.value_type,i.data_type,i.logtimefmt,'.			
-			'i.valuemapid,i.delay_flex,i.params,i.ipmi_sensor,i.flags,i.description,i.inventory_link,'.
-			't.num, t.value_min, t.value_avg,t.value_max,from_unixtime(t.clock)'.			
-		' FROM items i, trends_uint t, hosts h'.
-		' WHERE i.itemid=27435'.
-		'AND i.hostid=h.hostid'.
-		'AND t.itemid=i.itemid'.
-   	'AND t.value_max > 0'.   	   	
- 		'ORDER BY t.clock DESC'.
- 		'LIMIT 5'));
-	if ($row) {
-		return $row;
-	}
-	error(_s('No item with itemid "%1$s".', $itemid));
-	return false;
-}
-
-*/
 
 ?>

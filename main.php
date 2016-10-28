@@ -60,7 +60,7 @@ $users = $api->userGet(array(
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">           
-    
+
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 	 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />    
     <link href="css/bootstrap.css" rel="stylesheet">        		   
@@ -253,11 +253,11 @@ setTimeout(function(){
 	<div class="col-sm-12 col-md-12 align" style="margin-left: 0px;"> 	 				              
 	   <div id="time" class="widget2 widget-table action-table striped card1" >
 	      <div class="widget-header">                 
-	      	<h3><i class="fa fa-calendar" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Triggers']." last 7 days"; ?></h3>
+	      	<h3><i class="fa fa-calendar" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Triggers last 7 days']; ?></h3>
 	      	 <span  class=""></span>               
 	      </div> 
 	      <!-- /widget-header -->      
-	      <div id="triggers_time" style='height:350px !important; background:#fff; '>	 			
+	      <div id="triggers_time" style='height:305px !important; background:#fff; '>	 			
 					<?php
 						include ("charts/triggers_time.inc.php");
 					?> 	 						            

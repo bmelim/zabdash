@@ -1,18 +1,25 @@
 <?php
 
  // get all items
+
+ if($host['available'] == 1 && $host['sa'] == 0) { $keyValue = 'vfs.fs.size'; }
+ else { $keyValue = 'inbytes'; }			 
+ 
  $disks = $api->itemGet(array(
      'output' => 'extend',
      'hostids' => $hostid,
-     'search' => array('key_' => 'inbytes')
+     'search' => array('key_' => $keyValue)
      
  ));
 
  // print disks ID with graph name
  foreach($disks as $disk) {    
-	              
-    $diskSize = get_item_values($disk->itemid, 'hrStorageSizeinBytes');
-    $diskUsed = get_item_values($disk->itemid, 'hrStorageUsedinBytes');
+ 
+ 	if($host['available'] == 1 && $host['sa'] == 0) { $searchValSize = 'total'; $searchValUsed = 'used'; }
+	else { $searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; }
+					           
+   $diskSize = get_item_values($disk->itemid, $searchValSize);
+   $diskUsed = get_item_values($disk->itemid, $searchValUsed);
 
 	//Size
 	if(strchr(get_item_label($diskSize['key_']),"A:") != '') {
@@ -68,8 +75,8 @@ for($n=0;$n<count($arrUsed);$n++) {
  
  foreach($cpus as $cpu) {
    
-    $cpuLoad = get_item_values($cpu->itemid, 'processorload');    
-   	$arrCPU[] = $cpuLoad['value_max'];             
+   $cpuLoad = get_item_values($cpu->itemid, 'processorload');    
+   $arrCPU[] = $cpuLoad['value_max'];             
  }
  
 $cpuNum = count($arrCPU); 
@@ -113,7 +120,7 @@ foreach($ifs as $if) {
 	$ifUsed = get_item_values($if->itemid, 'ifOutOctets');
 				
 	if($ifSize['value_max'] != '') {			
-		$arrIfSize[]= get_item_label($ifSize['key_']).",".$ifSize['value_max'];
+		$arrIfSize[]= get_item_label($ifSize['key_']).",".$ifSize['value_max'];;
 	}
 	
 	if($ifUsed['value_max'] != '') {

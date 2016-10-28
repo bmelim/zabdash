@@ -4,22 +4,28 @@ require_once '../../include/config.inc.php';
 require_once '../../include/hosts.inc.php';
 require_once '../../include/actions.inc.php';
 require_once '../../include/items.inc.php';
-
 include('../config.php');
-include('../inc/functions.inc.php');
+
+require_once '../lib/ZabbixApi.class.php';
+use ZabbixApi\ZabbixApi;
+$api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
+
+if(isset($_GET['off'])) {
+	$off = $_GET['off'];
+}
 
 ?>
 
 <html> 
 <head>
-<title>Zabdash - <?php echo __('Hosts Map'); ?></title>
+<title>Zabdash - <?php echo _('Hosts Map'); ?></title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta http-equiv="content-language" content="en-us" />
-<meta http-equiv="refresh" content= "180"/> 
+<!--<meta http-equiv="refresh" content= "180"/>--> 
 
-<link rel="icon" href="../favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="../img/dash.ico" type="image/x-icon" />
+<link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
 <link href="../css/font-awesome.css" type="text/css" rel="stylesheet" />
 <script src="../js/jquery.min.js" type="text/javascript" ></script>
@@ -30,12 +36,9 @@ include('../inc/functions.inc.php');
 <link href="css/google_api.css" rel="stylesheet" type="text/css" />   
 
 <!--  
-<link href="../css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
 <script src="../js/bootstrap.min.js" type="text/javascript" ></script> 
 -->  
-
 </head>
-
 
 <!-- google maps - by Stevenes Donato -->
 
@@ -43,49 +46,83 @@ include('../inc/functions.inc.php');
 
 var markers=[];	                 
 var locations = [
+
 <?php
 
-$icon_red = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|FF0000|14|_|";
-$icon_green = "http://chart.apis.google.com/chart?chst=d_map_spin&chld=1|0|43B53C|14|_|";
+$icon_red = "./images/red-marker.png";
+$icon_green = "./images/green-marker.png";
 
-$dbLoc = DBselect( 'SELECT hi.hostid, hi.name, hi.location, hi.location_lat AS lat, hi.location_lon AS lon , h.snmp_disable_until AS sd
+$dbLoc = DBselect( 'SELECT hi.hostid, h.host, hi.name, hi.location, hi.location_lat AS lat, hi.location_lon AS lon , h.snmp_disable_until AS sd, h.status, h.flags							
 							FROM host_inventory hi, hosts h 
 							WHERE hi.location_lat <> 0 
 							AND hi.hostid = h.hostid
 							ORDER BY name ASC');
 
+
 while ($row = DBFetch($dbLoc)) {
-	
-  //$row['conta'] = count($row);
- 
+
   $id = $row['hostid'];
-  $title = $row['name'];  
-  $url = "../../hosts.php?form=update&hostid=".$id;   	
+  $title = $row['host'];  
+  $url = "../../tr_status.php?form=update&hostid=".$id;   	
   $host = "<a href=". $url ." target=_blank >" . $title . " (".$id.")</a>";  
   $status = $row['conta'];  
   $local = $row['location']; 
   $lat = $row['lat']; 
   $lon = $row['lon']; 
-  $quant1 = $row['sd'];   
-  //$num_up = $row['conta'];
-  //$num_down = $row['conta'];   
+  $quant1 = $row['sd'];     
 
 
-if ($quant1 == 0) {
-	$color = $icon_green.$quant."";
-	$num_up = 0;	
-	$num_down = 1;
+if($row['status'] == 0 && $row['flags'] == 0) {	
+
+	if ($quant1 != 0) {
+		//$color = $icon_red.$quant."";
+		$color = "./images/red-marker.png";		
+//		$sound = "../sound/alarm_disaster.wav";	
+		$num_up = 0;	
+		$num_down = 1;	
+		$conta[] = $id;		
+	}
+//}	
 	
-}
-
-else {
-	$color = $icon_red.$quant."";
-	//$color = $icon_green.$quant1."";
-	$num_up = 1;	
-	$num_down = 0;
-}
+	
+//if($row['status'] == 0 && $row['flags'] == 0) {
+	
+	if ($quant1 == 0) {
+	
+		$trigger = $api->triggerGet(array(
+			'output' => 'extend',
+			'hostids' => $id,
+			'sortfield' => 'priority',
+			'sortorder' => 'DESC',
+			'only_true' => '1',
+			'active' => '1', 
+			'withUnacknowledgedEvents' => '1'				
+		));
+	
+		if ($trigger) {
+	
+			// Highest Priority error
+			$prio = $trigger[0]->priority;				
+			$color = "./images/prio".$prio.".png";
+			//$sound = "../sound/airport.mp3";	
+			$num_up = 1;	
+			$num_down = 0;						
+		}
+		
+		else {	
+			$color = "./images/green-marker.png";		
+			//$color = "./images/prio".$prio.".png";		
+			//$sound = "../sound/no_sound.wav";		
+			$num_up = 1;	
+			$num_down = 0;
+		}
+		
+	}
+}	
 
 echo "['$title', $lat, $lon, '$local', '$color', '$host', $id, $quant1, $num_up, $num_down, '$url'],";
+
+$contaRed += $num_down;
 
 }
 ?>
@@ -118,7 +155,7 @@ var mapOptions = {
 		  title: locations[i][0],	        
         icon: {
         url: locations[i][4],
-        scaledSize: new google.maps.Size(36, 52) // pixels
+        //scaledSize: new google.maps.Size(32, 48) // pixels
     		},     
         host: locations[i][5],
         id: locations[i][6],
@@ -163,7 +200,7 @@ markers.push(marker)
       image_path = "./images/";
       image_ext = ".png";
       styles.push({
-        url: image_path + 0 + image_ext,
+        url: image_path + i + image_ext,
         height: 52,
         width: 53
       });
@@ -232,31 +269,66 @@ var iconCalculator = function(markers, numStyles) {
 	   }
    }
 
- 
     var infowindow = new google.maps.InfoWindow();
     infowindow.close();
     infowindow.setContent(titles); //set infowindow content to titles    
     infowindow.open(map, info);
 
-//close infowindow
-    google.maps.event.addListener(markerClusterer, 'mouseout', function() { infowindow.close() });
+	 //close infowindow
+	 google.maps.event.addListener(markerClusterer, 'mouseout', function() { infowindow.close() });
 
-// close infowindow when zoom change
-	google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close() });
+	 // close infowindow when zoom change
+	 google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close() });
 
 });
 
 }
-
 </script> 
 
+<?php
+	 //offline hosts 	 
+	 
+	 if($contaRed != 0) {
+		$sound = "../sound/Alarm1.wav";	 	
+	 }
+	 else { 
+	 	$sound = "../sound/no_sound.wav";
+	 }	
+	 	
+	 $offAtual = count($conta);
+    
+    echo '<meta http-equiv="refresh" content="180;URL=\'./index.php?off='.$offAtual.'\'"/>'; 	 	 	 
+	 
+	 if($off > 0 && $offAtual > $off) {
+		 echo '<!--[if IE]>';
+		 echo '<embed src="'.$sound.'" autostart="true" width="0" height="0" type="application/x-mplayer2"></embed>';
+		 echo "<![endif]-->\n";   
+		 // Browser HTML5    
+		 echo '<audio preload="auto" autoplay>';
+		 echo '<source src="'.$sound.'" type="audio/ogg"><source src="'.$sound.'" type="audio/mpeg">';
+		 echo "</audio>\n";
+	 }
 
-<body onload="initialize();" style="background:#e5e5e5;">
+/*
+//disaster #B10505 
+//high    #E97659
+//average #FFA059
+//warn #FFC859
+//info #59DB8F
+//ok #4BAC64
+*/	 
+ ?>
 
-	<div id='container-fluid' style="margin: 0px 0px 0px 1%;" > 
-					
+	<body onload="initialize();" style="background:#e5e5e5;">
+	
+		<div id='container-fluid' class="col-md-12 col-sm-12"  style="margin-top: -50px; margin-bottom:2px;" > 
+			<div style="margin-top:2px;margin-bottom:1px;">
+			<div style="float:left;"><a href="<?php echo $zabURL; ?>" target="_blank"><img src="../img/zabbix.png" alt="Zabbix" style="height:28px;"></img></a></div> 	
+		   <div class="" id="date" style="color:#000; float:right; "><?php echo date("d F Y", time())." - "; echo date("H:i:s", time()); ?></div>	    
+			</div>
+		</div>	
+						
 		<div id="map_canvas"></div>
-				
-	</div>
-</body>
+							
+	</body>
 </html>

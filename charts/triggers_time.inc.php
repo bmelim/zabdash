@@ -83,7 +83,7 @@ $(function () {
         $('#triggers_time').highcharts({
             chart: {
                 type: 'column',
-                height: 350
+                height: 300
             },
             title: {
                 text: ''

@@ -61,8 +61,8 @@ else {
 	<form id="form1" name="form1" class="form_rel" method="post" action="hosts_storage.php?sel=1" style="margin-top:30px; margin-bottom: -10px;" onchange='javascript:form1.submit();'>
 	<!-- <label>Selecione um ou mais Grupos:</label><br> -->
 		<select id='groupid' name='groupid' style='width: 300px; height: 27px;' autofocus data-placeholder="Selecione um Grupo">
-			<option value='-2'> <?php echo __('-- Selecione um Grupo --'); ?> </option>
-			<option value='-1'> Todos </option>
+			<option value='-2'> <?php echo $labels['Select group']; ?> </option>
+			<option value='-1'> <?php echo _('All'); ?> </option>
 			<?php
 				while ($groups = DBFetch($dbGroups)) {
 					echo "<option value='".$groups['groupid']."'>".$groups['name']."</option>\n";

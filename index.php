@@ -1,8 +1,6 @@
 <?php
 
 require_once '../include/config.inc.php';
-/*require_once '../include/hosts.inc.php';
-require_once '../include/actions.inc.php';*/
 require_once('config.php');
 require_once 'inc/functions.inc.php';
 
@@ -54,7 +52,7 @@ if($headers[0] != '') {
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">
-    <!--<meta http-equiv="refresh" content= "600"/>-->
+    <meta http-equiv="refresh" content= "1200"/>
     
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 	 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />    
@@ -181,7 +179,7 @@ if($headers[0] != '') {
                        <div class="user-menu" style="background:url('img/web.jpg') !important;">
                            <!--<img src="" alt="" title="" class="avatar" style="margin-left: -8px;" />-->
                            <div class="user-info">
-                               <div class="welcome"><?php //echo __('Welcome'); ?> </div>
+                               <div class="welcome"><?php //echo _('Welcome'); ?> </div>
                                <div class="username"></a></div>
                                
                            </div>                                  
@@ -202,7 +200,7 @@ if($headers[0] != '') {
                            <a href='#' onclick="window.open('hosts_view.php','iframe1'); scrollWin();" data-original-title='Hosts'>
                                <!--<i class='fa fa-desktop'></i>-->
                                <i><img src="img/icon/host.png" alt="" style="width:20px;"></img></i>
-                               <span class='hidden-minibar'><?php echo __('Hosts'); ?>
+                               <span class='hidden-minibar'><?php echo _('Hosts'); ?>
                                </span>
                            </a>  
                        		</li>
@@ -247,14 +245,14 @@ if($headers[0] != '') {
                                <!-- <li class=' '>
                                      <a href="./tickets/select_grupo.php" data-original-title=' por Grupo' target="_blank">
                                        <i class="fa fa-angle-right"></i>
-                                       <span class='hidden-minibar'> <?php echo __('by Group'); ?> </span>
+                                       <span class='hidden-minibar'> <?php echo _('by Group'); ?> </span>
                                    </a>
                                </li>   
                                
                               <li class='submenu'>
                                  <a class='dropdown' onClick='return false;' href='#' data-original-title='Mapas'>
                                      <i class='fa fa-angle-right'></i>
-                                     <span class='hidden-minibar'><?php echo __('Map');?>
+                                     <span class='hidden-minibar'><?php echo _('Map');?>
                                          <i class='fa fa-angle-right  pull-right'></i>
                                      </span>
                                  </a>
@@ -262,13 +260,13 @@ if($headers[0] != '') {
                                   <li class=' '>
                                       <a class='' href="./map/index.php" data-original-title=' Mapa' target="_blank">
                                           <i class="fa fa-angle-right"></i>
-                                          <span class='hidden-minibar'> <?php echo __('by Entity'); ?> </span>
+                                          <span class='hidden-minibar'> <?php echo _('by Entity'); ?> </span>
                                       </a>
                                   </li>
                                   <li class=' '>
                                       <a href="./map/map_loc.php" data-original-title=' Mapa' target="_blank">
                                           <i class="fa fa-angle-right"></i>
-                                          <span class='hidden-minibar'> <?php echo __('by Location'); ?> </span>
+                                          <span class='hidden-minibar'> <?php echo _('by Location'); ?> </span>
                                       </a>
                                   </li>
                                   </ul>
@@ -280,6 +278,13 @@ if($headers[0] != '') {
 	                        <a href='#' onclick="window.open('triggers.php','iframe1'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-edit'></i>
 	                            <span class='hidden-minibar'><?php echo _('Triggers'); ?>
+	                            </span>
+	                        </a>  
+                    		</li> 
+                    		<li class=' '>
+	                        <a href='#' onclick="window.open('map/index.php','_blank'); scrollWin();" data-original-title='Events'>
+	                            <i class='fa fa-map-marker'></i>
+	                            <span class='hidden-minibar'><?php echo _('Hosts Map'); ?>
 	                            </span>
 	                        </a>  
                     		</li>  
@@ -310,19 +315,19 @@ if($headers[0] != '') {
                                 <li class=' '>
                                    <a href='#' onclick="window.open('./graficos/geral.php','iframe1'); scrollWin();"  data-original-title=' Geral'>
                                        <i class="fa fa-angle-right"></i>
-                                       <span class='hidden-minibar'> <?php echo __('Overall'); ?></span>
+                                       <span class='hidden-minibar'> <?php echo _('Overall'); ?></span>
                                    </a>
                                </li>
                                  <li class=' '>
                                    <a href='#' onclick="window.open('./graficos/tecnicos.php','iframe1'); scrollWin();"  data-original-title=' Técnicos'>
                                        <i class="fa fa-angle-right"></i>
-                                       <span class='hidden-minibar'> <?php echo __('Technician'); ?></span>
+                                       <span class='hidden-minibar'> <?php echo _('Technician'); ?></span>
                                    </a>
                                </li>
                                <li class=' '>
                                    <a href='#' onclick="window.open('./graficos/usuarios.php','iframe1'); scrollWin();"  data-original-title=' Usuários'>
                                        <i class="fa fa-angle-right"></i>
-                                       <span class='hidden-minibar'> <?php echo __('Requester'); ?></span>
+                                       <span class='hidden-minibar'> <?php echo _('Requester'); ?></span>
                                    </a>
                                </li>
                                

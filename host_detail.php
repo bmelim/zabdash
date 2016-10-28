@@ -5,7 +5,6 @@ require_once '../include/actions.inc.php';
 require_once '../include/items.inc.php';
 
 include('config.php');
-//include('inc/functions.inc.php');
 
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
@@ -15,7 +14,12 @@ $hostid = $_REQUEST['hostid'];
 
 if(isset($hostid)) {
 
+
+$dbHosts = DBselect( 'SELECT hostid, name, status, available, snmp_available AS sa, snmp_disable_until AS sd, flags FROM hosts WHERE hostid='.$hostid);
+$host = DBFetch($dbHosts);		
+	
 //Get info from hostid	
+//
 include('host_info.php');
   
 ?>
@@ -65,13 +69,10 @@ include('host_info.php');
     function graphPage() {
     	
     	var period = document.getElementById("period").value;
-    	
-    	/*window.open('host_graphs.php?period='+period+'&hostid=<?php echo $hostid; ?>','_top');*/
+    	    	
     	window.location.href = 'host_graphs.php?period='+period+'&hostid=<?php echo $hostid; ?>';    	
     }
-
 </script>
-
 </head>
 
 <body>
@@ -80,9 +81,7 @@ include('host_info.php');
 
 <?php
 				
-	$dbHosts = DBselect( 'SELECT hostid, name, status, snmp_available AS sa, snmp_disable_until AS sd, flags FROM hosts WHERE hostid='.$hostid);
-	$host = DBFetch($dbHosts);		
-	
+
 	echo "			
 		<div id='host' class='align col-md-10 col-sm-10' >
 			<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2;'>\n
@@ -101,7 +100,7 @@ include('host_info.php');
 						<a href='".$zabURL."tr_status.php?fullscreen=0&source=0&hostid=".$host['hostid']."' target='_blank' >".$host['name']."</a>
 					</td>
 					<td style='text-align:center;'>
-						<img src='img/os/".$hostOS.".png' alt='' title='".$hostOS."'/>
+						<img src='img/os/".$hostOS.".png' alt='' title='".$hostOS."' alt=''/>
 					</td>
 					<td style='text-align:center; vertical-align:middle; '>
 						<i class='oicon-server' title='Hostname'></i> ".get_host_name($host['hostid'])."
@@ -121,27 +120,55 @@ include('host_info.php');
 		//CPU Load
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2;'>
 				<tr>					
-					<td colspan='5' style='font-weight:bold;'><img src='img/icon/electronics-24.png' alt=''/> ". _('CPU')." </td>
+					<td colspan='5' style='font-weight:bold;'><img src='img/icon/electronics-24.png' alt=''/> ".$labels['Processor']." </td>
 				</tr>\n"; 										
-
-		echo "<tr>
-					<td colspan='4'> "._('Average').": ".$avgCPU."% </td>
-				</tr>\n"; 
 			
-				for($i=0; $i<$cpuNum; $i++) {
+				for($i=0; $i<$cpuNum; $i++) {					
+									
+					$barra = $arrCPU[$i];						
+					$barraValue = $barra;
+				
+					// cor barra
+					if($barra >= 100) { $cor = "progress-bar-danger"; $perc_cor = "#fff"; $barraValue = 100;}
+					if($barra >= 80 and $barra <= 100) { $cor = "progress-bar-danger"; $perc_cor = "#fff"; }
+					if($barra >= 61 and $barra <= 79) { $cor = "progress-bar-warning"; $perc_cor = "#fff"; }
+					if($barra >= 26 and $barra <= 60) { $cor = " "; $perc_cor = "#fff"; }
+					if($barra >= 0 and $barra <= 25) { $cor = "progress-bar-success"; $perc_cor = "#000";}	
+					if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
 		
-					echo "<tr><td>".$labels['Processor']." ".($i + 1).": ".$arrCPU[$i]."% &nbsp;</td></tr>\n";
+					echo "<tr>\n";
+						echo "<td width='25%'>".$labels['Processor']." ".($i + 1)."</td>\n";
+						//echo "<td>".$arrCPU[$i]."% &nbsp;</td></tr>\n";
+						echo "<td width='20%' style='padding-right:15px; '>
+							<div style='font-size:13px; position:absolute; vertical-align:middle; color:".$perc_cor.";'>&nbsp;".$barra."%</div>
+							<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barraValue."%;'>&nbsp; </div>
+				   	</td><td></td>\n";
 				}					
+				
+					$barra = $avgCPU;						
+					$barraValue = $barra;
+				
+					// cor barra
+					if($barra >= 100) { $cor = "progress-bar-danger"; $perc_cor = "#fff"; $barraValue = 100;}
+					if($barra >= 80 and $barra <= 100) { $cor = "progress-bar-danger"; $perc_cor = "#fff"; }
+					if($barra >= 61 and $barra <= 79) { $cor = "progress-bar-warning"; $perc_cor = "#fff"; }
+					if($barra >= 26 and $barra <= 60) { $cor = " "; $perc_cor = "#fff"; }
+					if($barra >= 0 and $barra <= 25) { $cor = "progress-bar-success"; $perc_cor = "#000";}	
+					if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
+				
+					echo "<tr>
+						<td colspan='1'> "._('Average')."</td>";
+					echo "<td width='20%' style='padding-right:15px; '>
+							<div style='font-size:13px; position:absolute; vertical-align:middle; color:".$perc_cor.";'>&nbsp;".$barra."%</div>
+							<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barraValue."%;'>&nbsp; </div>
+				   	</td><td></td>\n
+					</tr>\n"; 
 										
 
 		//Memory		 
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2;'>
 				<tr>\n";					
-			echo "<td colspan='5' style='font-weight:bold;'><img src='img/icon/memory_slot-24.png' alt=''/>  ". $labels['Memory']." </td>
-				</tr>\n"; 										
-
-		echo "<tr>\n";
-			echo "<td colspan='2' style='width:50%;'> ". _('Type')." </td>
+			echo "<td colspan='1' style='width:50%; font-weight:bold;'><img src='img/icon/memory_slot-24.png' alt=''/>  ". $labels['Memory']." </td>				 															
 					<td> ". $labels['Used']." </td>
 					<td> ". _('Total')." </td>
 					<td> % ".$labels['Used']." </td>
@@ -192,10 +219,10 @@ include('host_info.php');
 					
 									
 			echo "<tr>";	
-				echo "<td colspan='2'>". $s[0] ."</td>";
+				echo "<td colspan='1'>". $s[0] ."</td>";
 				echo "<td>". formatBytes($u[1],1) ."</td>";
-				echo "<td width='15%'>". formatBytes($s[1],1) ."</td>";
-				echo "<td width='15%' style='padding-right:15px; '>
+				echo "<td widthx='15%'>". formatBytes($s[1],1) ."</td>";
+				echo "<td widthx='15%' style='padding-right:15px; '>
 							<div style='font-size:13px; position:absolute; vertical-align:middle; color:".$perc_cor.";'>&nbsp;".$barra."%</div>
 							<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barraValue."%;'>&nbsp; </div>
 				   	</td>";
@@ -209,22 +236,27 @@ include('host_info.php');
 		//Disks				
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2;'>
 				<tr>					
-					<td colspan='5' style='font-weight:bold;'><img src='img/icon/HDD-24.png' alt=''/> ".$labels['Storage']." </td>
-				</tr>\n"; 										
+					<td colspan='1' style='width:50%; font-weight:bold;'><img src='img/icon/HDD-24.png' alt=''/> ".$labels['Storage']." </td>\n";
+				//</tr>\n"; 										
 
-		echo "<tr>
-					<td colspan='2' style='width:50%;'> ".$labels['Unity']." </td>
+		echo "					
 					<td> ".$labels['Used']." </td>
 					<td> ". _('Total')." </td>
 					<td> % ".$labels['Used']." </td>
 				</tr>\n"; 		
+
 		
 		for($i=0;$i<count($arrUsed);$i++) {
 		
 			$s = explode(",",$arrSize[$i]);
 			$u = explode(",",$arrUsed[$i]); 
+			
+			if(isset($u[2])) {
+				$s[1] = $s[2];						
+				$u[1] = $u[2];
+			}
 				
-			if( stripos($s[0] , 'Memory') != true ) {
+			if( stripos($s[0] , 'Memory') != true ) {								
 				
 				if($s[1] != 0) {
 					$barra = round((100*$u[1])/$s[1],1);	
@@ -240,10 +272,10 @@ include('host_info.php');
 				if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }			
 														
 				echo "<tr>";	
-					echo "<td colspan='2'>". $s[0] ."</td>";
+					echo "<td colspan='1'>". $s[0] ."</td>";
 					echo "<td>". formatBytes($u[1],1) ."</td>";
-					echo "<td width='15%'>". formatBytes($s[1],1) ."</td>";
-					echo "<td width='15%' style='padding-right:15px; '>
+					echo "<td widthx='15%'>". formatBytes($s[1],1) ."</td>";
+					echo "<td widthx='15%' style='padding-right:15px; '>
 								<div style='font-size:13px; position:absolute; vertical-align:middle; color:".$perc_cor.";'>&nbsp;".$barra."%</div>
 								<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barra."%;'>&nbsp; </div>
 					      </td>";
@@ -299,13 +331,9 @@ include('host_info.php');
 		//Network				
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2; margin-bottom:80px;'>
 					<tr>					
-						<td colspan='4' style='font-weight:bold;'><img src='img/icon/ethernet_off-24.png' alt=''/> ".$labels['Network Interfaces']." </td>
-					</tr>\n"; 										
-	
-			echo "<tr>
-						<td colspan='2' style='width:65%;'> ". _('Name')."  </td>
+						<td colspan='1' style='width:50%; font-weight:bold;'><img src='img/icon/ethernet_off-24.png' alt=''/> ".$labels['Network Interfaces']." </td>																		
 						<td> In </td>
-						<td> Out </td>				
+						<td> Out </td>												
 					</tr>\n";
 			
 			//foreach($arrIfSize as $k){
@@ -315,9 +343,9 @@ include('host_info.php');
 				$u = explode(",",$arrIfUsed[$i]); 					
 				
 				echo "<tr>";
-					echo "<td colspan='2' style='width:60%;'>".$s[0]."</td>
+					echo "<td colspan='1' style='widthx:60%;'>".$s[0]."</td>
 							<td>". formatBytes(($s[1] * 8),1)."</td>
-							<td>". formatBytes(($u[1] * 8),1)."</td>";		
+							<td>". formatBytes(($u[1] * 8),1)."</td>\n";											
 				echo "</tr>\n";
 			}
 		echo "</table>\n";

@@ -8,20 +8,17 @@ require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
 $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
 
-//Translate
-//$labels = include_once 'locales/en.php';
-
-	$triggerAll = $api->triggerGet(array(
-		'output' => 'extend',
-		/*'hostids' => $hostid,*/
-		'sortfield' => 'lastchange',
-		'sortorder' => 'DESC',
-		'only_true' => '1',  //recents
-		'active' => '1', 
-		/*'withUnacknowledgedEvents' => '1',*/ 
-		'expandDescription' => '1',
-		'selectHosts' => 1								
-	));		
+$triggerAll = $api->triggerGet(array(
+	'output' => 'extend',
+	/*'hostids' => $hostid,*/
+	'sortfield' => 'lastchange',
+	'sortorder' => 'DESC',
+	'only_true' => '1',  //recents
+	'active' => '1', 
+	/*'withUnacknowledgedEvents' => '1',*/ 
+	'expandDescription' => '1',
+	'selectHosts' => 1								
+));		
 
 ?>
 

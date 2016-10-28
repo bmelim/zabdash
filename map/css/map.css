@@ -1,20 +1,3 @@
-#headxx {
-	width: 950px;
-   margin-left: -500px;
-	left: 53%;
-	position: relative;
-	background-color: #fff;
-	color: #fff;
-	padding-top: 20px;
-	padding-bottom: 2px;
-
- /* Rounded Corners */
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  box-shadow: 4px 4px 4px #888888;
-}
-
 
 #titulo {
 	min-width: 900px;

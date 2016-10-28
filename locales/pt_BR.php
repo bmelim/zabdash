@@ -40,7 +40,7 @@ return array(
 'Storage' => 'Armazenamento',
 'Hosts' => 'Hosts',
 'Host Groups' => 'Grupos de Hosts',
-'Hosts Health' => 'Saúde dos Hosts',
+'Hosts Health' => 'Estado dos Hosts',
 'Hosts Panel' => 'Painel Hosts',
 'Setup' => 'Configuração',
 'Help' => 'Ajuda',
@@ -64,6 +64,10 @@ return array(
 'Triggers by host - Top 10' => 'Triggers por host - Top 10',
 'Triggers by Severity' => 'Triggers por Severidade',
 'Unacknowledged Triggers' => 'Triggers não Reconhecidos',
+'Triggers last 7 days' => 'Triggers dos últimos 7 dias', 
+'Select group' => 'Selecione um Grupo',
+'Select one or more groups' => 'Selecione um ou mais Grupos',
+'Hosts Map' => 'Mapa de Hosts',
 
 
 );
