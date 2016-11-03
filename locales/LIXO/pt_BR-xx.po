@@ -1,0 +1,503 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-02 17:07-0400\n"
+"PO-Revision-Date: 2016-10-02 HO:MI+ZONE\n"
+"Last-Translator: Stevenes Donato <stevenesdonato@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: main2.php:87 main2.php:102 main2.php:117 main2.php:238 main2.php:306
+#: sh/template.php:256 sh/template.php:678 sh/template.php:939
+#: sh/template.php:971 sh/template.php:1037 map/map_loc.php:454
+#: map/map_loc.php:458 TESTE/main2-xxx.php:87 TESTE/main2-xxx.php:102
+#: TESTE/main2-xxx.php:117 TESTE/main2-xxx.php:238 TESTE/main2-xxx.php:306
+#: main.php:283 main.php:351 index2.php:295 index2.php:455
+msgid "Tickets"
+msgstr ""
+
+#: main2.php:88 map/map_loc.php:472 TESTE/main2-xxx.php:88
+msgid "Today"
+msgstr "Hoje"
+
+#: main2.php:118 TESTE/main2-xxx.php:118
+msgid "Total"
+msgstr "Total"
+
+#: main2.php:131 TESTE/main2-xxx.php:131
+msgid "users"
+msgstr "usuários"
+
+#: main2.php:155 TESTE/main2-xxx.php:155 main.php:199
+msgid "Close all Widgets"
+msgstr ""
+
+#: main2.php:159 TESTE/main2-xxx.php:159 main.php:203
+msgid "Open all Widgets"
+msgstr ""
+
+#: main2.php:161 TESTE/main2-xxx.php:161 main.php:205
+msgid "Closed Widgets"
+msgstr ""
+
+#: main2.php:202 TESTE/main2-xxx.php:202 main.php:247
+msgid "Tickets Evolution"
+msgstr ""
+
+#: main2.php:223 TESTE/main2-xxx.php:223 main.php:268
+msgid "Opened Tickets by Status"
+msgstr ""
+
+#: main2.php:238 map/map_loc.php:473 TESTE/main2-xxx.php:238 main.php:283
+msgid "Last 7 days"
+msgstr ""
+
+#: main2.php:253 TESTE/main2-xxx.php:253 main.php:298
+msgid "Ticket Solving Period"
+msgstr ""
+
+#: main2.php:269 TESTE/main2-xxx.php:269 main.php:314
+msgid "Open Tickets Age"
+msgstr ""
+
+#: main2.php:284 TESTE/main2-xxx.php:284 main.php:329
+msgid "Last Tickets"
+msgstr ""
+
+#: main2.php:306 sh/template.php:973 TESTE/main2-xxx.php:306 main.php:351
+msgid "Title"
+msgstr ""
+
+#: main2.php:324 main2.php:349 TESTE/main2-xxx.php:324 TESTE/main2-xxx.php:349
+#: main.php:369 main.php:395
+msgid "Open Tickets"
+msgstr ""
+
+#: main2.php:324 sh/template.php:300 sh/template.php:419
+#: TESTE/main2-xxx.php:324 main.php:369 index2.php:426 index2.php:478
+#: index2.php:505 index2.php:620
+msgid "by Technician"
+msgstr ""
+
+#: main2.php:348 sh/template.php:383 index.php:298 TESTE/main2-xxx.php:348
+#: index-labels.php:297 main.php:394 index2.php:357 index2.php:449
+#: index2.php:566
+msgid "Technician"
+msgstr ""
+
+#: main2.php:368 TESTE/main2-xxx.php:368 main.php:415
+msgid "Last Events"
+msgstr ""
+
+#: main2.php:386 TESTE/main2-xxx.php:386
+msgid "System"
+msgstr ""
+
+#: main2.php:387 main2.php:402 TESTE/main2-xxx.php:387 TESTE/main2-xxx.php:402
+msgid "Ticket"
+msgstr ""
+
+#: main2.php:389 main2.php:404 TESTE/main2-xxx.php:389 TESTE/main2-xxx.php:404
+msgid "Planning"
+msgstr ""
+
+#: main2.php:401 sh/template.php:360 sh/template.php:407 sh/template.php:465
+#: index.php:315 TESTE/main2-xxx.php:401 index-labels.php:314 index2.php:387
+#: index2.php:602 index2.php:672
+msgid "Assets"
+msgstr ""
+
+#: main2.php:403 TESTE/main2-xxx.php:403
+msgid "Assistance"
+msgstr ""
+
+#: main2.php:405 TESTE/main2-xxx.php:405
+msgid "Tools"
+msgstr ""
+
+#: main2.php:406 TESTE/main2-xxx.php:406
+msgid "Management"
+msgstr ""
+
+#: main2.php:407 TESTE/main2-xxx.php:407
+msgid "Connection"
+msgstr ""
+
+#: main2.php:408 sh/config1.php:14 sh/config1.php:48 sh/template.php:480
+#: index.php:331 TESTE/main2-xxx.php:408 index-labels.php:330 index2.php:688
+msgid "Setup"
+msgstr ""
+
+#: main2.php:409 TESTE/main2-xxx.php:409
+msgid "Security"
+msgstr ""
+
+#: main2.php:414 TESTE/main2-xxx.php:414
+msgid "Plugin"
+msgstr ""
+
+#: main2.php:421 TESTE/main2-xxx.php:421 main.php:468
+msgid "Type"
+msgstr ""
+
+#: main2.php:422 TESTE/main2-xxx.php:422 main.php:469
+msgid "Date"
+msgstr ""
+
+#: main2.php:423 TESTE/main2-xxx.php:423 main.php:470
+msgid "Service"
+msgstr ""
+
+#: main2.php:424 TESTE/main2-xxx.php:424 main.php:471
+msgid "Message"
+msgstr ""
+
+#: main2.php:515 TESTE/main2-xxx.php:515 main.php:562
+msgid "Logged Users"
+msgstr ""
+
+#: sh/config1.php:48
+msgid "Dashboard"
+msgstr "Painel"
+
+#: sh/config1.php:94
+msgid "Select a entity"
+msgstr ""
+
+#: sh/config1.php:95 sh/config1.php:214 sh/template.php:958 map/map_loc.php:466
+#: map/map_loc.php:475
+msgid "All"
+msgstr ""
+
+#: sh/config1.php:127 sh/template.php:401 index2.php:578
+msgid "Entity"
+msgstr ""
+
+#: sh/config1.php:211
+msgid "Period in index page"
+msgstr ""
+
+#: sh/config1.php:213
+msgid "Select"
+msgstr ""
+
+#: sh/config1.php:215
+msgid "Current year"
+msgstr ""
+
+#: sh/config1.php:229
+msgid "Theme"
+msgstr ""
+
+#: sh/config1.php:296
+msgid "Charts Theme"
+msgstr ""
+
+#: sh/template.php:18 sh/template.php:25 index2.php:17 index2.php:24
+msgid "Tickets Statistics"
+msgstr ""
+
+#: sh/template.php:47 index.php:13 index-labels.php:12 index2.php:72
+msgid "January"
+msgstr ""
+
+#: sh/template.php:48 index.php:14 index-labels.php:13 index2.php:73
+msgid "February"
+msgstr ""
+
+#: sh/template.php:49 index.php:15 index-labels.php:14 index2.php:74
+msgid "March"
+msgstr ""
+
+#: sh/template.php:50 index.php:16 index-labels.php:15 index2.php:75
+msgid "April"
+msgstr ""
+
+#: sh/template.php:51 index.php:17 index-labels.php:16 index2.php:76
+msgid "May"
+msgstr ""
+
+#: sh/template.php:52 index.php:18 index-labels.php:17 index2.php:77
+msgid "June"
+msgstr ""
+
+#: sh/template.php:53 index.php:19 index-labels.php:18 index2.php:78
+msgid "July"
+msgstr ""
+
+#: sh/template.php:54 index.php:20 index-labels.php:19 index2.php:79
+msgid "August"
+msgstr ""
+
+#: sh/template.php:55 index.php:21 index-labels.php:20 index2.php:80
+msgid "September"
+msgstr ""
+
+#: sh/template.php:56 index.php:22 index-labels.php:21 index2.php:81
+msgid "October"
+msgstr "Outubro"
+
+#: sh/template.php:57 index.php:23 index-labels.php:22 index2.php:82
+msgid "November"
+msgstr ""
+
+#: sh/template.php:58 index.php:24 index-labels.php:23 index2.php:83
+msgid "December"
+msgstr ""
+
+#: sh/template.php:62 index.php:28 index-labels.php:27 index2.php:87
+msgid "Sunday"
+msgstr ""
+
+#: sh/template.php:63 index.php:29 index-labels.php:28 index2.php:88
+msgid "Monday"
+msgstr ""
+
+#: sh/template.php:64 index.php:30 index-labels.php:29 index2.php:89
+msgid "Tuesday"
+msgstr ""
+
+#: sh/template.php:65 index.php:31 index-labels.php:30 index2.php:90
+msgid "Wednesday"
+msgstr ""
+
+#: sh/template.php:66 index.php:32 index-labels.php:31 index2.php:91
+msgid "Thursday"
+msgstr ""
+
+#: sh/template.php:67 index.php:33 index-labels.php:32 index2.php:92
+msgid "Friday"
+msgstr ""
+
+#: sh/template.php:68 index.php:34 index-labels.php:33 index2.php:93
+msgid "Saturday"
+msgstr ""
+
+#: sh/template.php:239 index2.php:268
+msgid "Welcome"
+msgstr ""
+
+#: sh/template.php:264 sh/template.php:377 index.php:292 map/map_loc.php:67
+#: index-labels.php:291 index2.php:303 index2.php:414 index2.php:560
+msgid "Overall"
+msgstr ""
+
+#: sh/template.php:270 sh/template.php:318 sh/template.php:437 index.php:258
+#: index-labels.php:257 index2.php:309 index2.php:330 index2.php:420
+#: index2.php:472 index2.php:517 index2.php:632
+msgid "by Entity"
+msgstr ""
+
+#: sh/template.php:276 sh/template.php:312 sh/template.php:431 index.php:243
+#: index-labels.php:242 index2.php:315 index2.php:523 index2.php:644
+msgid "by Group"
+msgstr ""
+
+#: sh/template.php:282 index.php:250 index-labels.php:249 index2.php:322
+msgid "Map"
+msgstr ""
+
+#: sh/template.php:292 index2.php:348
+msgid "Reports"
+msgstr ""
+
+#: sh/template.php:306 sh/template.php:425 sh/template.php:678 index2.php:432
+#: index2.php:484 index2.php:511 index2.php:626
+msgid "by Requester"
+msgstr ""
+
+#: sh/template.php:324 sh/template.php:443 index.php:264 map/map_loc.php:454
+#: map/map_loc.php:458 index-labels.php:263 index2.php:336 index2.php:490
+#: index2.php:529 index2.php:650
+msgid "by Location"
+msgstr ""
+
+#: sh/template.php:330 index2.php:535 index2.php:638
+msgid "by Category"
+msgstr ""
+
+#: sh/template.php:336 sh/template.php:449 index2.php:499 index2.php:614
+msgid "by Date"
+msgstr ""
+
+#: sh/template.php:342 sh/template.php:455 index2.php:542 index2.php:656
+msgid "by SLA"
+msgstr ""
+
+#: sh/template.php:369 index.php:284 index2.php:552
+msgid "Charts"
+msgstr ""
+
+#: sh/template.php:389 sh/template.php:938 sh/template.php:1037 index.php:304
+#: index-labels.php:303 index2.php:572
+msgid "Requester"
+msgstr ""
+
+#: sh/template.php:395 index2.php:590
+msgid "Group"
+msgstr ""
+
+#: sh/template.php:413 index2.php:375 index2.php:608
+msgid "Satisfaction"
+msgstr ""
+
+#: sh/template.php:498 index2.php:729
+msgid "New version"
+msgstr ""
+
+#: sh/template.php:499 index2.php:730
+msgid "avaliable"
+msgstr ""
+
+#: sh/template.php:719 sh/template.php:788
+msgid "Select a requester"
+msgstr ""
+
+#: sh/template.php:742
+msgid "Consult"
+msgstr ""
+
+#: sh/template.php:743
+msgid "Clean"
+msgstr ""
+
+#: sh/template.php:940 sh/template.php:1037
+msgid "Period"
+msgstr ""
+
+#: sh/template.php:946 sh/template.php:957 map/map_loc.php:62
+#: map/map_loc.php:465
+msgid "Closed"
+msgstr ""
+
+#: sh/template.php:956 map/map_loc.php:57 map/map_loc.php:72 map/map_loc.php:79
+#: map/map_loc.php:464
+msgid "Opened"
+msgstr ""
+
+#: sh/template.php:974
+msgid "Opening date"
+msgstr ""
+
+#: sh/template.php:975
+msgid "Close date"
+msgstr ""
+
+#: sh/template.php:976
+msgid "Resolution time"
+msgstr ""
+
+#: sh/template.php:1032
+msgid "Copy"
+msgstr ""
+
+#: sh/template.php:1036
+msgid "Print"
+msgstr ""
+
+#: sh/template.php:1041
+msgid "Export"
+msgstr ""
+
+#: sh/template.php:1069
+msgid "No ticket found"
+msgstr ""
+
+#: index.php:198 index-labels.php:197 main.php:130
+msgid "Hosts"
+msgstr ""
+
+#: index.php:207 main.php:160
+msgid "Host Groups"
+msgstr ""
+
+#: index.php:215 index-labels.php:214
+msgid "Hosts Panel"
+msgstr ""
+
+#: index.php:223 index-labels.php:222
+msgid "Hosts Health"
+msgstr ""
+
+#: index.php:231
+msgid "Storage"
+msgstr ""
+
+#: index.php:237
+msgid "Memory"
+msgstr "Memória"
+
+#: index.php:275
+msgid "Events"
+msgstr "Eventos"
+
+#: index.php:323 index-labels.php:322 index2.php:680
+msgid "Metrics"
+msgstr "Métricas"
+
+#: index.php:347 index-labels.php:346 index2.php:704
+msgid "Help"
+msgstr ""
+
+#: map/map_loc.php:15
+msgid "Tickets Map"
+msgstr ""
+
+#: map/map_loc.php:474
+msgid "Last 30 days"
+msgstr ""
+
+#: map/index.php:32
+msgid "Hosts Map"
+msgstr ""
+
+#: hosts_storage.php:65 hosts_memory.php:65
+msgid "-- Selecione um Grupo --"
+msgstr ""
+
+#: main.php:145
+msgid "Triggers"
+msgstr ""
+
+#: main.php:174
+msgid "Users"
+msgstr ""
+
+#: index2.php:288
+msgid "My Dashboard"
+msgstr ""
+
+#: index2.php:363 index2.php:584
+msgid "Category"
+msgstr ""
+
+#: index2.php:369 index2.php:596
+msgid "Location"
+msgstr ""
+
+#: index2.php:381
+msgid "SLAs"
+msgstr ""
+
+#: index2.php:406
+msgid "Summary"
+msgstr ""
+
+#: index2.php:464
+msgid "Cost"
+msgstr ""
+
+#: index2.php:662
+msgid "Time range"
+msgstr ""

@@ -34,13 +34,12 @@ return array(
 'Inactive' => 'Inativo',
 'Average' => 'Média',
 'Events' => 'Eventos',
-'About' => 'Sobre',
+'Info' => 'Informação',
 'Charts' => 'Gráficos',
 'Memory' => 'Memória',
 'Storage' => 'Armazenamento',
-'Hosts' => 'Hosts',
 'Host Groups' => 'Grupos de Hosts',
-'Hosts Health' => 'Estado dos Hosts',
+'Hosts Health' => 'Saúde dos Hosts',
 'Hosts Panel' => 'Painel Hosts',
 'Setup' => 'Configuração',
 'Help' => 'Ajuda',
@@ -50,25 +49,10 @@ return array(
 'Memory' => 'Memória',
 'Network Interfaces' => 'Interfaces de Rede',
 'Triggers' => 'Triggers',
-'Exit' => 'Sair',
-'Version' => 'Versão',
-'Developed by' => 'Desenvolvido por',
-'New version avaliable' => 'Nova versão disponível',
-'O.S.' => 'S.O.',
-'Disaster' => 'Disastre',
-'High' => 'Alta', 
-'Warning' => 'Atenção',
-'Information' => 'Informação', 
-'Not Classified' => 'Não Classificado',
-'All graphs' => 'Todos os gráficos',
-'Triggers by host - Top 10' => 'Triggers por host - Top 10',
-'Triggers by Severity' => 'Triggers por Severidade',
-'Unacknowledged Triggers' => 'Triggers não Reconhecidos',
-'Triggers last 7 days' => 'Triggers dos últimos 7 dias', 
-'Select group' => 'Selecione um Grupo',
-'Select one or more groups' => 'Selecione um ou mais Grupos',
-'Hosts Map' => 'Mapa de Hosts',
-'To view a host on the map enter your latitude and longitude in "Host inventory".' => 'Para exibir um host no mapa informe sua latitude e longitude em "Inventário do Host".',
+
+
+
+
 
 );
 ?> 

@@ -68,6 +68,8 @@ return array(
 'Select group' => 'Select group',
 'Select one or more groups' => 'Select one or more groups',
 'Hosts Map' => 'Hosts Map',
+'To view a host on the map enter your latitude and longitude in "Host inventory".' => 'To view a host on the map enter your latitude and longitude in "Host inventory".',
+
 
 );
 ?> 
