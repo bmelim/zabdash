@@ -1338,14 +1338,14 @@ tr.search:nth-child(odd)        { background: #ffffff; }
 }
 
 .chamado {
-    color: #fff;
+    color: #000;
     font-size: 14px;
     font-weight: 600;       
     text-transform: uppercase;
 }
 
 .date {
-    color: #fff; 
+    color: #000; 
     font-weight: lighter;
     font-family: 'RobotoDraft',sans-serif; 
     font-style: italic;
@@ -1510,7 +1510,7 @@ fieldset[disabled] .btn-primary.active {
 	color: #fff;
 }
 
-.db-yellow {
+.db-purple {
 	background-color: #9c27b0;
 	color: #fff;
 }
@@ -1533,15 +1533,49 @@ fieldset[disabled] .btn-primary.active {
 	color: #fff; //#32a0ee; 
 }
 
-.dashbox .panel-left {
-    width: 0%;
+.dashbox .panel-body {
+    padding: 0;
+}
+.panel-body {
+    padding: 15px;
+}
+
+.panel-default {
+    border-color: #DDDDDD;    
+}
+
+.dashbox .panel-right {
+    float: right;
+    padding-left: 20px;
+    padding-top: 2px;
+    padding-right: 12px;
+    border-radius: 0px 4px 4px 0px;
+    position: relative;
+    width:70%;
+    height: 75px;    
+}
+
+.dashbox .panel-left {    
     float: left;
-    padding: 20px;
+    display: block;
+    width: 30%;
+    height: 75px;
+    padding: 0px;
     border-radius: 4px 0px 0px 4px;
     color: #FFF;
-    text-align: center;
-    /*background-color: #f9f9f9;*/
+    text-align: center;    
     border-right: 1px solid #DDD;
+}
+
+.stat {
+	width: 97%;
+	float: none;
+	margin-right:auto;
+	margin-left: auto;
+}
+
+.odometer {
+	color: #000 !important;
 }
 
 * {

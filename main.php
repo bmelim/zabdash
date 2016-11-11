@@ -130,59 +130,72 @@ $users = $api->userGet(array(
     <!-- main-content 
    <div class="main-content masked-relative masked"> -->
       
-	<div id="panels" class="row" style="margin-top: 1%; margin-left: 1%; margin-right:1%;">
+	<div id="panels" class="row" style="margin-top: 1%; margin-left: 1.5%; margin-right:1%;">
 		<!-- COLUMN 1 -->															
-			  <div class="col-sm-3 col-md-3 stat">
-				 <div class="dashbox shad panel panel-default db-red">
-					<div class="panel-body">
-
-					   <div class="panel-right right" style='cursor:pointer;' onclick="window.open('../hosts.php');">
-							<span style="float:left; margin-top:18px;"><i class="fa fa-desktop fa-3x"></i></span>
-         				<span class="chamado"><?php echo _('Hosts'); ?></span><br>
-					     	<div id="odometer1" class="odometer" style="font-size: 25px;">   </div><p></p>
-            				<span class="date" title="Active/Inactive"><b><?php echo $hostsCount['active']." / ".$hostsCount['inactive']; ?> </b></span>												
-					   </div>
-					</div>
-				 </div>
+			  <div class="col-sm-3 col-md-3">
+				  <div class="dashbox shad panel panel-default db-redx row stat">
+								<div class="panel-left db-red row">					   	
+	<!--					   		<span style="vertical-align:middle; margin-top:18px;">-->
+						   			<i  style="vertical-align:middle; margin-top:18px;" class="fa fa-desktop fa-3x"></i>
+	<!--					   		</span>-->
+						   	</div>
+						   <div class="panel-right right" style='cursor:pointer;' onclick="window.open('../hosts.php');">
+	         				<span class="chamado"><?php echo _('Hosts'); ?></span><br>
+						     	<div id="odometer1" class="odometer" style="font-size: 25px;">   </div><p></p>
+	            			<span class="date" title="Active/Inactive"><span style="font-weightx:bold; color:#e33734;"><?php echo "<span style='color:#429e47;'>".$hostsCount['active']."</span><span class='date'> / </span> ". $hostsCount['inactive']; ?></span></span>												
+						   </div>
+	<!--					</div>-->
+					 </div>
 			  </div>
 			  
 			  <div class="col-sm-3 col-md-3">
-				 <div class="dashbox shad panel panel-default db-blue">
-					<div class="panel-body">
-
-					   <div class="panel-right right" style='cursor:pointer;' onclick="window.open('../tr_status.php');">	
-					   	<span style="float:left; margin-top:18px;"><i class="fa fa-warning fa-3x"></i></span>									 
+				 <div class="dashbox shad panel panel-default db-bluex row stat">
+<!--					<div class="panel-body">-->
+							<div class="panel-left db-blue">					   	
+<!--					   		<span style="vertical-align:middle; margin-top:18px;">-->
+					   			<i  style="vertical-align:middle; margin-top:18px;" class="fa fa-warning fa-3x"></i>
+<!--					   		</span>-->
+					   	</div>										 
+					   <div class="panel-right right " style='cursor:pointer;' onclick="window.open('../tr_status.php');">	
          				<span class="chamado"><?php echo _('Triggers'); ?></span><br>
 							<div id="odometer2" class="odometer" style="font-size: 25px;">   </div><p></p>
-         				<span class="date" title="Unack/Ack"><b><?php echo count($triggerUnack)." / ". (count($trigger) - count($triggerUnack)); ?></b></span>
+         				<span class="date" title="Ack/Unack"><span style="font-weight:boldx; color:#e33734;"><?php echo "<span style='color:#429e47;'>".(count($trigger) - count($triggerUnack))."</span><span class='date'> / </span> ".count($triggerUnack); ?></span></span>
 					   </div>
-					</div>
+<!--					</div>-->
 				 </div>
 			  </div>																		
       								
 			  <div class="col-sm-3 col-md-3">
-				 <div class="dashbox shad panel panel-default db-yellow">
-					<div class="panel-body">
+				 <div class="dashbox shad panel panel-default db-purplex row stat">
+<!--					<div class="panel-body">-->
 
+			   		<div class="panel-left db-purple">					   	
+<!--					   <span style="vertical-align:middle; margin-top:18px;">-->
+			   			<i  style="vertical-align:middle; margin-top:18px;" class="fa fa-sitemap fa-3x"></i>
+<!--					   </span>-->
+				   	</div>	
 					   <div class="panel-right right" style='cursor:pointer;' onclick="window.open('../hostgroups.php');">
-					   	<span style="float:left; margin-top:18px;"><i class="fa fa-sitemap fa-3x"></i></span>
          				<span class="chamado"><?php echo _('Host groups'); ?></span><br>
 							<div id="odometer3" class="odometer" style="font-size: 25px;">   </div><p></p>
          				<span class="date"><b>&nbsp;</b></span>
 					   </div>										   
-					</div>
+<!--					</div>-->
 				 </div>
 			  </div>
 			  <div class="col-sm-3 col-md-3">
-				 <div class="dashbox shad panel panel-default db-orange">
-					<div class="panel-body">
+				 <div class="dashbox shad panel panel-default db-orangex row stat">
+<!--					<div class="panel-body">-->
+			   		<div class="panel-left db-orange">					   	
+	<!--					<span style="vertical-align:middle; margin-top:18px;">-->
+			   			<i  style="vertical-align:middle; margin-top:18px;" class="fa fa-users fa-3x"></i>
+	<!--					</span>-->
+					   </div>	
 			   		<div class="panel-right right" style='cursor:pointer;' onclick="window.open('../users.php');">	
-			   		<span style="float:left; margin-top:18px;"><i class="fa fa-users fa-3x"></i></span>
          				<span class="chamado"><?php echo _('Users'); ?></span><br>                        				
 							<div id="odometer4" class="odometer" style="font-size: 25px;">   </div><p></p>
          				<span class="date"><b>&nbsp;</b></span>
 					   </div>
-					</div>
+<!--					</div>-->
 				 </div>
 			  </div>																	                          				                           							
 	</div>        
@@ -236,7 +249,7 @@ setTimeout(function(){
 					?> 	 						            
 				</div>
 				<div id="legend" class="col-sm-12 col-md-12 align" style="margin-top:35px; text-align:center;">
-		  		  <button type="button" class="btn btn-sm btn-success" style="background: #59DB8F !important; border: 1px solid #59DB8F;"><?php echo _('Information'); ?></button>
+		  		  <button type="button" class="btn btn-sm btn-success" style="background: #7499FF !important; border: 1px solid #7499FF;"><?php echo _('Information'); ?></button>
 	           <button type="button" class="btn btn-sm btn-success" style="background: #FFC859 !important; border: 1px solid #FFC859; width:70px;"><?php echo _('Warning'); ?></button>
 	           <button type="button" class="btn btn-sm btn-danger"  style="background: #FFA059 !important; border: 1px solid #FFA059; width:70px;"><?php echo _('Average'); ?></button>
 	           <button type="button" class="btn btn-sm btn-warning" style="background: #E97659 !important; border: 1px solid #E97659; width:70px;"><?php echo _('High'); ?></button>
