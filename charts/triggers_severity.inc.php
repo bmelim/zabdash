@@ -7,8 +7,7 @@ $triggersPr = $api->triggerGet(array(
 	'sortorder' => 'DESC',
 	'only_true' => '1',
 	'active' => '1', // include trigger state active not active
-	/*'withUnacknowledgedEvents' => '1', 	
-	'selectHosts' => 1 */		#7499FF			
+	/*'withUnacknowledgedEvents' => '1', */			
 ));	
 
 foreach($triggersPr as $t) {    			           

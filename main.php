@@ -1,8 +1,12 @@
 <?php
 
 require_once '../include/config.inc.php';
-//require_once 'inc/functions.inc.php';
 require_once('config.php');
+
+//Access control
+if(!$_COOKIE["zabdash_session"]) {
+	header("location:index.php");
+}
 
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
@@ -38,14 +42,12 @@ $triggerUnack = $api->triggerGet(array(
 	'selectHosts' => 1							
 ));
 
-
 $hostsGroups = $api->hostgroupGet(array(
 	'output' => 'extend',	
 	'sortfield' => 'name',
 	'sortorder' => 'ASC'
 	/*'real_hosts' => '1'*/
 ));
-
 
 $users = $api->userGet(array(
 	'output' => 'extend'	
@@ -127,10 +129,12 @@ $users = $api->userGet(array(
 <!-- .box-holder -->
 <!-- .content -->
 <div class="content animated fadeInBig corpo col-md-12 col-sm-12 align">
+<div class="container-fluid">  
+<div id='content-main' class="container-fluid1 align col-md-12 col-sm-12 row">      
     <!-- main-content 
    <div class="main-content masked-relative masked"> -->
       
-	<div id="panels" class="row" style="margin-top: 1%; margin-left: 1.5%; margin-right:1%;">
+	<div id="panels" class="row" style="margin-top: 1%; margin-left: 0%; margin-right:-1%;">
 		<!-- COLUMN 1 -->															
 			  <div class="col-sm-3 col-md-3">
 				  <div class="dashbox shad panel panel-default db-redx row stat">
@@ -200,8 +204,7 @@ $users = $api->userGet(array(
 			  </div>																	                          				                           							
 	</div>        
                 
-<div class="container-fluid">  
-      
+
 <script type="text/javascript" >
 window.odometerOptions = {
    format: '( ddd).dd'
@@ -216,7 +219,7 @@ setTimeout(function(){
 
 </script> 
 
-<div id='content-main' class="container-fluid1 align col-md-12 col-sm-12 row">  
+  
 
 <div id="widgets2" class="row" style="margin-top: 0px;">
 

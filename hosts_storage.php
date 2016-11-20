@@ -1,4 +1,10 @@
 <?php
+
+//Access control
+if(!$_COOKIE["zabdash_session"]) {
+	header("location:index.php");
+}
+
 require_once '../include/config.inc.php';
 require_once '../include/hosts.inc.php';
 require_once '../include/actions.inc.php';

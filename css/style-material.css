@@ -1568,7 +1568,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .stat {
-	width: 97%;
+	width: 100%;
 	float: none;
 	margin-right:auto;
 	margin-left: auto;

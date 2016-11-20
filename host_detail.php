@@ -1,4 +1,10 @@
 <?php
+
+//Access control
+if(!$_COOKIE["zabdash_session"]) {
+	header("location:index.php");
+}
+
 require_once '../include/config.inc.php';
 require_once '../include/hosts.inc.php';
 require_once '../include/actions.inc.php';
@@ -19,7 +25,6 @@ $dbHosts = DBselect( 'SELECT hostid, name, status, available, snmp_available AS 
 $host = DBFetch($dbHosts);		
 	
 //Get info from hostid	
-//
 include('host_info.php');
   
 ?>

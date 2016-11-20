@@ -1,5 +1,10 @@
 <?php
 
+//Access control
+if(!$_COOKIE["zabdash_session"]) {
+	header("location:index.php");
+}
+
 require_once '../include/config.inc.php';
 require_once('config.php');
 require_once 'inc/functions.inc.php';
@@ -9,8 +14,7 @@ use ZabbixApi\ZabbixApi;
 $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
 
 $triggerAll = $api->triggerGet(array(
-	'output' => 'extend',
-	/*'hostids' => $hostid,*/
+	'output' => 'extend',	
 	'sortfield' => 'lastchange',
 	'sortorder' => 'DESC',
 	'only_true' => '1',  //recents
@@ -30,7 +34,7 @@ $triggerAll = $api->triggerGet(array(
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv='refresh' content='90'>
+	<meta http-equiv='refresh' content='300'>
 	<title>Zabbix Triggers</title>	
 
 	<link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -39,10 +43,7 @@ $triggerAll = $api->triggerGet(array(
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/styles.css" />
-	
-	<link href="inc/select2/select2.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="inc/select2/select2.js" language="javascript"></script>	
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />		
 
 	<!-- Datatables -->	
 	<script src="js/media/js/jquery.dataTables.min.js"></script>
@@ -55,7 +56,7 @@ $triggerAll = $api->triggerGet(array(
 </head>
 
 <body>
-	<div class="row col-md-11 col-sm-11" style="margin-top:40px; margin-bottom: 70px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
+	<div class="row col-md-12 col-sm-1" style="margin-top:40px; margin-bottom: 70px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	<?php
 	echo "			
 		<div id='triggers_all' class='align col-md-12 col-sm-12' style='margin-bottom: 30px;'>
@@ -65,27 +66,30 @@ $triggerAll = $api->triggerGet(array(
 					<th style='text-align:center; width:15%;'>". _('Last change')."</th>
 					<th style='text-align:center;'>". _('Severity')."</th>
 					<th style='text-align:center;'>". _('Host')."</th>
-					<th style='text-align:center;'>". _('Description')."</th>
-					<!--<th style='text-align:center;'>Acknowledged</th>-->
+					<th style='text-align:center;'>". _('Status')."</th>
+					<th style='text-align:center;'>". _('Description')."</th>					
 				</tr>\n								
 			</thead>\n
 			<tbody>\n ";
 		
+//					<th style='text-align:center;'>". _('Acknowledged')."</th>
 		
-	 foreach($triggerAll as $tu) {   	 	 	 
+	 foreach($triggerAll as $tu) {  
+	 
+	  	if($tu->value == 0) { $priority = 9; $statColor = '#34AA63';} 	
+	  	else { $priority = $tu->priority; $statColor = '#E33734'; } 	 
 	
 		echo "<tr>";			            
-			echo "<td style='text-align:center; vertical-align: middle !important;' data-order=".$tu->lastchange.">".from_epoch($tu->lastchange)."</td>\n";				            
-			//echo $t->triggerid.",";				            			            
-			//echo "<td style='text-align:center;'>".$t->priority."</td>";
+			echo "<td style='text-align:center; vertical-align: middle !important;' data-order=".$tu->lastchange.">".from_epoch($tu->lastchange)."</td>\n";				            			
 			echo "<td style='vertical-align: middle !important;'>
-						<div class='hostdiv nok". $tu->priority ." hostevent trig_radius' style='height:21px !important; margin-top:0px; !important;' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=". $tu->hosts[0]->hostid ."&show_triggers=1')\">
+						<div class='hostdiv nok". $priority ." hostevent trig_radius' style='height:21px !important; margin-top:0px; !important;' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=". $tu->hosts[0]->hostid ."&show_triggers=1')\">
 						<p class='severity' style='margin-top: -2px;'>". _(get_severity($tu->priority)) ."</p>									
 						</div>
 					</td>";				            
-			echo "<td style='text-align:left; vertical-align: middle !important;'>". get_hostname($tu->hosts[0]->hostid)."</td>";				            
-			echo "<td style='text-align:left; vertical-align: middle !important;'>".$tu->description."</td>";				            
-			//echo "<td style='text-align:center; vertical-align: middle !important;'>".$tu->triggerid."</td>";				            
+			echo "<td style='text-align:left; vertical-align: middle !important;'>". get_hostname($tu->hosts[0]->hostid)."</td>";
+			echo "<td style='text-align:center; vertical-align: middle !important; color:".$statColor." !important;'>"._(set_status($tu->value))."</td>";				            						            
+//			echo "<td style='text-align:center; vertical-align: middle !important;'>".$tu->state."</td>";				            						            
+			echo "<td style='text-align:left; vertical-align: middle !important;'>".$tu->description."</td>";				            						            
 		echo "</tr>\n";			            
 			
 	 }

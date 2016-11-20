@@ -13,13 +13,13 @@
 	));	
 	
 
-echo "			
-	<!--<div id='triggers_Unack' class='align col-md-12 col-sm-12' style='margin-bottom: 30px;'>-->
+echo "				
 		<table id='triggersUnack' class='box table table-striped table-hover table-condensed' border='0' style='background:#fff;'>
 		<thead>
 			<tr>
 				<th style='text-align:center; width:15%;'>". _('Last change')."</th>
 				<th style='text-align:center;'>". _('Severity')."</th>
+				<th style='text-align:center;'>". _('Status')."</th>				
 				<th style='text-align:center;'>". _('Host')."</th>
 				<th style='text-align:center;'>". _('Description')."</th>
 			</tr>								
@@ -27,18 +27,23 @@ echo "
 		<tbody> ";
 	
 	
- foreach($triggerUnack as $tu) {    
+ foreach($triggerUnack as $tu) {
+ 	
+  	if($tu->value == 0) { $priority = 9; $statColor = '#34AA63';} 	
+  	else { $priority = $tu->priority; $statColor = '#E33734'; } 	 
+	    
 
 	echo "<tr>";			            
 		echo "<td style='text-align:center; vertical-align:middle !important;' data-order=".$tu->lastchange.">".from_epoch($tu->lastchange)."</td>";				            
 		//echo $t->triggerid.",";				            			            
 		//echo "<td style='text-align:center;'>".$t->priority."</td>";
 		echo "<td style='text-align:left; vertical-align: middle !important;'>
-					<div class='hostdiv nok". $tu->priority ." hostevent trig_radius' style='height:21px !important; margin-top:0px; !important;' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=". $tu->hosts[0]->hostid ."&show_triggers=1')\">
+					<div class='hostdiv nok". $priority ." hostevent trig_radius' style='height:21px !important; margin-top:0px; !important;' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=". $tu->hosts[0]->hostid ."&show_triggers=1')\">
 					<p class='severity' style='margin-top: -2px;'>". _(get_severity($tu->priority)) ."</p>									
 					</div>
 				</td>";				            
-		echo "<td style='text-align:left; vertical-align: middle !important;'>". get_hostname($tu->hosts[0]->hostid)."</td>";				            
+		echo "<td style='text-align:center; vertical-align: middle !important; color:".$statColor." !important;'>"._(set_status($tu->value))."</td>";				            
+		echo "<td style='text-align:left; vertical-align: middle !important;'>". get_hostname($tu->hosts[0]->hostid)."</td>";
 		echo "<td style='text-align:left; vertical-align: middle !important;'>".$tu->description."</td>";				            
 	echo "</tr>";			            
 		

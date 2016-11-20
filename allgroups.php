@@ -54,8 +54,7 @@ foreach( $groupID as $g ) {
 			}
 		}
 		
-		//hosts online						
-		
+		//hosts online								
 		while ($hosts = DBFetch($dbHostsOk)) {
 			
 			if($hosts['status'] == 0 && $hosts['flags'] == 0) {
@@ -80,14 +79,10 @@ foreach( $groupID as $g ) {
 					if ($trigger) {
 	
 						// Highest Priority error
-						$hostdivprio = $trigger[0]->priority;
-	
-	 	        		/*$priority = $event->priority;
-	 					$description = $event->description;
-						
-						$search = array('{HOSTNAME}', '{HOST.NAME}');
-						$description = str_replace($search, "", $description);
-						*/
+						//$hostdivprio = $trigger[0]->priority;
+						if($trigger[0]->value == 0) { $hostdivprio = 9;} 	
+	  					else { $hostdivprio = $trigger[0]->priority;} 
+
 						// View       							
 	       					$icon = "fa fa-exclamation-circle";		
 	       					echo "
@@ -109,8 +104,7 @@ foreach( $groupID as $g ) {
 												".$IP['ip']."
 											</td>
 										</tr>					
-									</table>
-									
+									</table>									
 								</div>\n";					
 						}
 					
@@ -135,8 +129,7 @@ foreach( $groupID as $g ) {
 										".$IP['ip']."
 									</td>
 								</tr>					
-							</table>
-							
+							</table>							
 						</div>\n";
 					}
 				} 								

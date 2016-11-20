@@ -64,9 +64,6 @@ for($i=0; $i < count($valUn2); $i++) {
 	}
 }	
 
-/*print_r($valUn2);
-print_r($valAc2);
-print_r($valDiff);*/
 
 $valuesUn = implode(',',$valUn2);
 $valuesAc = implode(',',$valDiff);

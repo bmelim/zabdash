@@ -1070,7 +1070,7 @@ img.avatar2 {
   #srvinfo { display:none; }
   #grfrow { width: 100%; }
   .main-content, .container-fluid { margin-left: 0% !important; }
-  #panels { margin-left: 0% !important; }   
+  #panels { margin-left: 0%}   
   #graflinhas1 { width: 100% !important; } 
   
   .iframe-side { 
@@ -1186,6 +1186,7 @@ body {
 */
 /* host is ok box 
 .ok {background-color: #4B9C05; border: 1px solid #0D0D0D; color: #FFF;}
+#59DB8F  #4BAC64
 */
 .ok {background-color: #4BAC64; border: 1px solid #0D0D0D; color: #FFF; }
 /* host is not ok, "information triggered" */
@@ -1198,6 +1199,8 @@ body {
 .nok4 {background-color: #E97659; border: 1px solid #0D0D0D; }
 /* host is not ok, "disaster triggered" */
 .nok5 {background-color: #B10505; border: 1px solid #0D0D0D; }
+/* For triggers in OK status*/
+.nok9 {background-color: #59DB8F; border: 1px solid #0D0D0D; color: #FFF; }
 
 .trig_radius { border-radius: 5px; }
 
@@ -1209,6 +1212,8 @@ body {
 /*.link2 a:link, .link2 a:focus,  {color: #000 !important; text-decoration: none; font-weight: bold;}*/
 .link3 a {color: #fff !important; text-decoration: none;}
 .link3 a:link, .link3 a:focus, .link3 a:hover {color: #fff !important; text-decoration: none; font-weight: bold;}
+.link9 a {color: #fff !important; text-decoration: none;}
+.link9 a:link, .link9 a:focus, .link9 a:hover {color: #fff !important; text-decoration: none; font-weight: bold;}
 .color2 {color: #fff;}
 
 /* Increase Box width with level not ok 4 and 5. I know, hardcoded *sigh* */
@@ -1286,4 +1291,3 @@ box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
 
 .invisible {display: none !important;}
 .progress-bar { border-radius: 3px !important; }
-

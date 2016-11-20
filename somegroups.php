@@ -83,14 +83,11 @@ foreach( $groupID as $g ) {
 				if ($trigger) {
 
 					// Highest Priority error
-					$hostdivprio = $trigger[0]->priority;
+					//$hostdivprio = $trigger[0]->priority;
+					
+					if($trigger[0]->value == 0) { $hostdivprio = 9;} 	
+	  				else { $hostdivprio = $trigger[0]->priority;} 
 
-/* 	        		$priority = $event->priority;
- 					$description = $event->description;				
-					// Remove hostname or host.name in description
-					$search = array('{HOSTNAME}', '{HOST.NAME}');
-					$description = str_replace($search, "", $description);*/
-				
 					// View
        					//echo "<div class=\"description nok" . $priority ."\">" . $description . "</div>";
        					$icon = "fa fa-exclamation-circle";		

@@ -96,7 +96,9 @@ if($row['status'] == 0 && $row['flags'] == 0) {
 		if ($trigger) {
 	
 			// Highest Priority error
-			$prio = $trigger[0]->priority;				
+			//$prio = $trigger[0]->priority;				
+			if($trigger[0]->value == 0) { $prio = 9;} 	
+	  		else { $prio = $trigger[0]->priority;} 			
 			$color = "./images/prio".$prio.".png";
 			//$sound = "../sound/airport.mp3";	
 			$num_up = 1;	

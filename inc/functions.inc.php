@@ -281,6 +281,20 @@ function get_severity($value) {
 }
 
 
+function set_status($value) {
+
+	$status = $value;
+	
+	switch ($status) {
+	 case "0": $status = 'OK'; break;
+	 case "1": $status = 'Problem'; break;
+
+	 }
+	 
+	 return $status;
+}
+
+
 function percent ( $value, $total ) {
 	return round(( $value * 100 ) / $total,1);
 }
