@@ -50,7 +50,7 @@ var locations = [
 $icon_red = "./images/red-marker.png";
 $icon_green = "./images/green-marker.png";
 
-$dbLoc = DBselect( 'SELECT hi.hostid, h.host, hi.name, hi.location, hi.location_lat AS lat, hi.location_lon AS lon , h.snmp_disable_until AS sd, h.status, h.flags							
+$dbLoc = DBselect( 'SELECT hi.hostid, h.host, hi.name, hi.location, hi.location_lat AS lat, hi.location_lon AS lon , h.snmp_disable_until AS sd, h.status, h.flags, h.description							
 							FROM host_inventory hi, hosts h 
 							WHERE hi.location_lat <> 0 
 							AND hi.hostid = h.hostid
@@ -68,14 +68,14 @@ while ($row = DBFetch($dbLoc)) {
   $lat = $row['lat']; 
   $lon = $row['lon']; 
   $quant1 = $row['sd'];     
-
+  $desc = str_replace(["\r\n", "\r", "\n"], "<br/>",$row['description']);	
+  
 
 if($row['status'] == 0 && $row['flags'] == 0) {	
 
 	if ($quant1 != 0) {
 		//$color = $icon_red.$quant."";
-		$color = "./images/red-marker.png";		
-		//$sound = "../sound/alarm_disaster.wav";	
+		$color = "./images/red-marker.png";				
 		$num_up = 0;	
 		$num_down = 1;	
 		$conta[] = $id;		
@@ -99,16 +99,13 @@ if($row['status'] == 0 && $row['flags'] == 0) {
 			//$prio = $trigger[0]->priority;				
 			if($trigger[0]->value == 0) { $prio = 9;} 	
 	  		else { $prio = $trigger[0]->priority;} 			
-			$color = "./images/prio".$prio.".png";
-			//$sound = "../sound/airport.mp3";	
+			$color = "./images/prio".$prio.".png";	
 			$num_up = 1;	
 			$num_down = 0;						
 		}
 		
 		else {	
-			$color = "./images/green-marker.png";		
-			//$color = "./images/prio".$prio.".png";		
-			//$sound = "../sound/no_sound.wav";		
+			$color = "./images/green-marker.png";							
 			$num_up = 1;	
 			$num_down = 0;
 		}
@@ -116,7 +113,7 @@ if($row['status'] == 0 && $row['flags'] == 0) {
 	}
 }	
 
-echo "['$title', $lat, $lon, '$local', '$color', '$host', $id, $quant1, $num_up, $num_down, '$url'],";
+echo "['$title', $lat, $lon, '$local', '$color', '$host', $id, $quant1, $num_up, $num_down, '$url', '$desc'],";
 
 $contaRed += $num_down;
 $showAlert += $id;
@@ -161,33 +158,36 @@ var mapOptions = {
         status: locations[i][7],
         num_up: locations[i][8],
         num_down: locations[i][9],
-        url: locations[i][10]
-        
+        url: locations[i][10],        
+        infos: locations[i][11]        
       });
-
-//marker animation
-marker.setAnimation(google.maps.Animation.DROP);
+     
+		
+		//marker animation
+		marker.setAnimation(google.maps.Animation.DROP);
       	
       google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
         return function() {
+        	        	
+        	//var infos1 = infos.replace(/(\r|\n)/g, '<br />');
           //infowindow.setContent('<b>'+locations[i][5] + '</b><br> <?php echo $state; ?>: ' + locations[i][7]);
-          infowindow.setContent('<b>'+locations[i][5] + '</b><br>');
+          infowindow.setContent('<b>' + locations[i][5] + '</b><br>' + locations[i][11]);
           infowindow.open(map, marker);
         }
       })(marker, i)); 
 
-// close infowindow when zoom change 
-google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close() }); 
-            
-markers.push(marker)			
-}
-
-//center map
-    var bounds = new google.maps.LatLngBounds();
-    for (i = 0; i < locations.length; i++) {    
-    bounds.extend(new google.maps.LatLng(locations[i][1], locations[i][2]));
- }
- map.fitBounds(bounds);
+	// close infowindow when zoom change 
+	google.maps.event.addListener(map, 'zoom_changed', function() { infowindow.close() }); 
+	            
+	markers.push(marker)			
+	}
+	
+	//center map
+	    var bounds = new google.maps.LatLngBounds();
+	    for (i = 0; i < locations.length; i++) {    
+	    bounds.extend(new google.maps.LatLng(locations[i][1], locations[i][2]));
+	 }
+	 map.fitBounds(bounds);
 
 
 // Define the marker clusterer color

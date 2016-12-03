@@ -18,10 +18,7 @@ include('config.php');
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
   <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />      
 	<style type="text/css">
-		a:link, a:focus, a:visited, a:hover { 		
-				color: #3575AC !important;
-		
-		}
+		a:link, a:focus, a:visited, a:hover { color: #3575AC !important;}
 	</style>    
     
   </head>

@@ -5,8 +5,8 @@ require_once('config.php');
 
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
-$api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
 
+//If already auth go to zabdash.php
 if($_COOKIE["zabdash_session"]) {
 	header("location:zabdash.php");
 }
@@ -17,23 +17,35 @@ $username = $_POST['inputUser'];
 $password = $_POST['inputPasswd'];
 
 if(isset($username) && isset($password)) {
-
-	$login = $api->userLogin(array(
-		'output' => 'extend',	
-		'user' => $username,
-		'password' => $password						
-	));
-}
 	
-if($login) {	
+	try
+	{
+		$api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $username .'', ''. $password .'');
+			
+		$login = $api->userLogin(array(
+			'output' => 'extend',	
+			'user' => $username,
+			'password' => $password						
+		));
+	}
+	catch(Exception $e)
+	{
+	    // Exception in ZabbixApi catched
+	    //echo $e->getMessage();
+	}
+}
+
+//If login successful 	
+if (strlen($login) === 32) {
 	setcookie('zabdash_session', $login, time() + (86400 * 7), "/");
 	header("location:zabdash.php");
 }
+
 ?>
 
 <html>
 <head>
-    <title>Zabdash - Home </title>
+    <title>Zabdash - Login </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">           

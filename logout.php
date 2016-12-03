@@ -13,7 +13,6 @@ $api->userLogout(array(
 	'output' => 'extend'					
 ));
 
-//setcookie("zbx_sessionid", "", time() - 3600, "/zabbix/zabdash/");
 setcookie("zabdash_session", "", time() - 3600, "/");
 header("location:index.php");
 
