@@ -69,6 +69,9 @@ return array(
 'Select one or more groups' => 'Selecione um ou mais Grupos',
 'Hosts Map' => 'Mapa de Hosts',
 'To view a host on the map enter your latitude and longitude in "Host inventory".' => 'Para exibir um host no mapa informe sua latitude e longitude em "Inventário do Host".',
+'CPU utilization' => 'Utilização de CPU',
+'Hosts Memory' => 'Memória dos Hosts',
+'Hosts Storage' => 'Armazenamento dos Hosts',
 
 );
 ?> 

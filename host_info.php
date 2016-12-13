@@ -1,21 +1,23 @@
 <?php
 
- // get all items
+//get disks
 
- if($host['available'] == 1 && $host['sa'] == 0) { $keyValue = 'vfs.fs.size'; }
- else { $keyValue = 'inbytes'; }			 
+//if($host['available'] == 1 && $host['sa'] == 0) { $keyValue = 'vfs.fs.size'; }
+if($host['available'] == 1 ) { $keyValue = 'vfs.fs.size'; }
+else { $keyValue = 'inbytes'; }			 
  
- $disks = $api->itemGet(array(
+	$disks = $api->itemGet(array(
      'output' => 'extend',
      'hostids' => $hostid,
      'search' => array('key_' => $keyValue)
      
- ));
+));
 
- // print disks ID with graph name
- foreach($disks as $disk) {    
+// print disks ID with graph name
+foreach($disks as $disk) {    
  
- 	if($host['available'] == 1 && $host['sa'] == 0) { $searchValSize = 'total'; $searchValUsed = 'used'; }
+ 	//if($host['available'] == 1 && $host['sa'] == 0) { $searchValSize = 'total'; $searchValUsed = 'used'; }
+ 	if($host['available'] == 1 ) { $searchValSize = 'total'; $searchValUsed = 'used'; }
 	else { $searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; }
 					           
    $diskSize = get_item_values($disk->itemid, $searchValSize);
@@ -65,19 +67,116 @@ for($n=0;$n<count($arrUsed);$n++) {
 	}
 }
 
+
+// Memory
+
+if($host['available'] == 1 ) { $keyValueMem = 'vm.memory.size'; }
+else { $keyValueMem = 'inbytes'; }			 
+ 
+$mems = $api->itemGet(array(
+  'output' => 'extend',
+  'hostids' => $hostid,
+  'search' => array('key_' => $keyValueMem)
+));
+
+// print Mem
+
+foreach($mems as $mem) {    
+  	
+ 	if($host['available'] == 1 ) { 
+ 	
+	 	$searchValSize = 'total'; $searchValUsed = 'available'; 
+						           
+	   $memSize = get_item_values($mem->itemid, $searchValSize);
+	   $memUsed = get_item_values($mem->itemid, $searchValUsed);
+	   //$memUsed = ($memSize['value_max'] - $memUsed['value_max']);
+	
+		//Size				
+		if($memSize['value_max'] != 0 || get_item_label($memSize['key_']) != '') {						
+			$arrSizeMem[] = get_item_label($memSize['key_']).",".$memSize['value_max'];
+		}
+
+		if($memUsed['name'] != '') {
+			if($memUsed['value_max'] != 0) {
+				$arrUsedMem[] = get_item_label($memUsed['key_']).",". $memUsed['value_max'];
+			}
+		}
+		
+		$zbx_agent = 1;
+	}	
+	
+	else { 
+	
+		$searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; 
+	
+	   $memSize = get_item_values($mem->itemid, $searchValSize);
+	   $memUsed = get_item_values($mem->itemid, $searchValUsed);
+				
+		//Size								
+		if($memSize['value_max'] != 0 || get_item_label($memSize['key_']) != '') {						
+			$label = get_item_label($memSize['key_']);
+									
+				if(stripos($label,"memory") != '') {						
+					$arrSizeMem[] = $label.",".$memSize['value_max'];
+				}
+		}
+
+		if($memUsed['name'] != '') {
+			if($memUsed['value_max'] != 0) {
+				
+				$label = get_item_label($memUsed['key_']);
+									
+				if(stripos($label,"memory") != '') {						
+					$arrUsedMem[] = $label.",".$memUsed['value_max'];
+				}	
+			}
+		}
+		
+		$zbx_agent = 0;				
+	}				
+}
+ 
+sort($arrSizeMem);
+sort($arrUsedMem);
+
+//print mem size
+for($n=0;$n<count($arrUsedMem);$n++) {
+
+	$u = explode(",",$arrUsedMem[$n]); 		
+	
+	if($u[0] != 0 || $u[0] != '') {	
+		if(strchr($u[0],":") == '') {				
+			$arrUsedMem2[] = $u[0].",".$u[1];
+		}	
+	}
+}
+
+
 //CPU Load
- $cpus = $api->itemGet(array(
-     'output' => 'extend',
-     'hostids' => $hostid,
-     'search' => array('key_' => 'processorLoad')     
- ));
+if($host['available'] == 1 ) { $keyValueCPU = 'system.cpu.util[,system]'; }
+else { $keyValueCPU = 'processorLoad'; }	
+ 
+$cpus = $api->itemGet(array(
+  'output' => 'extend',
+  'hostids' => $hostid,
+  'search' => array('key_' => $keyValueCPU)     
+));
 
  
- foreach($cpus as $cpu) {
-   
-   $cpuLoad = get_item_values($cpu->itemid, 'processorload');    
-   $arrCPU[] = $cpuLoad['value_max'];             
- }
+foreach($cpus as $cpu) {
+	
+ 	if($host['available'] == 1 ) { 
+ 		$searchValSize = 'system.cpu.util[,system]';
+ 		$cpuLoad = zbx_get_item_values($cpu->itemid, $searchValSize);    
+		$arrCPU[] = $cpuLoad['value_max'];  
+ 	 }
+
+	else { 
+		$searchValSize = 'processorload';
+		$cpuLoad = get_item_values($cpu->itemid, $searchValSize);    
+		$arrCPU[] = $cpuLoad['value_max'];  
+	}            
+}
  
 $cpuNum = count($arrCPU); 
 
@@ -88,16 +187,20 @@ else {
 	$avgCPU = 0;
 }	
 
+
 //uptime
+if($host['available'] == 1 ) { $keyValueUP = 'system.uptime'; }
+else { $keyValueUP = 'sysuptime'; }	
+
  $times = $api->itemGet(array(
      'output' => 'extend',
      'hostids' => $hostid,
-     'search' => array('key_' => 'sysuptime')     
+     'search' => array('key_' => $keyValueUP)     
  ));
  
  foreach($times as $t) {      
                
-    $time = get_item_values($t->itemid, 'sysuptime');
+    $time = get_item_values($t->itemid, $keyValueUP);
     if($time['value_max'] != 0) {		       	       
      
    	$arrTime[] = $time['value_max'];         
@@ -106,18 +209,25 @@ else {
  
  
 // get all network interfaces
+
+if($host['available'] == 1 ) { $keyValueNet = 'net.if'; }
+else { $keyValueNet = 'if'; }	
+
 $ifs = $api->itemGet(array(
   'output' => 'extend',
   'hostids' => $hostid,
-  'search' => array('key_' => 'if'),
+  'search' => array('key_' => $keyValueNet),
   'sortfield' => 'name'
 ));
 
  // print graph ID with graph name
-foreach($ifs as $if) {    			            
+foreach($ifs as $if) {    
 
-   $ifSize = get_item_values($if->itemid, 'ifInOctets');
-	$ifUsed = get_item_values($if->itemid, 'ifOutOctets');
+ 	if($host['available'] == 1 ) { $searchValIn = 'net.if.in'; $searchValOut = 'net.if.out'; }
+	else { $searchValIn = 'ifInOctets'; $searchValOut = 'ifOutOctets'; }			            
+
+   $ifSize = get_item_values($if->itemid, $searchValIn);
+	$ifUsed = get_item_values($if->itemid, $searchValOut);
 				
 	if($ifSize['value_max'] != '') {			
 		$arrIfSize[]= get_item_label($ifSize['key_']).",".$ifSize['value_max'];;

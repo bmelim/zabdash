@@ -6,7 +6,6 @@ require_once '../include/actions.inc.php';
 require_once '../include/items.inc.php';
 
 include('config.php');
-//include('inc/functions.inc.php');
 
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
@@ -23,8 +22,7 @@ if(isset($hostid)) {
 	else {
 		$period = 3600;
 	}
-	
-  
+	  
 // get all graphs
  $graphs = $api->graphGet(array(
      'output' => 'extend',
@@ -38,7 +36,6 @@ else {
 		echo 'history.back();';
 	echo '</script>';
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +46,7 @@ else {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv='refresh' content='90'>
+<meta http-equiv='refresh' content='60'>
 
 <title>Zabbix Host Graphs</title>
 
@@ -69,7 +66,20 @@ else {
 	
 	<h3 style="color:#000 !important; margin-top:0px; margin-bottom: 20px;"> <?php echo get_hostname($hostid);  ?> </h3>	
 
-	<div class="row">
+	<div class="btn-group row col-md-12 col-sm-12 text-right" id="buttons" style="margin-bottom:20px;">
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=300&hostid=<?php echo $hostid;?>";'>5m</button>
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=900&hostid=<?php echo $hostid;?>";'>15m</button>
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=1800&hostid=<?php echo $hostid;?>";'>30m</button>
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=3600&hostid=<?php echo $hostid;?>";'>1h</button>
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=7200&hostid=<?php echo $hostid;?>";'>2h</button>
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=21600&hostid=<?php echo $hostid;?>";'>6h</button>
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=43200&hostid=<?php echo $hostid;?>";'>12h</button>
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=86400&hostid=<?php echo $hostid;?>";'>1d</button>
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=259200&hostid=<?php echo $hostid;?>";'>3d</button>
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=604800&hostid=<?php echo $hostid;?>";'>7d</button>
+	</div>
+
+	<div class="row">	
 		<?php	
 			foreach($graphs as $g) {
 			

@@ -3,7 +3,7 @@
 foreach( $groupID as $g ) {
 	
 	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.available, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags FROM hosts h, hosts_groups hg WHERE hg.groupid = '.$g.' AND h.hostid = hg.hostid ORDER BY h.name ASC'	);
-	$dbHostsOk = DBselect( 'SELECT h.hostid, h.name, h.status, h.available, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags FROM hosts h, hosts_groups hg WHERE hg.groupid = '.$g.' AND h.hostid = hg.hostid ORDER BY h.name ASC'	);
+	//$dbHostsOk = DBselect( 'SELECT h.hostid, h.name, h.status, h.available, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags FROM hosts h, hosts_groups hg WHERE hg.groupid = '.$g.' AND h.hostid = hg.hostid ORDER BY h.name ASC'	);
 
 	//get group name
 	$group = get_hostgroup_by_groupid($g);
@@ -12,7 +12,7 @@ foreach( $groupID as $g ) {
 
 	echo '	
 		<div class="col-md-12 col-sm-12">
-			<h3 style="color:#000 !important; margin-top:-2 px;"> ' .$groupName.'</h3>
+			<h3 style="color:#000 !important; margin-top:15px; margin-bottom:15px;"> ' .$groupName.'</h3>
 		</div>	';
 				
 		$md = 12;											
@@ -21,7 +21,7 @@ foreach( $groupID as $g ) {
 			
 			if($hosts['status'] == 0 && $hosts['flags'] == 0) {
 				
-				if($hosts['available'] == 1 && $hosts['sa'] == 0) { $keyValue = 'vfs.fs.size'; }
+				if($hosts['available'] == 1 ) { $keyValue = 'vfs.fs.size'; }
 				else { $keyValue = 'inbytes'; }						
 				
 				 // get all items
@@ -32,31 +32,31 @@ foreach( $groupID as $g ) {
 				 ));
 				
 				 // print disks ID with graph name
-				 foreach($disks as $disk) {    
-				 
-				 	if($hosts['available'] == 1 && $hosts['sa'] == 0) { $searchValSize = 'total'; $searchValUsed = 'used'; }
+				foreach($disks as $disk) {    
+				 				 	
+				 	if($hosts['available'] == 1 ) { $searchValSize = 'total'; $searchValUsed = 'used'; }
 					else { $searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; }
 									           
-				    $diskSize = get_item_values($disk->itemid, $searchValSize);
-				    $diskUsed = get_item_values($disk->itemid, $searchValUsed);
-
+				   $diskSize = get_item_values($disk->itemid, $searchValSize);
+				   $diskUsed = get_item_values($disk->itemid, $searchValUsed);
+				
 					//Size
-					if(strchr(get_item_label($diskSize['key_']),":") != '') {
-						if($diskSize['value_max'] != 0) {												
+					if(strchr(get_item_label($diskSize['key_']),"A:") != '') {
+						if($diskSize['value_max'] != 0) {							
 							$arrSize[]= get_item_label($diskSize['key_']).",".$diskSize['value_max'];
 						}
 					}		
-
-					else {										
+				
+					else {						
 						if($diskSize['value_max'] != 0 || get_item_label($diskSize['key_']) != '') {						
 							$arrSize[]= get_item_label($diskSize['key_']).",".$diskSize['value_max'];
 						}
 					}
 					
 					//Used
-					if(strchr(get_item_label($diskUsed['key_']),":") == '') {
-						if($diskUsed['name'] != '') {
-							$arrUsed[]= get_item_label($diskUsed['key_']).",".$diskUsed['value_max'];						
+					if(strchr(get_item_label($diskUsed['key_']),"A:") == '') {
+						if($diskUsed['name'] != '') {		
+							$arrUsed[]= get_item_label($diskUsed['key_']).",".$diskUsed['value_max'];		
 						}
 					}
 					else {
@@ -69,8 +69,20 @@ foreach( $groupID as $g ) {
 							
 				 }
 				 
-					sort($arrSize);
-					sort($arrUsed);
+				sort($arrSize);
+				sort($arrUsed);
+				
+				//print disks size
+				for($n=0;$n<count($arrUsed);$n++) {
+				
+					$u = explode(",",$arrUsed[$n]); 		
+					
+					if($u[0] != 0 || $u[0] != '') {	
+						if(strchr($u[0],":") == '') {				
+							$arrUsed2[] = $u[0].",".$u[1];
+						}	
+					}
+				}
 
 					if($arrSize[0] != '') {
 							
@@ -140,9 +152,8 @@ foreach( $groupID as $g ) {
 						echo "</tbody></table>\n";
 						echo "</div>\n";	
 						echo "<div style='margin-bottom:60px;'></div>\n";								
-						}
 					}
 				}
-				
+			}				
 }	
 ?>

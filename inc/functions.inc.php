@@ -162,6 +162,29 @@ function get_item_values($itemid, $key) {
 }
 
 
+
+function zbx_get_item_values($itemid, $key) {
+
+	$dbItems = DBselect("SELECT i.itemid,i.name,i.key_,i.status,i.type,t.value AS value_max,from_unixtime(t.clock)			
+				FROM items i, history t, hosts h
+				WHERE i.hostid=h.hostid
+				AND t.itemid=i.itemid			
+				AND i.key_ LIKE '%".$key."%'		  	   	
+				AND i.itemid=".$itemid."
+				ORDER BY t.clock DESC			
+				LIMIT 1");
+	
+	$row = DBFetch($dbItems);		
+	
+	if ($row) {
+		return $row;
+	}
+	else {
+		return false;
+	}
+}
+
+
 function time_ext($date) {
 
 $time = $date; // time duration in seconds

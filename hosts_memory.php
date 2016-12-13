@@ -64,13 +64,10 @@ else {
 			<?php
 				while ($groups = DBFetch($dbGroups)) {
 					echo "<option value='".$groups['groupid']."'>".$groups['name']."</option>\n";
-									
 				}											
 			?>
 		</select><br><br><p>
-		<!--<button type='button' class='btn btn-primary' onclick='javascript:this.form.submit();'>Enviar</button>
-		<button type='button' class='btn btn-primary' onclick="javascript:location.href='hosts_storage.php';">Limpar</button>
-		-->
+
 	</form>
 <?php 
 
@@ -84,12 +81,12 @@ else {
 ?>
 </div>
 
-	<script type="text/javascript">
-		$("#groupid").select2({
-		placeholder: "Selecione um Grupo",
-		allowClear: false	  
-		});
-	</script>
+<script type="text/javascript">
+	$("#groupid").select2({
+	placeholder: "Selecione um Grupo",
+	allowClear: false	  
+	});
+</script>
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>

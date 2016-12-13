@@ -76,9 +76,6 @@ else {
 				}											
 			?>
 		</select><br><br><p>
-		<!--<button type='button' class='btn btn-primary' onclick='javascript:this.form.submit();'>Enviar</button>
-		<button type='button' class='btn btn-primary' onclick="javascript:location.href='hosts_storage.php';">Limpar</button>
-		-->
 	</form>
 	<?php 		
 	

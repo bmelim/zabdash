@@ -57,7 +57,7 @@ if($headers[0] != '') {
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">
-    <meta http-equiv="refresh" content= "600"/>
+    <meta http-equiv="refresh" content= "3600"/>
     
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 	 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />    
@@ -203,8 +203,7 @@ if($headers[0] != '') {
                            </li>                           
                        		
                        		<li class=''>
-                           <a href='#' onclick="window.open('hosts_view.php','iframe1'); scrollWin();" data-original-title='Hosts'>
-                               <!--<i class='fa fa-desktop'></i>-->
+                           <a href='#' onclick="window.open('hosts_view.php','iframe1'); scrollWin();" data-original-title='Hosts'>                               
                                <i><img src="img/icon/host.png" alt="" style="width:20px;"></img></i>
                                <span class='hidden-minibar'><?php echo _('Hosts'); ?>
                                </span>
@@ -262,7 +261,7 @@ if($headers[0] != '') {
                     		<li class=' '>
 	                        <a href='#' onclick="window.open('map/index.php','_blank'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-map-marker'></i>
-	                            <span class='hidden-minibar'><?php echo _('Hosts Map'); ?>
+	                            <span class='hidden-minibar'><?php echo $labels['Hosts Map']; ?>
 	                            </span>
 	                        </a>  
                     		</li>  

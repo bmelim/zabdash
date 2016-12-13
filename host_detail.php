@@ -71,10 +71,8 @@ include('host_info.php');
       }  
     }
     
-    function graphPage() {
-    	
-    	var period = document.getElementById("period").value;
-    	    	
+    function graphPage() {    	
+    	var period = document.getElementById("period").value;    	    	
     	window.location.href = 'host_graphs.php?period='+period+'&hostid=<?php echo $hostid; ?>';    	
     }
 </script>
@@ -142,8 +140,13 @@ include('host_info.php');
 					if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
 		
 					echo "<tr>\n";
-						echo "<td width='25%'>".$labels['Processor']." ".($i + 1)."</td>\n";
-						//echo "<td>".$arrCPU[$i]."% &nbsp;</td></tr>\n";
+						if($zbx_agent == 0) {
+							echo "<td width='25%'>".$labels['Processor']." ".($i + 1)."</td>\n";
+						}
+						else {
+							echo "<td width='25%'>".$labels['CPU utilization']."</td>\n";
+						}
+						
 						echo "<td width='20%' style='padding-right:15px; '>
 							<div style='font-size:13px; position:absolute; vertical-align:middle; color:".$perc_cor.";'>&nbsp;".$barra."%</div>
 							<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barraValue."%;'>&nbsp; </div>
@@ -161,14 +164,15 @@ include('host_info.php');
 					if($barra >= 0 and $barra <= 25) { $cor = "progress-bar-success"; $perc_cor = "#000";}	
 					if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
 				
-					echo "<tr>
-						<td colspan='1'> "._('Average')."</td>";
-					echo "<td width='20%' style='padding-right:15px; '>
-							<div style='font-size:13px; position:absolute; vertical-align:middle; color:".$perc_cor.";'>&nbsp;".$barra."%</div>
-							<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barraValue."%;'>&nbsp; </div>
-				   	</td><td></td>\n
-					</tr>\n"; 
-										
+					if($zbx_agent == 0 && $barraValue != 0) {
+						echo "<tr>
+							<td colspan='1'> "._('Average')."</td>";
+						echo "<td width='20%' style='padding-right:15px; '>
+								<div style='font-size:13px; position:absolute; vertical-align:middle; color:".$perc_cor.";'>&nbsp;".$barra."%</div>
+								<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barraValue."%;'>&nbsp; </div>
+					   	</td><td></td>\n
+						</tr>\n"; 	
+					}									
 
 		//Memory		 
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2;'>
@@ -180,35 +184,26 @@ include('host_info.php');
 				</tr>\n"; 
 
 
-		//print memory size					
-		for($n=0;$n<count($arrSize);$n++) {
-		
-			$s = explode(",",$arrSize[$n]);
-		
-			if( stripos($s[0] , 'Memory') == true ) {					
-				$arrSize2[] = $s[0].",".$s[1];	
-			}
+		//memory size					
+		for($n=0;$n<count($arrSizeMem);$n++) {		
+			$s = explode(",",$arrSizeMem[$n]);										
+			$arrSizeMem2[] = $s[0].",".$s[1];				
 		}	
 		
-	
-		for($n=0;$n<count($arrUsed);$n++) {
-		
-			$u = explode(",",$arrUsed2[$n]); 			
-				
-			if( stripos($u[0] , 'Memory') == true ) {					
-				$arrUsed3[] = $u[0].",".$u[1];	
-			}
+		// memory used
+		for($n=0;$n<count($arrUsedMem);$n++) {		
+			$u = explode(",",$arrUsedMem2[$n]); 															
+			$arrUsedMem3[] = $u[0].",".$u[1];				
 		}
 		
-		for($i=0;$i < count($arrUsed2);$i++) {
+		for($i=0;$i < count($arrUsedMem2);$i++) {
 	
-		$s = explode(",",$arrSize2[$i]);
-		$u = explode(",",$arrUsed3[$i]); 
-			
-		if( stripos($s[0] , 'Memory') == true ) {
+			$s = explode(",",$arrSizeMem2[$i]);
+			$u = explode(",",$arrUsedMem3[$i]); 									
 			
 			if($s[1] != 0) {
-				$barra = round((100*$u[1])/$s[1],1);	
+				if($zbx_agent == 0) {$barra = round((100*($u[1]))/$s[1],1);}	
+				if($zbx_agent == 1) {$barra = round((100*($s[1] - $u[1]))/$s[1],1);}	
 			}
 			else { $barra = 0; }	
 			
@@ -221,35 +216,35 @@ include('host_info.php');
 			if($barra >= 26 and $barra <= 60) { $cor = " "; $perc_cor = "#fff"; }
 			if($barra >= 0 and $barra <= 25) { $cor = "progress-bar-success"; $perc_cor = "#000";}	
 			if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }			
-					
+
+			if($s[0] != 'total') { $memName = $s[0]; }
+			else { $memName = ""; }				
+			
+			if($zbx_agent == 0) {$usada = formatBytes($u[1],1);}	
+			if($zbx_agent == 1) {$usada = formatBytes($s[1] - $u[1],1);}								
 									
 			echo "<tr>";	
-				echo "<td colspan='1'>". $s[0] ."</td>";
-				echo "<td>". formatBytes($u[1],1) ."</td>";
+				echo "<td colspan='1'>". $memName ."</td>";
+				echo "<td>". $usada ."</td>";
 				echo "<td widthx='15%'>". formatBytes($s[1],1) ."</td>";
 				echo "<td widthx='15%' style='padding-right:15px; '>
 							<div style='font-size:13px; position:absolute; vertical-align:middle; color:".$perc_cor.";'>&nbsp;".$barra."%</div>
 							<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barraValue."%;'>&nbsp; </div>
 				   	</td>";
-			echo "</tr>\n";						
-			}
-		}
-					
+			echo "</tr>\n";									
+		}					
 		echo "</table>\n";
 		
 		
 		//Disks				
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2;'>
 				<tr>					
-					<td colspan='1' style='width:50%; font-weight:bold;'><img src='img/icon/HDD-24.png' alt=''/> ".$labels['Storage']." </td>\n";
-				//</tr>\n"; 										
-
+					<td colspan='1' style='width:50%; font-weight:bold;'><img src='img/icon/HDD-24.png' alt=''/> ".$labels['Storage']." </td>\n";													
 		echo "					
 					<td> ".$labels['Used']." </td>
 					<td> ". _('Total')." </td>
 					<td> % ".$labels['Used']." </td>
 				</tr>\n"; 		
-
 		
 		for($i=0;$i<count($arrUsed);$i++) {
 		
@@ -310,6 +305,8 @@ include('host_info.php');
 				
 				echo "<td width='20%' >\n";	
 				echo "<select id='period' name='period' onChange=\"getVal();\" style='height: 27px; width:75px;' autofocus >\n";
+					echo "<option value='300'> 5m </option>\n";	
+					echo "<option value='900'> 15m </option>\n";	
 					echo "<option value='1800'> 30m </option>\n";	
 					echo "<option value='3600' selected> 1h </option>\n";	
 					echo "<option value='7200'> 2h </option>\n";	
