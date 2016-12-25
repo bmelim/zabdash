@@ -15,15 +15,15 @@
 
 echo "				
 		<table id='triggersUnack' class='box table table-striped table-hover table-condensed' border='0' style='background:#fff;'>
-		<thead>
-			<tr>
-				<th style='text-align:center; width:15%;'>". _('Last change')."</th>
-				<th style='text-align:center;'>". _('Severity')."</th>
-				<th style='text-align:center;'>". _('Status')."</th>				
-				<th style='text-align:center;'>". _('Host')."</th>
-				<th style='text-align:center;'>". _('Description')."</th>
-			</tr>								
-		</thead>
+			<thead>
+				<tr>
+					<th style='text-align:center; width:15%;'>". _('Last change')."</th>
+					<th style='text-align:center;'>". _('Severity')."</th>
+					<th style='text-align:center;'>". _('Status')."</th>				
+					<th style='text-align:center;'>". _('Host')."</th>
+					<th style='text-align:center;'>". _('Description')."</th>
+				</tr>								
+			</thead>
 		<tbody> ";
 	
 	
@@ -35,10 +35,8 @@ echo "
 
 	echo "<tr>";			            
 		echo "<td style='text-align:center; vertical-align:middle !important;' data-order=".$tu->lastchange.">".from_epoch($tu->lastchange)."</td>";				            
-		//echo $t->triggerid.",";				            			            
-		//echo "<td style='text-align:center;'>".$t->priority."</td>";
 		echo "<td style='text-align:left; vertical-align: middle !important;'>
-					<div class='hostdiv nok". $priority ." hostevent trig_radius' style='height:21px !important; margin-top:0px; !important;' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=". $tu->hosts[0]->hostid ."&show_triggers=1')\">
+					<div class='hostdiv nok". $priority ." hostevent trig_radius truncate' style='height:21px !important; margin-top:0px; !important;' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=". $tu->hosts[0]->hostid ."&show_triggers=1')\">
 					<p class='severity' style='margin-top: -2px;'>". _(get_severity($tu->priority)) ."</p>									
 					</div>
 				</td>";				            

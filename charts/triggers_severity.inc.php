@@ -22,8 +22,8 @@ foreach($contagem AS $numero => $vezes) {
 
 $conta = count($valores);
 
-$severity = array('Disaster' => 0,'High' => 0,'Average' => 0,'Warning' => 0,'Information' => 0,'Not Classified' => 0);
-$colors = array('Disaster' => '#B10505','High' => '#E97659','Average' => '#FFA059','Warning' => '#FFC859','Information' => '#7499FF','Not Classified' => '#CECECE');
+$severity = array('Disaster' => 0,'High' => 0,'Average' => 0,'Warning' => 0,'Information' => 0,'Not classified' => 0);
+$colors = array('Disaster' => '#B10505','High' => '#E97659','Average' => '#FFA059','Warning' => '#FFC859','Information' => '#7499FF','Not classified' => '#97AAB3');
 
 krsort($priori);
 
@@ -78,6 +78,7 @@ $(function () {
 //average #FFA059
 //warn #FFC859
 //info #59DB8F
+//not classified #97AAB3
 //ok #4BAC64
 
 ?>

@@ -1189,6 +1189,9 @@ body {
 #59DB8F  #4BAC64
 */
 .ok {background-color: #4BAC64; border: 1px solid #0D0D0D; color: #FFF; }
+
+/* host is not ok, "Not classified triggered" */
+.nok0 {background-color: #97AAB3; border: 1px solid #0D0D0D; }
 /* host is not ok, "information triggered" */
 .nok1 {background-color: #7499FF; border: 1px solid #0D0D0D;}
 /* host is not ok, "warning triggered" #59DB8F #7499FF */
@@ -1201,6 +1204,13 @@ body {
 .nok5 {background-color: #B10505; border: 1px solid #0D0D0D; }
 /* For triggers in OK status*/
 .nok9 {background-color: #59DB8F; border: 1px solid #0D0D0D; color: #FFF; }
+
+.truncate {
+  width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 .trig_radius { border-radius: 5px; }
 

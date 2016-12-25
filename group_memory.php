@@ -11,7 +11,7 @@ foreach( $groupID as $g ) {
 
 	echo '	
 		<div class="col-md-12 col-sm-12">
-			<h3 style="color:#000 !important; margin-top: 15px; margin-bottom:15px;"> ' .$groupName.'</h3>
+			<h3 style="color:#000 !important; margin-top: 15px; margin-bottom:15px;"> '.$groupName.'</h3>
 		</div>	';
 				
 		$md = 12;											
