@@ -27,6 +27,7 @@ $dbGroups = DBselect( 'SELECT * FROM groups WHERE groupid <> 1 ORDER BY name ASC
 <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/font-awesome.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
@@ -38,8 +39,8 @@ $dbGroups = DBselect( 'SELECT * FROM groups WHERE groupid <> 1 ORDER BY name ASC
 
 <body>
 
-<div class="row col-md-12 col-sm-12" style="margin-top:50px; margin-bottom: 20px; background:#fff; float:none; margin-right:auto; margin-left:auto; text-align:center;">
-		<span><h3><i class="fa fa-desktop"></i>  Zabbix Hosts Groups</h3></span>
+<div class="row col-md-12 col-sm-12" style="margin-top:50px; margin-bottom: 20px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
+		<span><h3><i class="fa fa-desktop"></i>  <?php echo _('Host groups'); ?></h3></span>
 		
 		<form id="form1" name="form1" class="form_rel" method="post" action="groups.php?sel=1" style="margin-top:30px; margin-bottom: 20px;">		
 			<select id='groupid' name='groupid[]' multiple style='width: 300px; height: 27px;' autofocus data-placeholder="<?php echo $labels['Select one or more groups']; ?>">				
@@ -57,9 +58,7 @@ $dbGroups = DBselect( 'SELECT * FROM groups WHERE groupid <> 1 ORDER BY name ASC
 		
 <?php
 
-if($group != '') {	
-	
-	//echo '<script language="javascript"> location.href="hosts.php?groupid='.implode(",",$group).'"; 
+if($group != '') {			
 	echo '<script language="javascript"> window.open(\'hosts.php?groupid='.implode(",",$group).'\',\'_blank\'); </script>';
 }
 

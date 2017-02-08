@@ -218,19 +218,16 @@ setTimeout(function(){
 }, 1000);
 
 </script> 
-
   
-
-<div id="widgets2" class="row" style="margin-top: 0px;">
-
+<div id="widgets2" class="row">
 	<div class="col-sm-6 col-md-6 align" style="float:left; margin-left: 0px;"> 	 				              
 	   <div id="tickets_status" class="widget2 widget-table action-table striped card1" >
 	      <div class="widget-header">                 
 	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Triggers by host - Top 10']; ?></h3>
-	      	 <span  class=""></span>               
+	      	 <span class=""></span>               
 	      </div> 
 	      <!-- /widget-header -->      
-	      <div id="graflinhas1" class="" style='height:400px !important; background:#fff;'>	 			
+	      <div id="graflinhas1" class="col-md-12 col-sm-12" style='height:400px !important; background:#fff;'>	 			
 					<?php
 						include ("charts/triggers_hosts.inc.php");
 					?> 	 						            
@@ -245,8 +242,8 @@ setTimeout(function(){
 	      	 <span  class=""></span>               
 	      </div>
 	      <!-- /widget-header -->      
-	      <div id="severity1" class="col-sm-12 col-md-12 align" style="height:400px !important; background:#fff;">
-	      	<div id="severity" style="height:280px !important; background:#fff;">	      	 			
+	      <div id="severity1" class="col-sm-12x col-md-12x align" style="height:400px !important; background:#fff;">
+	      	<div id="severity" class="align" style="height:280px !important; background:#fff;">	      	 			
 					<?php
 						include ("charts/triggers_severity.inc.php");
 					?> 	 						            
@@ -258,13 +255,7 @@ setTimeout(function(){
 	           <span class="label label-danger"  style="background: #FFA059 !important; border: 1px solid #FFA059; width:70px;"><?php echo _('Average'); ?></span>
 	           <span class="label label-warning" style="background: #E97659 !important; border: 1px solid #E97659; width:70px;"><?php echo _('High'); ?></span>
 	           <span class="label label-warning" style="background: #B10505 !important; border: 1px solid #B10505; width:70px;"><?php echo _('Disaster'); ?></span>
-	           
-		  		  <!--<button type="button" class="btn btn-sm btn-primary" style="background: #97AAB3 !important; border: 1px solid #97AAB3;"><?php echo _('Not classified'); ?></button>
-		  		  <button type="button" class="btn btn-sm btn-success" style="background: #7499FF !important; border: 1px solid #7499FF;"><?php echo _('Information'); ?></button>
-	           <button type="button" class="btn btn-sm btn-success" style="background: #FFC859 !important; border: 1px solid #FFC859; width:70px;"><?php echo _('Warning'); ?></button>
-	           <button type="button" class="btn btn-sm btn-danger"  style="background: #FFA059 !important; border: 1px solid #FFA059; width:70px;"><?php echo _('Average'); ?></button>
-	           <button type="button" class="btn btn-sm btn-warning" style="background: #E97659 !important; border: 1px solid #E97659; width:70px;"><?php echo _('High'); ?></button>
-	           <button type="button" class="btn btn-sm btn-warning" style="background: #B10505 !important; border: 1px solid #B10505; width:70px;"><?php echo _('Disaster'); ?></button>-->
+	           		  		  
 				</div>  
 			</div>  
 		</div>
@@ -334,7 +325,6 @@ setTimeout(function(){
 	});
 
 </script>	
-
 
 <div id="go-top" class="go-top" onclick="scrollWin()">
    <i class="fa fa-chevron-up"></i>&nbsp; Top     							    

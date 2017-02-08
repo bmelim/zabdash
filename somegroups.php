@@ -56,15 +56,13 @@ foreach( $groupID as $g ) {
 			}
 		}
 		
-		//hosts online						
-		
+		//hosts online								
 		while ($hosts = DBFetch($dbHostsOk)) {
 			
 			if($hosts['status'] == 0 && $hosts['flags'] == 0) {
 		
 				if($hosts['sd'] == 0) { 
-				
-					//$cor = "#4BAC64";
+									
 					$icon = "fa fa-thumbs-up"; 
 					
 					$dbIP = DBSelect('SELECT DISTINCT ip FROM interface WHERE hostid ='.$hosts['hostid']);
@@ -82,36 +80,33 @@ foreach( $groupID as $g ) {
 	
 				if ($trigger) {
 
-					// Highest Priority error
-					//$hostdivprio = $trigger[0]->priority;
-					
+					// Highest Priority error										
 					if($trigger[0]->value == 0) { $hostdivprio = 9;} 	
 	  				else { $hostdivprio = $trigger[0]->priority;} 
 
-					// View
-       					//echo "<div class=\"description nok" . $priority ."\">" . $description . "</div>";
-       					$icon = "fa fa-exclamation-circle";		
-       					echo "
-							<div class='hostdiv nok". $hostdivprio ." col-md-".$md." col-sm-".$md."'>
-								<table border='0' width='100%' height='100%' style='color:#fff;' class='link". $hostdivprio ."'>
-									<tr>
-										<td rowspan='2' style='font-size:20px;' width='22px' height='50%'>
-											<i class='".$icon."'></i>
-										</td>
-										<td class='link". $hostdivprio ."'>
-											<a href='".$zabURL."tr_status.php?fullscreen=0&groupid=0&source=0&hostid=".$hosts['hostid']."' target='_blank' >".$hosts['name']."</a>
-										</td>
-										<td rowspan='2' style='font-size:20px;' width='22px' height='50%'>
-											<img src='img/os/".getOS($hosts['hostid']).".png' alt=''/>
-										</td>										
-									</tr>
-									<tr>
-										<td>
-											".$IP['ip']."
-										</td>
-									</tr>					
-								</table>								
-							</div>\n";					
+					// View       					
+    					$icon = "fa fa-exclamation-circle";		
+    					echo "
+						<div class='hostdiv nok". $hostdivprio ." col-md-".$md." col-sm-".$md."'>
+							<table border='0' width='100%' height='100%' style='color:#fff;' class='link". $hostdivprio ."'>
+								<tr>
+									<td rowspan='2' style='font-size:20px;' width='22px' height='50%'>
+										<i class='".$icon."'></i>
+									</td>
+									<td class='link". $hostdivprio ."'>
+										<a href='".$zabURL."tr_status.php?fullscreen=0&groupid=0&source=0&hostid=".$hosts['hostid']."' target='_blank' >".$hosts['name']."</a>
+									</td>
+									<td rowspan='2' style='font-size:20px;' width='22px' height='50%'>
+										<img src='img/os/".getOS($hosts['hostid']).".png' alt=''/>
+									</td>										
+								</tr>
+								<tr>
+									<td>
+										".$IP['ip']."
+									</td>
+								</tr>					
+							</table>								
+						</div>\n";					
 					}
 				
 				else {
