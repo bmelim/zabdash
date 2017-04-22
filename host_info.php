@@ -2,7 +2,6 @@
 
 //get disks
 
-//if($host['available'] == 1 && $host['sa'] == 0) { $keyValue = 'vfs.fs.size'; }
 if($host['available'] == 1 ) { $keyValue = 'vfs.fs.size'; }
 else { $keyValue = 'inbytes'; }			 
  

@@ -20,7 +20,6 @@ $hostid = $_REQUEST['hostid'];
 
 if(isset($hostid)) {
 
-
 $dbHosts = DBselect( 'SELECT hostid, name, status, available, snmp_available AS sa, snmp_disable_until AS sd, flags FROM hosts WHERE hostid='.$hostid);
 $host = DBFetch($dbHosts);		
 	

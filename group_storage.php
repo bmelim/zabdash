@@ -2,8 +2,7 @@
 
 foreach( $groupID as $g ) {
 	
-	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.available, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags FROM hosts h, hosts_groups hg WHERE hg.groupid = '.$g.' AND h.hostid = hg.hostid ORDER BY h.name ASC'	);
-	//$dbHostsOk = DBselect( 'SELECT h.hostid, h.name, h.status, h.available, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags FROM hosts h, hosts_groups hg WHERE hg.groupid = '.$g.' AND h.hostid = hg.hostid ORDER BY h.name ASC'	);
+	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.available, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags FROM hosts h, hosts_groups hg WHERE hg.groupid = '.$g.' AND h.hostid = hg.hostid ORDER BY h.name ASC');
 
 	//get group name
 	$group = get_hostgroup_by_groupid($g);

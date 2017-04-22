@@ -117,6 +117,4 @@ $(function () {
 
 </script>";
 
-//print_r($hosts); 
-
 ?>

@@ -248,14 +248,8 @@ function get_userid($session) {
 
 	$dbUser = DBselect( 'SELECT sessionid, userid, lastaccess FROM sessions WHERE sessionid ="'.$session.'"');
 	$dbID = DBFetch($dbUser);	
-	
-	//if($dbID['userid'] != '' ) {
-		$userid = $dbID['userid'];
-	//}
-	//else {
-		//$userid = '';
-	//}
-	
+	$userid = $dbID['userid'];
+
 	return $userid;
 }
 
@@ -292,13 +286,13 @@ function get_severity($value) {
 	$severity = $value;
 	
 	switch ($severity) {
-	 case "0": $severity = 'Not classified'; break;
-	 case "1": $severity = 'Information'; break;
-	 case "2": $severity = 'Warning'; break;
-	 case "3": $severity = 'Average'; break;
-	 case "4": $severity = 'High'; break;
-	 case "5": $severity = 'Disaster'; break; 
-	 }
+		 case "0": $severity = 'Not classified'; break;
+		 case "1": $severity = 'Information'; break;
+		 case "2": $severity = 'Warning'; break;
+		 case "3": $severity = 'Average'; break;
+		 case "4": $severity = 'High'; break;
+		 case "5": $severity = 'Disaster'; break; 
+	}
 	 
 	 return $severity;
 }
@@ -336,13 +330,69 @@ function color_bar($value) {
 	if($barra >= 0 and $barra <= 25) { $cor = "progress-bar-success"; $perc_cor = "#000";}	
 	if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }
 	
-/*	return $barra;			
-	return $cor;			
-	return $perc_cor;	*/
-	
 	$arrBar = array($barra,$cor,$perc_cor);	
 	return $arrBar;	
 														
+}
+
+
+function to_timestamp_ini($date) {
+
+	//$date1 = $arr_days[0];
+	list($day, $month, $year) = explode('/', $date);
+	$timeStamp = mktime(0, 0, 0, $month, $day, $year);
+	//echo $timeStamp;
+	return $timeStamp;
+}
+
+
+function to_timestamp_fin($date) {
+
+	//$date1 = $arr_days[0];
+	list($day, $month, $year) = explode('/', $date);
+	$timeStamp = mktime(23, 59, 59, $month, $day, $year);
+	//echo $timeStamp;
+	return $timeStamp;
+}
+
+
+//get recovery event id
+function get_revent($eventid) {
+
+	$dbGetEvent = DBselect( 'SELECT r_eventid FROM event_recovery WHERE eventid ="'.$eventid.'"');
+	$dbevent = DBFetch($dbGetEvent);
+	
+	$r_event = $dbevent['r_eventid'];	
+	
+	return $r_event;
+}
+
+
+//event time
+function event_time($eventid) {
+
+	$dbGetEvent = DBselect( 'SELECT clock FROM events WHERE eventid ="'.$eventid.'"');
+	$dbeventtime = DBFetch($dbGetEvent);	
+	
+	$eventtime = $dbeventtime['clock'];
+	
+	return $eventtime;
+}
+
+//recovery event time
+function revent_time($reventid) {
+
+	$dbGetEvent = DBselect( 'SELECT clock FROM events WHERE eventid ="'.$reventid.'"');
+	$dbreventtime = DBFetch($dbGetEvent);	
+	
+	if($dbreventtime['clock'] != '') {
+		$reventtime = $dbreventtime['clock'];
+	}
+	else {
+		$reventtime = '';
+	}
+	
+	return $reventtime;
 }
 
 

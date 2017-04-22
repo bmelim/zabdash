@@ -26,6 +26,12 @@ include('config.php');
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
 
+<script src="js/media/js/jquery.dataTables.min.js"></script>
+<link href="js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
+<script src="js/media/js/dataTables.bootstrap.js"></script>
+
+<script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 </head>
 
@@ -43,16 +49,20 @@ include('config.php');
 	
 	$dbGroups = DBselect( 'SELECT groupid, name FROM groups ORDER BY name ASC'	);
 	
+	$dbHostsCount = DBselect( 'SELECT COUNT(h.hostid) AS hc FROM hosts h WHERE h.status <> 3 AND h.flags = 0');
+	$hostsCount = DBFetch($dbHostsCount);
+	
 	echo "			
 		<div class='align col-md-".$md." col-sm-".$md."' >
-			<table id='hosts' class='box table table-striped table-hover' border='0' width='50%'>
+			<table id='hosts' class='box table table-striped table-hover' border='0' width='100%'>
 			<thead>
 				<tr>
 					<th width='8px'></th>
 					<th style='text-align:center;'>". _('Groups')." (".$groupsCount['hc'].")</th>
-					<th style='text-align:center;'>". _('Hosts')."</th>										
+					<th style='text-align:center;'>". _('Hosts')." (" .$hostsCount['hc'].")</th>										
 				</tr>								
-			</thead> ";
+			</thead>
+			<tbody>\n ";
 	
 	
 	while ($groups = DBFetch($dbGroups)) {						 	
@@ -73,9 +83,32 @@ include('config.php');
 				</tr>";								
 	}
 
-echo "	</table>						
+echo "	</tbody>
+			</table>						
 		</div>\n";				
 ?>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+    $('#hosts').DataTable({
+
+		  "select": false,
+		  "filter": true,
+		  "paging":   true,
+        "ordering": false,
+        "info":     false,
+        "order": [[ 0, "asc" ]],
+        pagingType: "full_numbers",        
+		  displayLength: 25,
+        lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],	    	    	   
+    
+    });
+});
+
+</script>
 
 </body>
 </html>
