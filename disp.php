@@ -69,7 +69,7 @@ else {
 </head>
 
 <body>
-	<div class="row col-md-12 col-sm-12" style="margin-top:30px; margin-bottom: 20px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
+	<div class="row col-md-12 col-sm-12" style="margin-top:10px; margin-bottom: 35px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	
 	<?php	
 				
@@ -88,8 +88,8 @@ else {
 	$md = 11;	
 	
 	echo "			
-		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:50px;' >
-				<h3 style='color:#000 !important; margin-top:-2 px; text-align:center;'> " .$groupName."</h3>
+		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:20px;' >
+			<h3 style='color:#000 !important; margin-top:-2 px; text-align:center;'> " .$groupName."</h3>
 			<table id='tab_hosts' class='box table table-striped table-hover' border='0' >
 			<thead style='background:#fff;'>
 				<tr>

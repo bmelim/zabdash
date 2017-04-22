@@ -29,7 +29,7 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv='refresh' content='600'>
 
-<title>Zabbix Hosts</title>
+<title>Zabdash</title>
 
 <!-- Bootstrap -->
 <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
@@ -64,7 +64,7 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 </head>
 
 <body>
-	<div class="row col-md-12 col-sm-12" style="margin-top:30px; margin-bottom: 0px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
+	<div class="row col-md-12 col-sm-12" style="margin-top:20px; margin-bottom: 0px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	
 	<?php	
 				
@@ -78,10 +78,10 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 	$md = 11;	
 	
 	echo "			
-		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:30px;' >
-				<h3 style='color:#000 !important; margin-top:12 px; text-align:center;'> " .$host['name']."</h3>
+		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:40px;'>
+			<h3 style='color:#000 !important; margin-top:2 px; text-align:center;'> " .$host['name']."</h3>
 				
-			<table id='tab_hosts' class='box table table-striped table-hover table-bordered table-condensed' border='' >
+			<table id='tab_hosts' class='box table table-striped table-hover table-bordered table-condensed' border='0'>
 			<thead style='background:#fff;'>
 				<tr>
 					<th style='text-align:center;'>Data</th>
@@ -141,7 +141,6 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 						".$period."
 					</td>
 				</tr>\n";	
-
 	}
 
 	echo "		</tbody>
@@ -149,26 +148,25 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 		</div>\n";			
 	?>
 
-<script type="text/javascript">
-
-$(document).ready(function() {
+	<script type="text/javascript">
 	
-    $('#tab_hosts').DataTable({
-
-		  "select": false,
-		  "filter": true,
-		  "paging":   true,
-        "ordering": true,
-        "info":     true,
-        "order": [[ 0, "desc" ]],
-        pagingType: "full_numbers",        
-		  displayLength: 15,
-        lengthMenu: [[15, 50, 100, -1], [15, 50, 100, "All"]],	    	    	   
-    
-    });
-});
-
-</script>
+	$(document).ready(function() {
+		
+	    $('#tab_hosts').DataTable({
+	
+			  "select": false,
+			  "filter": true,
+			  "paging":   true,
+	        "ordering": true,
+	        "info":     true,
+	        "order": [[ 0, "desc" ]],
+	        pagingType: "full_numbers",        
+			  displayLength: 15,
+	        lengthMenu: [[15, 50, 100, -1], [15, 50, 100, "All"]],	    	    	   
+	    
+	    });
+	});	
+	</script>
 	
 	</div>	
 	</body>
