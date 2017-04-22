@@ -72,6 +72,7 @@ return array(
 'CPU utilization' => 'CPU utilization',
 'Hosts Memory' => 'Hosts Memory',
 'Hosts Storage' => 'Hosts Storage',
+'Availability' => 'Availability',
 
 );
 ?> 

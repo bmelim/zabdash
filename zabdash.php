@@ -247,12 +247,7 @@ if($headers[0] != '') {
                                        <span class='hidden-minibar'> <?php echo $labels['Memory']; ?> </span>
                                    </a>
                                </li>
-                               <li class=' '>
-                                    <a href='#' onclick="window.open('./disp.php','iframe1'); scrollWin();" data-original-title=' Availability'>
-                                       <i class="fa fa-angle-right"></i>
-                                       <span class='hidden-minibar'> <?php echo $labels['Availability']; ?> </span>
-                                   </a>
-                               </li>                               
+                           
                            
                            	</ul>                                    
                        </li>
