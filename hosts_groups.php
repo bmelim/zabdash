@@ -53,7 +53,7 @@ include('config.php');
 	$hostsCount = DBFetch($dbHostsCount);
 	
 	echo "			
-		<div class='align col-md-".$md." col-sm-".$md."' >
+		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:20px;' >
 			<table id='hosts' class='box table table-striped table-hover' border='0' width='100%'>
 			<thead>
 				<tr>

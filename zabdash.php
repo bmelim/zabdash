@@ -247,6 +247,12 @@ if($headers[0] != '') {
                                        <span class='hidden-minibar'> <?php echo $labels['Memory']; ?> </span>
                                    </a>
                                </li>
+                               <li class=' '>
+                                    <a href='#' onclick="window.open('./disp.php','iframe1'); scrollWin();" data-original-title=' Availability'>
+                                       <i class="fa fa-angle-right"></i>
+                                       <span class='hidden-minibar'> <?php echo $labels['Availability']; ?> </span>
+                                   </a>
+                               </li>                               
                            
                            	</ul>                                    
                        </li>
@@ -353,7 +359,7 @@ if($headers[0] != '') {
 </script> 
 
 </div>   
- <iframe id="iframe1" name="iframe1" class="iframe iframe-side" src="main.php" scrolling="yes" style="position: absolute; height: 100%; margin-bottom: 40px; border: none; display:block;"></iframe>
+ <iframe id="iframe1" name="iframe1" class="iframe iframe-side" src="main.php" scrolling="yes" style="position: absolute; height: 100%; margin-bottom: 70px; border: none; display:block;"></iframe>
         	
 </div>		
 <!-- end main-content -->	
@@ -363,9 +369,9 @@ if($headers[0] != '') {
 <!-- transparent them footer -->
 <style type="text/css">
 	@media screen and (min-width: 1201px) and (max-width: 2200px) {
-	  	#footer-bar {
-	 margin-top: 5px;
-	 height: 20px;
+	 #footer-bar {
+	 	margin-top: 5px;
+	 	height: 20px;
 	  	 }
 	}
 </style>

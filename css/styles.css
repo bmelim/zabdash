@@ -1263,6 +1263,7 @@ div#sheetname {position: absolute; top: -36px; right: 20px; z-index: 200; font-s
 	margin-right: auto;
 	margin-left: auto;
 	float: none;
+	margin-bottom:15px;
 }
 
  .link a, .link4 a {color: #fff !important; text-decoration: none;}

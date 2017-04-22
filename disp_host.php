@@ -64,7 +64,7 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 </head>
 
 <body>
-	<div class="row col-md-12 col-sm-12" style="margin-top:10px; margin-bottom: 0px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
+	<div class="row col-md-12 col-sm-12" style="margin-top:30px; margin-bottom: 0px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	
 	<?php	
 				
@@ -79,7 +79,7 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 	
 	echo "			
 		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:30px;' >
-				<h3 style='color:#000 !important; margin-top:-2 px; text-align:center;'> " .$host['name']."</h3>
+				<h3 style='color:#000 !important; margin-top:12 px; text-align:center;'> " .$host['name']."</h3>
 				
 			<table id='tab_hosts' class='box table table-striped table-hover table-bordered table-condensed' border='' >
 			<thead style='background:#fff;'>

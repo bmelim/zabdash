@@ -69,7 +69,7 @@ else {
 </head>
 
 <body>
-	<div class="row col-md-12 col-sm-12" style="margin-top:10px; margin-bottom: 0px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
+	<div class="row col-md-12 col-sm-12" style="margin-top:30px; margin-bottom: 20px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	
 	<?php	
 				
@@ -88,13 +88,13 @@ else {
 	$md = 11;	
 	
 	echo "			
-		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:30px;' >
+		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:50px;' >
 				<h3 style='color:#000 !important; margin-top:-2 px; text-align:center;'> " .$groupName."</h3>
 			<table id='tab_hosts' class='box table table-striped table-hover' border='0' >
 			<thead style='background:#fff;'>
 				<tr>
 					<th width='4px;' style='padding:3px !important; text-align:right;'></th>
-					<th style='text-align:center;'>Hosts (".$hostsCount['hc'].")</th>\n";
+					<th style='text-align:center; min-width:180px;'>Hosts (".$hostsCount['hc'].")</th>\n";
 			
 					$date = date_create($umdia);
 	
@@ -139,7 +139,7 @@ while ($hosts = DBFetch($dbHosts)) {
 						<td  style='background-color:".$cor.";' title='".$conn."' data-order='".$value."'>
 						</td>
 						<td class='link2' style='vertical-align:middle; text-align:left; padding:5px;'>
-							<a href='disp_host.php?hostid=".$hosts['hostid']."' target='_blank' >".$hosts['name']."</a>
+							<a href='disp_host.php?hostid=".$hosts['hostid']."' target='_self' >".$hosts['name']."</a>
 						</td>\n";
 
 				for( $i = 0; $i < 15; $i++ ) {
@@ -157,7 +157,7 @@ while ($hosts = DBFetch($dbHosts)) {
 						echo "<td style='text-align:center; vertical-align:middle'>\n";
 						
 						if($obj[0]->value == 1) {
-							echo "<img src='img/error128.png' alt='Off' width='20' />\n" ;
+							echo "<img src='img/error128.png' alt='Off' width='18' />\n" ;
 						}
 						else { echo "";}	
 					}	
