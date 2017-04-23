@@ -205,8 +205,7 @@ if($headers[0] != '') {
                        		<li class=''>
                            <a href='#' onclick="window.open('hosts_view.php','iframe1'); scrollWin();" data-original-title='Hosts'>                               
                                <i><img src="img/icon/host.png" alt="" style="width:20px;"></img></i>
-                               <span class='hidden-minibar'><?php echo _('Hosts'); ?>
-                               </span>
+                               <span class='hidden-minibar'><?php echo _('Hosts'); ?></span>
                            </a>  
                        		</li>
                      
@@ -214,16 +213,14 @@ if($headers[0] != '') {
                            <a href='#' onclick="window.open('hosts_groups.php','iframe1'); scrollWin();" data-original-title='Hosts'>
                                <!--<i><img src="img/icon/group.png" alt="" style="width:20px;"></img></i>-->
                                <i class="fa fa-sitemap"></i>
-                               <span class='hidden-minibar'><?php echo _('Host groups'); ?>
-                               </span>
+                               <span class='hidden-minibar'><?php echo _('Host groups'); ?></span>
                            </a>  
                        		</li>                              
                        		
                        	  <li class=''>
 	                          <a href='#' onclick="window.open('groups.php','iframe1'); scrollWin();" data-original-title='Panel'>
                                <i class="fa fa-desktop" aria-hidden="true"></i>
-                               <span class='hidden-minibar'><?php echo $labels['Hosts Panel']; ?>
-                               </span>
+                               <span class='hidden-minibar'><?php echo $labels['Hosts Panel']; ?></span>
                            </a>  
                        		</li>
                            
@@ -246,39 +243,33 @@ if($headers[0] != '') {
                                        <i class="fa fa-angle-right"></i>
                                        <span class='hidden-minibar'> <?php echo $labels['Memory']; ?> </span>
                                    </a>
-                               </li>
-                           
-                           
+                               </li>                                                       
                            	</ul>                                    
                        </li>
-                                  
-                    		<li class=' '>
+
+                      		<li class=' '>
 	                        <a href='#' onclick="window.open('triggers.php','iframe1'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-edit'></i>
-	                            <span class='hidden-minibar'><?php echo _('Triggers'); ?>
-	                            </span>
+	                            <span class='hidden-minibar'><?php echo _('Triggers'); ?></span>
 	                        </a>  
                     		</li> 
                     		<li class=' '>
 	                        <a href='#' onclick="window.open('map/index.php','iframe1'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-map-marker'></i>
-	                            <span class='hidden-minibar'><?php echo $labels['Hosts Map']; ?>
-	                            </span>
+	                            <span class='hidden-minibar'><?php echo $labels['Hosts Map']; ?></span>
 	                        </a>  
                     		</li>                     	 
                     		<li class=' '>
                             <a href='#' onclick="window.open('info.php','iframe1'); scrollWin();" target="iframe1" data-original-title='Info'>
                                <i class='fa fa-info-circle'></i>
-                               <span class='hidden-minibar'><?php echo $labels['About']; ?>
-                               </span>
+                               <span class='hidden-minibar'><?php echo $labels['About']; ?></span>
                            </a>  
                         </li> 
                   		
 					    		<li class=' '>
 	                        <a href='#' onclick="window.open('logout.php','_self'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-sign-out'></i>
-	                            <span class='hidden-minibar'><?php echo $labels['Exit']; ?>
-	                            </span>
+	                            <span class='hidden-minibar'><?php echo $labels['Exit']; ?></span>
 	                        </a>  
                     		</li>                                		
                                                                                      												                                                       

@@ -73,6 +73,9 @@ return array(
 'Hosts Memory' => 'Hosts Memory',
 'Hosts Storage' => 'Hosts Storage',
 'Availability' => 'Availability',
+'Previous' => 'Previous',
+'Next' => 'Next',
+'Start' => 'Start',
 
 );
 ?> 

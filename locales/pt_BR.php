@@ -73,6 +73,9 @@ return array(
 'Hosts Memory' => 'Memória dos Hosts',
 'Hosts Storage' => 'Armazenamento dos Hosts',
 'Availability' => 'Disponibilidade',
+'Previous' => 'Anterior',
+'Next' => 'Próximo',
+'Start' => 'Início',
 
 );
 ?> 

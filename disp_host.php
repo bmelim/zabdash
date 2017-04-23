@@ -84,7 +84,7 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 			<table id='tab_hosts' class='box table table-striped table-hover table-bordered table-condensed' border='0'>
 			<thead style='background:#fff;'>
 				<tr>
-					<th style='text-align:center;'>Data</th>
+
 					<th style='text-align:center;'>Início</th>				
 					<th style='text-align:center;'>Fim</th>					
 					<th style='text-align:center;'>Duração</th>
@@ -104,34 +104,29 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 			'active' => '1', 	
 		));	
 
-
-		$dbFails = DBSelect("SELECT eventid, objectid, value, clock, DATE_FORMAT(FROM_UNIXTIME(`clock`), '%d/%m/%Y') AS data
+		$dbevents = DBSelect("SELECT eventid, objectid, value, clock, DATE_FORMAT(FROM_UNIXTIME(`clock`), '%d/%m/%Y') AS data
 			FROM `events` 
 			WHERE `objectid` = ".$trigger[0]->triggerid ."
 			AND value = 1 
 			ORDER BY clock DESC 
-			LIMIT 100");
-	 		
+			LIMIT 100");	 	
 
-	while ($fails = DBFetch($dbFails)) {
+	while ($events = DBFetch($dbevents)) {
 		
-		$r_event = get_revent($fails['eventid']);
-		$time_init = from_epoch(event_time($fails['eventid']));
+		$r_event = get_revent($events['eventid']);
+		$time_init = from_epoch(event_time($events['eventid']));
 		$time_rec = from_epoch(revent_time($r_event));
 		
 		if(revent_time($r_event) != '') {
-			$diff = (revent_time($r_event) - event_time($fails['eventid']));
-			$period = time_ext($diff);
-			
+			$diff = (revent_time($r_event) - event_time($events['eventid']));
+			$period = time_ext($diff);			
 		}
 		else {$period = '';}	
 
 		echo "
 				<tr>						
-					<td style='vertical-align:middle; text-align:center; padding:5px;' data-order='".$fails['clock']."'>
-						".$fails['data']."
-					</td>
-					<td style='vertical-align:middle; text-align:center; padding:5px;'>
+
+					<td style='vertical-align:middle; text-align:center; padding:5px;' data-order='".$events['clock']."'>
 						". $time_init ."
 					</td>
 					<td style='vertical-align:middle; text-align:center; padding:5px;'>

@@ -14,14 +14,8 @@ $_REQUEST['groupid'] = 8;
 
 if(isset($_REQUEST['groupid']) && $_REQUEST['groupid'] != '' && $_REQUEST['groupid'] != 0) {	
 	$include = "1";
-	$groupID = $_REQUEST['groupid'];		
-	
+	$groupID = $_REQUEST['groupid'];			
 }
-
-else {
-	$include = "0";		
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +28,7 @@ else {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv='refresh' content='600'>
 
-<title>Zabbix Hosts</title>
+<title>Zabdash</title>
 
 <!-- Bootstrap -->
 <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
@@ -72,10 +66,27 @@ else {
 	<div class="row col-md-12 col-sm-12" style="margin-top:10px; margin-bottom: 35px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	
 	<?php	
+	//days interval
+	if(isset($_REQUEST['int']) && $_REQUEST['int'] != '' && $_REQUEST['int'] != 0) {	
+		$int = $_REQUEST['int'];			
+	}
+	else { $int = 15; }
+	
+	//pagination
+	if(isset($_REQUEST['pag']) && $_REQUEST['pag'] != '' && $_REQUEST['pag'] != 0) {	
+		$pag = $_REQUEST['pag'];	
+		$int = $int * $pag;
+		$umdia = date('Y-m-d', strtotime('-'.$int.' days'));
 				
-	$hoje = date("d/m/Y");  //hoje
+	}
+	else { 
+		$pag = 1; 
+		$umdia = date('Y-m-d', strtotime('-'.$int.' days'));
+	}
+
+				
 	$today = date("Y-m-d");  //hoje
-	$umdia = date('Y-m-d', strtotime('-15 days'));
+	//$umdia = date('Y-m-d', strtotime('-'.$int.' days'));
 	
 	$group = get_hostgroup_by_groupid($groupID);
 	$groupName = $group['name'];
@@ -88,9 +99,9 @@ else {
 	$md = 11;	
 	
 	echo "			
-		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:20px;' >
+		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:0px;' >
 			<h3 style='color:#000 !important; margin-top:-2 px; text-align:center;'> " .$groupName."</h3>
-			<table id='tab_hosts' class='box table table-striped table-hover' border='0' >
+			<table id='tab_hosts' class='box table table-striped table-hover table-bordered' border='0' >
 			<thead style='background:#fff;'>
 				<tr>
 					<th width='4px;' style='padding:3px !important; text-align:right;'></th>
@@ -98,7 +109,7 @@ else {
 			
 					$date = date_create($umdia);
 	
-					for( $i = 1; $i <= 15; $i++ ) {
+					for( $i = 0; $i < 15; $i++ ) {
 					   date_add($date, date_interval_create_from_date_string('1 days'));
 					   $arr_days[] = date_format($date, 'd/m/Y');
 					   
@@ -109,7 +120,7 @@ else {
 			</thead>
 			<tbody>\n ";	
 	
-while ($hosts = DBFetch($dbHosts)) {				
+	while ($hosts = DBFetch($dbHosts)) {				
 	
 		if($hosts['sd'] <> 0) { $conn = "Offline"; $cor = "#E3573F"; $value = 1; } 
 		else { $conn = "Online"; $cor = "#4BAC64"; $value = 0; } 	
@@ -122,17 +133,7 @@ while ($hosts = DBFetch($dbHosts)) {
 			'active' => '1', 	
 		));	
 
-		if ($trigger) {
-
-			// Highest Priority error
-			$hostdivprio = $trigger[0]->priority;
-	
-	 	   $priority = $event->priority;
-	 		$description = $event->description;
-	 		
-	 		foreach ($trigger as $event) {
-						$conta = $count++ ;
-			}			 
+		if ($trigger) {				 
 
 			echo "
 					<tr>
@@ -143,24 +144,25 @@ while ($hosts = DBFetch($dbHosts)) {
 						</td>\n";
 
 				for( $i = 0; $i < 15; $i++ ) {
-							$obj = $api->eventGet(array(
-							'output' => 'extend',
-							"objectids" => $trigger[0]->triggerid,
-				        	//"sortfield" => "clock",
-				        	"value" => '1',
-				        	"limit" => '1',
-				        	"time_from" => to_timestamp_ini($arr_days[$i]),
-				         "time_till" => to_timestamp_fin($arr_days[$i]),
-				        	"sortorder" => "DESC"		
-						   ));
+						$obj = $api->eventGet(array(
+						'output' => 'extend',
+						"objectids" => $trigger[0]->triggerid,
+			        	"sortfield" => "clock",
+			        	"value" => '1',
+			        	//"limit" => '1',
+			        	"time_from" => to_timestamp_ini($arr_days[$i]),
+			         "time_till" => to_timestamp_fin($arr_days[$i]),
+			        	"sortorder" => "DESC"		
+					   ));					   
 					  					   
 						echo "<td style='text-align:center; vertical-align:middle'>\n";
-						
+
 						if($obj[0]->value == 1) {
 							echo "<img src='img/error128.png' alt='Off' width='18' />\n" ;
+							//echo "<img src='img/error128.png' alt='Off' title='". from_epoch(event_time($obj[0]->eventid)) ."  -  ". from_epoch(revent_time($obj[0]->r_eventid)) ."' width='18' />\n" ;
 						}
 						else { echo "";}	
-					}	
+				 }	
 
 			echo "  </td>
 					</tr>\n";								
@@ -169,9 +171,31 @@ while ($hosts = DBFetch($dbHosts)) {
 
 	echo "		</tbody>
 			</table>						
-		</div>\n";
-		
-	?>
+		</div>\n";			
+
+ // agora vamos criar os botões "Anterior e próximo"
+  $anterior = $pag - 1;
+  $proximo = $pag + 1;
+  $tp = 10;
+  
+	echo '
+	<nav aria-label="navigation" style="margin-bottom:15px;">
+	  <ul class="pagination">';
+	  if ($pag > 0) {
+	    echo '<li class="page-item"><a href="?pag='.$proximo.'" class="page-link" style="color:#337ab7 !important;"><< '.$labels['Previous'].'</a></li>';
+	  }  
+	  
+	  echo '<li class="page-item"><a href="?pag=1" class="page-link" style="color:#337ab7 !important;">'.$labels['Start'].'</a></li>';	  
+	  
+	  if ($pag < $tp) {
+	    echo '<li class="page-item"><a href="?pag='.$anterior.'" class="page-link" style="color:#337ab7 !important;">'.$labels['Next'].' >></a></li>';
+	  }
+	echo '  
+	  </ul>
+	</nav>';	
+
+
+  ?>	
 
 <script type="text/javascript">
 
