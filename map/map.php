@@ -303,8 +303,7 @@ var mapOptions = {
 
 <?php
 
-	 //offline hosts 	 
-	 
+	 //offline hosts 	 	 
 	 if($contaRed != 0) {
 		$sound = "../sound/Alarm1.wav";	 	
 	 }
@@ -321,7 +320,8 @@ var mapOptions = {
 function reloadPage() {
 	
 		$("#reload_page").click(function() {			
-			window.location.href='index.php?off=<?php echo $offAtual; ?>';
+			//window.location.href='index.php?off=<?php echo $offAtual; ?>';
+			window.location.href='map.php?groupid=<?php echo implode(",",$groupID); ?>';
 		});
 		
 		
@@ -337,7 +337,8 @@ function reloadPage() {
 	
 				if (counter === 0) {					
 					//window.location.reload();
-					window.location.href='index.php?off=<?php echo $offAtual; ?>';
+					//window.location.href='index.php?off=<?php echo $offAtual; ?>';
+					window.location.href='map.php?groupid=<?php echo implode(",",$groupID); ?>';
 					counter = interval;
 				}
 	
@@ -378,7 +379,8 @@ function reloadPage() {
 				var inter = localStorage.getItem('relInt');
 				
 				//window.location.reload();
-				window.location.href='index.php?off=<?php echo $offAtual; ?>';								
+				//window.location.href='index.php?off=<?php echo $offAtual; ?>';		
+				window.location.href='map.php?groupid=<?php echo implode(",",$groupID); ?>';						
 
 				if (selectVal != 0) {
 					$("#reload_page").attr({
@@ -392,13 +394,12 @@ function reloadPage() {
 
 					reloadTimer(false);
 					//window.location.reload();
-					window.location.href='index.php?off=<?php echo $offAtual; ?>';
+					//window.location.href='index.php?off=<?php echo $offAtual; ?>';
+					window.location.href='map.php?groupid=<?php echo implode(",",$groupID); ?>';
 				}
 			});
 		});			
-
 }		 	  
-
 </script>
 
 <?php      	 	 	 
@@ -412,8 +413,7 @@ function reloadPage() {
 		 echo '<source src="'.$sound.'" type="audio/ogg"><source src="'.$sound.'" type="audio/mpeg">';
 		 echo "</audio>\n";
 	 }
- 
- ?>
+?>
 
 	<body onload="initialize();reloadPage();" style="background:#e5e5e5;">
 	

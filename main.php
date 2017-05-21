@@ -67,7 +67,7 @@ $users = $api->userGet(array(
 	 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />    
     <link href="css/bootstrap.css" rel="stylesheet">        		   
     <link rel="stylesheet" type="text/css" href="css/layout.css">
-    <meta http-equiv="refresh" content= "300"/>
+    <meta http-equiv="refresh" content= "600"/>
     
      <!-- this page specific styles 
     <link rel="stylesheet" href="css/compiled/index.css" type="text/css" media="screen" /> -->    

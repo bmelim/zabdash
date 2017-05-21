@@ -246,8 +246,14 @@ if($headers[0] != '') {
                                </li>                                                       
                            	</ul>                                    
                        </li>
-
-                      		<li class=' '>
+                         <li class=' '>
+                              <a href='#' onclick="window.open('./disp.php','iframe1'); scrollWin();" data-original-title=' Availability'>
+                                 <i class='fa fa-clock-o'></i>
+                                 <span class='hidden-minibar'> <?php echo $labels['Availability']; ?> </span>
+                             </a>
+                         </li>   
+                                  
+                    		<li class=' '>
 	                        <a href='#' onclick="window.open('triggers.php','iframe1'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-edit'></i>
 	                            <span class='hidden-minibar'><?php echo _('Triggers'); ?></span>

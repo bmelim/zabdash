@@ -57,7 +57,7 @@
 	 		$description = $event->description;
 	 		
 	 		foreach ($trigger as $event) {
-						$conta = $count++ ;
+				$conta = $count++ ;
 			}			 
 
 			echo "

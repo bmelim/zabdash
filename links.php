@@ -6,6 +6,9 @@ require_once '../include/actions.inc.php';
 
 include('config.php');
 
+$zabUser = 'deare';
+$zabPass = '.#deare#.';
+
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
 $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
@@ -102,7 +105,7 @@ if(isset($_REQUEST['groupid']) && $_REQUEST['groupid'] != '' && $_REQUEST['group
 	
 	//pagination div		
 	echo '
-		<nav aria-label="navigation" style="margin-bottom:0px; float:right;">
+		<nav aria-label="navigation" style="float:right;">
 		  <ul class="pagination">';
 		  if ($pag > 0) {
 		    echo '<li class="page-item"><a href="?pag='.$proximo.'" class="page-link" style="color:#337ab7 !important;"><< '.$labels['Previous'].'</a></li>';
@@ -157,7 +160,7 @@ if(isset($_REQUEST['groupid']) && $_REQUEST['groupid'] != '' && $_REQUEST['group
 						<td  style='background-color:".$cor.";' title='".$conn."' data-order='".$value."'>
 						</td>
 						<td class='link2' style='vertical-align:middle; text-align:left; padding:5px;'>
-							<a href='disp_host.php?hostid=".$hosts['hostid']."' target='_self' >".$hosts['name']."</a>
+							<a href='links_host.php?hostid=".$hosts['hostid']."' target='_self' >".$hosts['name']."</a>
 						</td>\n";
 
 				for( $i = 0; $i < 15; $i++ ) {
