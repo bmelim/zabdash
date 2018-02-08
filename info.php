@@ -5,13 +5,17 @@ require_once '../include/hosts.inc.php';
 require_once '../include/actions.inc.php';
 
 include('config.php');
+
+require_once 'lib/ZabbixApi.class.php';
+use ZabbixApi\ZabbixApi;
+$api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
             						                         	            
 ?>
-
+<!DOCTYPE html>
 <html>
   <head>
   <meta content="text/html; charset=UTF-8" http-equiv="content-type">
-  <title>Zabbix - Dashboard - Info</title>
+  <title>ZabDash - Info</title>
   <link rel="icon" href="img/dash.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="img/dash.ico" type="image/x-icon" />
   <link href="css/styles.css" rel="stylesheet" type="text/css" />
@@ -22,24 +26,25 @@ include('config.php');
 	</style>    
     
   </head>
-<body style="background-color: #fff; background:url('img/bg.jpg'); height:800px;">
+<body style='background-color: #fff; height:800px; background:url("img/bg.jpg");'>
 
-<div id="content" class="col-md-12" >
+<div id="content" class="col-md-12 col-sm-12" >
 	  
 	<div class="well info_box col-md-6" style="opacity: 0.9; height:460px; margin:auto; margin-top:100px; margin-bottom: 400px; float:none; text-align:center; font-size:14pt;">    
 	    <br>
-	    <span style="font-weight: bold;">Zabdash - Zabbix Dashboard</span><p>
+	    <span style="font-weight: bold;">ZabDash - Zabbix Dashboard</span><p>
 	    <br>
 		 <?php echo $labels['Version']." ". $version; ?><br>
 	    <br><p>
-	    <?php echo $labels['Developed by']; ?>:
-	    <br><br>
+	    <?php echo $labels['Developed by']; ?>
+	    <br>
 	    <b>Stevenes Donato
-	    <br>
+<!--	    <br>
 	     <a href="mailto:stevenesdonato@gmail.com"> stevenesdonato@gmail.com </b> </a>
-	    <br>
+	    <br>-->
 	    <br>
 	    <a href="https://sourceforge.net/projects/zabdash" target="_blank" >https://sourceforge.net/projects/zabdash</a>
+	    <br><p></p>
 	    <br><p></p>
 	    
 	    <div id="donate" style="margin-top:25px; margin-left:0px;">

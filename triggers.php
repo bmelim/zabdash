@@ -35,7 +35,7 @@ $triggerAll = $api->triggerGet(array(
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv='refresh' content='300'>
-	<title>Zabbix Triggers</title>	
+	<title>ZabDash - Triggers</title>	
 
 	<link rel="icon" href="favicon.ico" type="image/x-icon" />
 	<link href="css/bootstrap.css" rel="stylesheet">
@@ -49,14 +49,27 @@ $triggerAll = $api->triggerGet(array(
 	<script src="js/media/js/jquery.dataTables.min.js"></script>
 	<link href="js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
 	<script src="js/media/js/dataTables.bootstrap.js"></script>
-	<script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+<!--	<script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>-->
 	<link href="js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />	
-	<script src="js/extensions/Select/js/dataTables.select.min.js"></script>		
+	<script src="js/extensions/Select/js/dataTables.select.min.js"></script>	
+	<link rel="stylesheet" type="text/css" href="css/skin-material.css"> 
+	<link rel="stylesheet" type="text/css" href="css/style-material.css">		
+
+<link href="css/loader.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript">
+ jQuery(window).load(function () {
+	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
+	$("#container-fluid").toggle("fast");    
+});          
+</script>
 	
 </head>
 
-<body>
-	<div class="row col-md-12 col-sm-1" style="margin-top:40px; margin-bottom: 70px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
+<body style="background-color: #fff !important;" >
+<div id="loader" class="loader"></div>
+ <div class='container-fluid'>
+	<div class="row col-md-12 col-sm-12" style="margin-top:40px; margin-bottom: 70px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	<?php
 	echo "			
 		<div id='triggers_all' class='align col-md-12 col-sm-12' style='margin-bottom: 30px;'>
@@ -72,8 +85,6 @@ $triggerAll = $api->triggerGet(array(
 			</thead>\n
 			<tbody>\n ";
 		
-//					<th style='text-align:center;'>". _('Acknowledged')."</th>
-		
 	 foreach($triggerAll as $tu) {  
 	 
 	  	if($tu->value == 0) { $priority = 9; $statColor = '#34AA63';} 	
@@ -86,9 +97,8 @@ $triggerAll = $api->triggerGet(array(
 						<p class='severity' style='margin-top: -2px;'>". _(get_severity($tu->priority)) ."</p>									
 						</div>
 					</td>";				            
-			echo "<td style='text-align:left; vertical-align: middle !important;'>". get_hostname($tu->hosts[0]->hostid)."</td>";
-			echo "<td style='text-align:center; vertical-align: middle !important; color:".$statColor." !important;'>"._(set_status($tu->value))."</td>";				            						            
-//			echo "<td style='text-align:center; vertical-align: middle !important;'>".$tu->state."</td>";				            						            
+			echo "<td style='text-align:left; vertical-align: middle !important;'><a href='../zabdash/host_detail.php?hostid=".$tu->hosts[0]->hostid."' target='_blank'>". get_hostname($tu->hosts[0]->hostid)."</a></td>";
+			echo "<td style='text-align:center; vertical-align: middle !important; color:".$statColor." !important;'>"._(set_status($tu->value))."</td>";				            						            			            						            
 			echo "<td style='text-align:left; vertical-align: middle !important;'>".$tu->description."</td>";				            						            
 		echo "</tr>\n";			            
 			
@@ -97,6 +107,7 @@ $triggerAll = $api->triggerGet(array(
 	echo "</tbody> </table></div>\n";	
 	?>
 	
+	</div>
 	</div>
 
 	<script type="text/javascript">

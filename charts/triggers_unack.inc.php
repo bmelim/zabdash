@@ -37,11 +37,11 @@ echo "
 		echo "<td style='text-align:center; vertical-align:middle !important;' data-order=".$tu->lastchange.">".from_epoch($tu->lastchange)."</td>";				            
 		echo "<td style='text-align:left; vertical-align: middle !important;'>
 					<div class='hostdiv nok". $priority ." hostevent trig_radius truncate' style='height:21px !important; margin-top:0px; !important;' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=". $tu->hosts[0]->hostid ."&show_triggers=1')\">
-					<p class='severity' style='margin-top: -2px;'>". _(get_severity($tu->priority)) ."</p>									
+						<p class='severity' style='margin-top: -2px;'>". _(get_severity($tu->priority)) ."</p>									
 					</div>
 				</td>";				            
 		echo "<td style='text-align:center; vertical-align: middle !important; color:".$statColor." !important;'>"._(set_status($tu->value))."</td>";				            
-		echo "<td style='text-align:left; vertical-align: middle !important;'>". get_hostname($tu->hosts[0]->hostid)."</td>";
+		echo "<td style='text-align:left; vertical-align: middle !important;'><a href='../zabdash/host_detail.php?hostid=".$tu->hosts[0]->hostid."' target='_blank'>". get_hostname($tu->hosts[0]->hostid)."</a></td>";
 		echo "<td style='text-align:left; vertical-align: middle !important;'>".$tu->description."</td>";				            
 	echo "</tr>";			            
 		

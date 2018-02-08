@@ -51,8 +51,7 @@ $hostsGroups = $api->hostgroupGet(array(
 
 $users = $api->userGet(array(
 	'output' => 'extend'	
-));	
-
+));
 ?>
 
 <!DOCTYPE html>
@@ -87,9 +86,9 @@ $users = $api->userGet(array(
 	<script src="js/media/js/jquery.dataTables.min.js"></script>
 	<link href="js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
 	<script src="js/media/js/dataTables.bootstrap.js"></script>
-	<script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+<!--	<script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
 	<link href="js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
-	<script src="js/extensions/Select/js/dataTables.select.min.js"></script>
+	<script src="js/extensions/Select/js/dataTables.select.min.js"></script>-->
     
 	<!-- <link href="less/style.less" rel="stylesheet"  title="lessCss" id="lessCss"> -->
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -100,10 +99,8 @@ $users = $api->userGet(array(
 	<![endif]-->         
 	<!-- <link href="fonts/fonts.css" rel="stylesheet" type="text/css" /> -->
      
-  	 <?php 
- 	 	echo '<link rel="stylesheet" type="text/css" href="css/skin-material.css">'; 
-	 	echo '<link rel="stylesheet" type="text/css" href="css/style-material.css">';				
- 	 ?>  	
+ 	<link rel="stylesheet" type="text/css" href="css/skin-material.css"> 
+	<link rel="stylesheet" type="text/css" href="css/style-material.css">			 	
 
 	<style type="text/css">
 		@media screen and (min-width: 1201px) and (max-width: 2200px) {
@@ -114,26 +111,34 @@ $users = $api->userGet(array(
 		}
 		.triggersUnack_filter { display:none !important; }
 	</style>	
-	
+
+<link href="css/loader.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript">
+ jQuery(window).load(function () {
+	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
+	$("#container-fluid").toggle("fast");    
+});          
+</script>	
 </head>
 
 <body>	 
 <?php    
 	$ano = date("Y");
 	$month = date("Y-m");
-	$hoje = date("Y-m-d");
+	$hoje = date("Y-m-d");	
 ?>
-
+<div id="loader" class="loader"></div>
+     
+<div class="container-fluid">  
 <div class="site-holder">
 <!-- top -->
 <!-- .box-holder -->
 <!-- .content -->
 <div class="content animated fadeInBig corpo col-md-12 col-sm-12 align">
-<div class="container-fluid">  
 <div id='content-main' class="container-fluid1 align col-md-12 col-sm-12 row">      
     <!-- main-content 
-   <div class="main-content masked-relative masked"> -->
-      
+   <div class="main-content masked-relative masked"> -->      
 	<div id="panels" class="row" style="margin-top: 1%; margin-left: 0%; margin-right:-1%;">
 		<!-- COLUMN 1 -->															
 			  <div class="col-sm-3 col-md-3">
@@ -228,21 +233,21 @@ setTimeout(function(){
 	      </div> 
 	      <!-- /widget-header -->      
 	      <div id="graflinhas1" class="col-md-12 col-sm-12" style='height:400px !important; background:#fff;'>	 			
-					<?php
+					<?php						
 						include ("charts/triggers_hosts.inc.php");
 					?> 	 						            
 			</div> 
 		</div>
 	</div>
 	
-	<div class="col-sm-6 col-md-6 align" style="float:left; margin-left: 0px;"> 	 				              
+	<div class="col-sm-6 col-md-6 align" style="float:left; margin-left: 0px; height:400px !important; "> 	 				              
 	   <div id="triggers_severity" class="widget2 widget-table action-table striped card1" >
 			<div class="widget-header">                 
 	      	<h3><i class="fa fa-pie-chart" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Triggers by Severity']; ?></h3>
 	      	 <span  class=""></span>               
 	      </div>
 	      <!-- /widget-header -->      
-	      <div id="severity1" class="col-sm-12x col-md-12x align" style="height:400px !important; background:#fff;">
+	      <div id="severity1" style="height:400px !important; background:#fff;">
 	      	<div id="severity" class="align" style="height:280px !important; background:#fff;">	      	 			
 					<?php
 						include ("charts/triggers_severity.inc.php");
@@ -290,6 +295,7 @@ setTimeout(function(){
 	      <div id="pie1" style='height:350px !important; background:#fff; '>	 			
 					<?php
 						include ("charts/triggers_unack.inc.php");
+						echo "<script type='text/javascript'>hideCarga(this);</script>";
 					?> 	 						            
 			</div> 
 		</div>
@@ -323,7 +329,6 @@ setTimeout(function(){
 	    
 	    });
 	});
-
 </script>	
 
 <div id="go-top" class="go-top" onclick="scrollWin()">
@@ -332,6 +337,7 @@ setTimeout(function(){
  	
 </div> <!-- end content -->   
 
+</div>
 </div>
 <!-- /.site-holder -->
 
@@ -358,7 +364,8 @@ setTimeout(function(){
 <script src="js/export-csv.js"></script>
 -->
 <!-- Remove below two lines in production -->  
-<script src="js/theme-options.js"></script>       
-<script src="js/core.js"></script>
+<!--<script src="js/theme-options.js"></script>       
+<script src="js/core.js"></script>-->
+
 </body>
 </html>

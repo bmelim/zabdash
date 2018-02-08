@@ -45,7 +45,7 @@ if (strlen($login) === 32) {
 
 <html>
 <head>
-    <title>Zabdash - Login </title>
+    <title>ZabDash - Login </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">           

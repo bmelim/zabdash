@@ -37,7 +37,7 @@ include('host_info.php');
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--<meta http-equiv='refresh' content='120'>-->	
-	<title>Zabbix Host Details</title>
+	<title>ZabDash - Host Details</title>
 	
 	<!-- Bootstrap -->
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
@@ -75,10 +75,21 @@ include('host_info.php');
     	window.location.href = 'host_graphs.php?period='+period+'&hostid=<?php echo $hostid; ?>';    	
     }
 </script>
+
+<link href="css/loader.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript">
+ jQuery(window).load(function () {
+	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
+	$("#container-fluid").toggle("fast");    
+});          
+</script>
+
 </head>
 
 <body>
-
+<div id="loader" class="loader"></div>
+<div class='container-fluid'>
 <div class="row col-md-12 col-sm-12" style="margin-top:40px; margin-bottom: 0px; float:none; margin-right:auto; margin-left:auto; text-align:center;"></div>	
 
 <?php
@@ -359,7 +370,7 @@ else {
 }		
 
 ?>
-
+</div>
 <script type="text/javascript">
 	$("#graphid").select2({
 	  placeholder: "Selecione o gráfico",

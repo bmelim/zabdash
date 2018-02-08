@@ -29,7 +29,7 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv='refresh' content='600'>
 
-<title>Zabdash - Disponibilidade</title>
+<title>Zabdash</title>
 
 <!-- Bootstrap -->
 <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
@@ -45,6 +45,14 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 <link href="js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
 <script src="js/media/js/dataTables.bootstrap.js"></script>
 
+<script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+<script src="js/extensions/Buttons/js/buttons.html5.min.js"></script>
+<script src="js/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
+<script src="js/extensions/Buttons/js/buttons.print.min.js"></script>
+<script src="js/media/pdfmake.min.js"></script>
+<script src="js/media/vfs_fonts.js"></script>
+<script src="js/media/jszip.min.js"></script>
+
 <script src="js/extensions/Select/js/dataTables.select.min.js"></script>
 <link href="js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
 
@@ -53,20 +61,9 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 	td{height:100%}
 </style>
 
-<link href="css/loader.css" type="text/css" rel="stylesheet" />
-
-<script type="text/javascript">
- jQuery(window).load(function () {
-	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
-	$("#container-fluid").toggle("fast");    
-});          
-</script>
-
 </head>
 
 <body>
-<div id="loader" class="loader"></div>
- <div class='container-fluid'>
 	<div class="row col-md-12 col-sm-12" style="margin-top:20px; margin-bottom: 0px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	
 	<?php	
@@ -87,7 +84,7 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 			<table id='tab_hosts' class='box table table-striped table-hover table-bordered table-condensed' border='0'>
 			<thead style='background:#fff;'>
 				<tr>
-
+	
 					<th style='text-align:center;'>Início</th>				
 					<th style='text-align:center;'>Fim</th>					
 					<th style='text-align:center;'>Duração</th>
@@ -105,40 +102,57 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 			'sortfield' => 'priority',
 			'search' => array('description' => '{HOST.NAME} is unavailable by ICMP'),
 			'active' => '1', 	
-		));	
+		));	 	
+			
+	if($trigger) {			
 
-		$dbevents = DBSelect("SELECT eventid, objectid, value, clock, DATE_FORMAT(FROM_UNIXTIME(`clock`), '%d/%m/%Y') AS data
-			FROM `events` 
-			WHERE `objectid` = ".$trigger[0]->triggerid ."
-			AND value = 1 
-			ORDER BY clock DESC 
-			LIMIT 100");	 	
+		$obj = $api->eventGet(array(
+		'output' => 'extend',
+		"objectids" => $trigger[0]->triggerid,
+     	"sortfield" => "clock",
+     	"value" => '1',
+     	//"limit" => '1',
+     	//"time_from" => to_timestamp_ini($arr_days[$i]),
+      //"time_till" => to_timestamp_fin($arr_days[$i]),
+     	"sortorder" => "DESC"		
+	   ));
+	   
+   	$dbevents = DBSelect("SELECT COUNT(eventid) AS conta
+		FROM `events` 
+		WHERE `objectid` = ".$obj[0]->eventid ."
+		AND value = 1 ");	
+		
+		$cevents = DBFetch($dbevents);
 
-	while ($events = DBFetch($dbevents)) {
+	//while ($events = DBFetch($dbevents)) {
 		
-		$r_event = get_revent($events['eventid']);
-		$time_init = from_epoch(event_time($events['eventid']));
-		$time_rec = from_epoch(revent_time($r_event));
+		//if($obj) {
+		while($cevents) {	
 		
-		if(revent_time($r_event) != '') {
-			$diff = (revent_time($r_event) - event_time($events['eventid']));
-			$period = time_ext($diff);			
+			//$r_event = get_revent($obj[0]->eventid);
+			$time_init = from_epoch(event_time($obj[0]->eventid));
+			$time_rec = from_epoch(revent_time($obj[0]->r_eventid));
+			
+			//if(revent_time($r_event) != '') {
+				$diff = (revent_time($obj[0]->r_eventid) - event_time($obj[0]->r_eventid));
+				$period = time_ext($diff);			
+			//}
+			//else {$period = '';}	
+	
+			echo "
+					<tr>						
+
+						<td style='vertical-align:middle; text-align:center; padding:5px;' data-order='".$obj[0]->clock."'>
+							". $time_init ."
+						</td>
+						<td style='vertical-align:middle; text-align:center; padding:5px;'>
+							". $time_rec ."
+						</td>
+						<td style='vertical-align:middle; text-align:center; padding:5px;'>
+							".$period."
+						</td>
+					</tr>\n";	
 		}
-		else {$period = '';}	
-
-		echo "
-				<tr>						
-
-					<td style='vertical-align:middle; text-align:center; padding:5px;' data-order='".$events['clock']."'>
-						". $time_init ."
-					</td>
-					<td style='vertical-align:middle; text-align:center; padding:5px;'>
-						". $time_rec ."
-					</td>
-					<td style='vertical-align:middle; text-align:center; padding:5px;'>
-						".$period."
-					</td>
-				</tr>\n";	
 	}
 
 	echo "		</tbody>
@@ -166,7 +180,6 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 	});	
 	</script>
 	
-	</div>	
 	</div>	
 	</body>
 </html>

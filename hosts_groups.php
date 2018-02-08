@@ -1,4 +1,10 @@
 <?php
+
+//Access control
+if(!$_COOKIE["zabdash_session"]) {
+	header("location:index.php");
+}
+
 require_once '../include/config.inc.php';
 require_once '../include/hosts.inc.php';
 require_once '../include/actions.inc.php';
@@ -29,14 +35,23 @@ include('config.php');
 <script src="js/media/js/jquery.dataTables.min.js"></script>
 <link href="js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
 <script src="js/media/js/dataTables.bootstrap.js"></script>
-
 <script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 </head>
 
-<body>
+<link href="css/loader.css" type="text/css" rel="stylesheet" />
 
+<script type="text/javascript">
+ jQuery(window).load(function () {
+	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
+	$("#container-fluid").toggle("fast");    
+});          
+</script>
+
+<body>
+<div id="loader" class="loader"></div>
+<div class='container-fluid'>
 <div class="row col-md-12 col-sm-12" style="margin-top:40px; margin-bottom: 0px; float:none; margin-right:auto; margin-left:auto; text-align:center;">	
 </div>	
 
@@ -63,7 +78,18 @@ include('config.php');
 				</tr>								
 			</thead>
 			<tbody>\n ";
-	
+
+		echo "
+				<tr>
+					<td  style='background-color:".$cor.";' title='".$conn."'>
+					</td>
+					<td class='link2' style='vertical-align:middle; text-align:left; padding:5px;'>
+						<a href='hosts_view.php?groupid=0' target='_self' >". _('All')."</a>
+					</td>
+					<td style='text-align:center;'>
+						" .$hostsCount['hc']."
+					</td>					
+				</tr>";		
 	
 	while ($groups = DBFetch($dbGroups)) {						 	
 			
@@ -88,7 +114,7 @@ echo "	</tbody>
 		</div>\n";				
 ?>
 
-
+</div>
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -98,7 +124,7 @@ $(document).ready(function() {
 		  "select": false,
 		  "filter": true,
 		  "paging":   true,
-        "ordering": false,
+        "ordering": true,
         "info":     false,
         "order": [[ 0, "asc" ]],
         pagingType: "full_numbers",        

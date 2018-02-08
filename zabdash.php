@@ -53,7 +53,7 @@ if($headers[0] != '') {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Zabdash - Home</title>
+    <title>ZabDash - Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">
@@ -101,11 +101,26 @@ if($headers[0] != '') {
 			$('html, body').animate({ scrollTop: 0 }, 'slow');
 		}
  	 </script>
+
+<style type="text/css">
+.loader { height: 140% !important;}
+</style>
+
+<link href="css/loader.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript">
+jQuery(window).load(function () {
+	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
+	$("#container-fluid").toggle("fast");    
+});
+</script>
+ 	  	 
 </head>
 
 <body>
-
+<div id="loader" class="loader"></div>
    <div class="site-holder">
+   <div class='container-fluidx'>
        <!-- .navbar -->
        <nav class="navbar navbar-default nav-delighted navbar-fixed-top shad2" role="navigation" >
            <a href="#" class="toggle-left-sidebar">
@@ -190,7 +205,7 @@ if($headers[0] != '') {
                                
                            </div>                                  
                        </div>
-                       <!-- /.User   -->
+                       <!-- User   -->
 
                        <!-- Menu -->
                        <ul class="nav nav-list">
@@ -201,14 +216,7 @@ if($headers[0] != '') {
                                <span class='hidden-minibar'>Zabdash</span>
                            </a>
                            </li>                           
-                       		
-                       		<li class=''>
-                           <a href='#' onclick="window.open('hosts_view.php','iframe1'); scrollWin();" data-original-title='Hosts'>                               
-                               <i><img src="img/icon/host.png" alt="" style="width:20px;"></img></i>
-                               <span class='hidden-minibar'><?php echo _('Hosts'); ?></span>
-                           </a>  
-                       		</li>
-                     
+                       		                  
                        		<li class=''>
                            <a href='#' onclick="window.open('hosts_groups.php','iframe1'); scrollWin();" data-original-title='Hosts'>
                                <!--<i><img src="img/icon/group.png" alt="" style="width:20px;"></img></i>-->
@@ -232,13 +240,13 @@ if($headers[0] != '') {
                                   </span>
                               </a>
 										<ul  class="animated fadeInDown">
-                               <li class=' '>
+                               <li class=''>
                                    <a href='#' onclick="window.open('./hosts_storage.php','iframe1'); scrollWin();" data-original-title=' Storage'>
                                        <i class="fa fa-angle-right"></i>
                                        <span class='hidden-minibar'> <?php echo $labels['Storage']; ?> </span>
                                    </a>
                                </li>
-                               <li class=' '>
+                               <li class=''>
                                     <a href='#' onclick="window.open('./hosts_memory.php','iframe1'); scrollWin();" data-original-title=' Memory'>
                                        <i class="fa fa-angle-right"></i>
                                        <span class='hidden-minibar'> <?php echo $labels['Memory']; ?> </span>
@@ -246,40 +254,38 @@ if($headers[0] != '') {
                                </li>                                                       
                            	</ul>                                    
                        </li>
-                         <li class=' '>
-                              <a href='#' onclick="window.open('./disp.php','iframe1'); scrollWin();" data-original-title=' Availability'>
+                         <li class=''>
+                              <a href='#' onclick="window.open('./hosts_disp.php','iframe1'); scrollWin();" data-original-title=' Availability'>
                                  <i class='fa fa-clock-o'></i>
                                  <span class='hidden-minibar'> <?php echo $labels['Availability']; ?> </span>
                              </a>
                          </li>   
                                   
-                    		<li class=' '>
-	                        <a href='#' onclick="window.open('triggers.php','iframe1'); scrollWin();" data-original-title='Events'>
+                    		<li class=''>
+	                        <a href='#' onclick="window.open('./triggers.php','iframe1'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-edit'></i>
-	                            <span class='hidden-minibar'><?php echo _('Triggers'); ?></span>
+	                            <span class='hidden-minibar'><?php echo $labels['Triggers']; ?></span>
 	                        </a>  
                     		</li> 
-                    		<li class=' '>
+                    		<li class=''>
 	                        <a href='#' onclick="window.open('map/index.php','iframe1'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-map-marker'></i>
 	                            <span class='hidden-minibar'><?php echo $labels['Hosts Map']; ?></span>
 	                        </a>  
                     		</li>                     	 
-                    		<li class=' '>
-                            <a href='#' onclick="window.open('info.php','iframe1'); scrollWin();" target="iframe1" data-original-title='Info'>
+                    		<li class=''>
+                            <a href='#' onclick="window.open('./info.php','iframe1'); scrollWin();" data-original-title='Info'>
                                <i class='fa fa-info-circle'></i>
                                <span class='hidden-minibar'><?php echo $labels['About']; ?></span>
                            </a>  
                         </li> 
                   		
-					    		<li class=' '>
+					    		<li class=''>
 	                        <a href='#' onclick="window.open('logout.php','_self'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-sign-out'></i>
 	                            <span class='hidden-minibar'><?php echo $labels['Exit']; ?></span>
 	                        </a>  
-                    		</li>                                		
-                                                                                     												                                                       
-                                                   
+                    		</li>                                		                                                                                     												                                                                                                        
 	 						<li></li>                                                                                                                               
    				</ul>
   		<!-- /.Menu -->
@@ -368,7 +374,7 @@ if($headers[0] != '') {
 	}
 </style>
 
-	
+</div>
 </div>
 <!-- /.site-holder -->
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -386,8 +392,8 @@ if($headers[0] != '') {
 <script src="js/jquery.jclock.js"></script>
 
  <!-- Remove below two lines in production -->  
- <script src="js/theme-options.js"></script>       
- <script src="js/core.js"></script>
+ <!--<script src="js/theme-options.js"></script>       
+ <script src="js/core.js"></script>-->
  
 </body>
 </html>

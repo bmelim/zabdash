@@ -77,6 +77,7 @@ else {
 	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=86400&hostid=<?php echo $hostid;?>";'>1d</button>
 	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=259200&hostid=<?php echo $hostid;?>";'>3d</button>
 	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=604800&hostid=<?php echo $hostid;?>";'>7d</button>
+	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=2592000&hostid=<?php echo $hostid;?>";'>1m</button>
 	</div>
 
 	<div class="row">	

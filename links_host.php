@@ -6,11 +6,12 @@ require_once '../include/actions.inc.php';
 
 include('config.php');
 
+$zabUser = 'deare';
+$zabPass = '.#deare#.';
+
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
 $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
-
-//$_REQUEST['hostid'] = 10111;
 
 if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'] != 0) {	
 	$include = "1";
@@ -29,7 +30,7 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv='refresh' content='600'>
 
-<title>Zabdash - Disponibilidade</title>
+<title>Zabdash</title>
 
 <!-- Bootstrap -->
 <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
@@ -51,22 +52,12 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 <style type="text/css">
 	tr{height:38px;}
 	td{height:100%}
+	.cert a, a:link, a:visited { color:#337ab7 !important; }
 </style>
-
-<link href="css/loader.css" type="text/css" rel="stylesheet" />
-
-<script type="text/javascript">
- jQuery(window).load(function () {
-	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
-	$("#container-fluid").toggle("fast");    
-});          
-</script>
 
 </head>
 
 <body>
-<div id="loader" class="loader"></div>
- <div class='container-fluid'>
 	<div class="row col-md-12 col-sm-12" style="margin-top:20px; margin-bottom: 0px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	
 	<?php	
@@ -87,10 +78,10 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 			<table id='tab_hosts' class='box table table-striped table-hover table-bordered table-condensed' border='0'>
 			<thead style='background:#fff;'>
 				<tr>
-
 					<th style='text-align:center;'>Início</th>				
 					<th style='text-align:center;'>Fim</th>					
 					<th style='text-align:center;'>Duração</th>
+					<th style='text-align:center;'>Certidão</th>
 				</tr>								
 			</thead>
 			<tbody>\n ";	
@@ -128,7 +119,6 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 
 		echo "
 				<tr>						
-
 					<td style='vertical-align:middle; text-align:center; padding:5px;' data-order='".$events['clock']."'>
 						". $time_init ."
 					</td>
@@ -138,7 +128,12 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 					<td style='vertical-align:middle; text-align:center; padding:5px;'>
 						".$period."
 					</td>
-				</tr>\n";	
+					<td id='cert' style='vertical-align:middle; text-align:center; padding:5px;'>";
+					if($period != '') {						
+						echo "<a href='certidao.php?hostid=".$hostid."&init=".$time_init."&rec=".$time_rec."' target='_blank'><i class='fa fa-file-text fa-2x'></i></a>";
+					}	
+			echo "</td>
+				</tr>\n";
 	}
 
 	echo "		</tbody>
@@ -166,7 +161,6 @@ if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'
 	});	
 	</script>
 	
-	</div>	
 	</div>	
 	</body>
 </html>

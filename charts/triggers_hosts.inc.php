@@ -24,7 +24,7 @@ for($i=0; $i <= $conta; $i++) {
 		'sortorder' => 'DESC',
 		'only_true' => '1',
 		'active' => '1',		
-		'expandDescription' => '1',
+		//'expandDescription' => '1',
 		'selectHosts' => 1							
 	));	
 

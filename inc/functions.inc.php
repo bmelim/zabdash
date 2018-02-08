@@ -93,29 +93,51 @@ function hostIP($hostid) {
 
 function getOS($hostid) {
 
-	$dbHosts = DBselect( 'SELECT hostid, os, os_full, hardware FROM host_inventory WHERE hostid ='.$hostid.'');
+	$dbHosts = DBselect( 'SELECT hostid, os, os_full, os_short, hardware FROM host_inventory WHERE hostid ='.$hostid.'');
 	$dbOS = DBFetch($dbHosts);	
+
+	$osShort = $dbOS['os_short'];
 	
-	$os = $dbOS['os'];
-	$osFull = $dbOS['os_full'];
-	$hard = $dbOS['hardware'];
-	
-	$arrOS = array('Linux','Windows','VMware','Cisco','H3C','HP','3Com','Dell');	
-	
-	foreach($arrOS as $v) {
+	if($osShort !== '') {
 		
-		if (strpos($hard, $v) !== false || strpos($osFull, $v) !== false) {	
+		strtolower($osShort);
+		
+		$arrOS = array('ubuntu','suse','opensuse','debian','slackware','redhat','freebsd','centos');
+		
+		foreach($arrOS as $v) {
+		
+			if (strpos($osShort, $v) !== false) {	
 			$OS = $v;
-		}
-	} 
+			}
+		} 
+				
+	}	 
 	
+	elseif($osShort == '') {
+			
+		$os = $dbOS['os'];
+		$osFull = $dbOS['os_full'];
+		$hard = $dbOS['hardware'];
+		
+		$arrOS = array('Linux','Windows','VMware','Cisco','H3C','HP','3Com','Dell');	
+		
+		foreach($arrOS as $v) {
+			
+			if (strpos($hard, $v) !== false || strpos($osFull, $v) !== false) {	
+				$OS = $v;
+			}
+		} 
+	}
+		
 	if($OS != '') {
 		return strtolower($OS);	
 	}
+	
 	else {
 		$OS = 'none';
 		return ;
-	}	
+	}
+		
 }
 
 

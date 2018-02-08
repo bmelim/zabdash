@@ -1,6 +1,6 @@
 
 <?php
-require_once '../include/config.inc.php';
+/*require_once '../include/config.inc.php';
 require_once '../include/hosts.inc.php';
 require_once '../include/actions.inc.php';
 
@@ -9,52 +9,16 @@ include('config.php');
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
 $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
+*/
+$sel_id = $_REQUEST['groupid'];
+//$sel_id = 8;
 
-$_REQUEST['groupid'] = 8;
-
-if(isset($_REQUEST['groupid']) && $_REQUEST['groupid'] != '' && $_REQUEST['groupid'] != 0) {	
+if(isset($sel_id) && $sel_id != '' && $sel_id != 0) {	
 	$include = "1";
-	$groupID = $_REQUEST['groupid'];			
+	$groupID = $sel_id;			
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Language" content="pt-br">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv='refresh' content='600'>
-
-<title>Zabdash</title>
-
-<!-- Bootstrap -->
-<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/font-awesome.css" rel="stylesheet">
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="css/styles.css" />
-
-<script src="js/media/js/jquery.dataTables.min.js"></script>
-<link href="js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
-<script src="js/media/js/dataTables.bootstrap.js"></script>
-
-<script src="js/extensions/Select/js/dataTables.select.min.js"></script>
-<link href="js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
-
-<style type="text/css">
-	tr{height:38px;}
-	td{height:100%}
-</style>
-
-</head>
-
-<body>
 	<div class="row col-md-12 col-sm-12" style="margin-top:10px; margin-bottom: 35px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	
 	<?php	
@@ -105,13 +69,13 @@ if(isset($_REQUEST['groupid']) && $_REQUEST['groupid'] != '' && $_REQUEST['group
 		<nav aria-label="navigation" style="margin-bottom:0px; float:right;">
 		  <ul class="pagination">';
 		  if ($pag > 0) {
-		    echo '<li class="page-item"><a href="?pag='.$proximo.'" class="page-link" style="color:#337ab7 !important;"><< '.$labels['Previous'].'</a></li>';
+		    echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag='.$proximo.'" class="page-link" style="color:#337ab7 !important;"><< '.$labels['Previous'].'</a></li>';
 		  }  
 		  
-		  echo '<li class="page-item"><a href="?pag=1" class="page-link" style="color:#337ab7 !important;">'.$labels['Start'].'</a></li>';	  
+		  echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag=1" class="page-link" style="color:#337ab7 !important;">'.$labels['Start'].'</a></li>';	  
 		  
 		  if ($pag < $tp) {
-		    echo '<li class="page-item"><a href="?pag='.$anterior.'" class="page-link" style="color:#337ab7 !important;">'.$labels['Next'].' >></a></li>';
+		    echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag='.$anterior.'" class="page-link" style="color:#337ab7 !important;">'.$labels['Next'].' >></a></li>';
 		  }
 	echo '  
 		  </ul>
@@ -189,18 +153,18 @@ if(isset($_REQUEST['groupid']) && $_REQUEST['groupid'] != '' && $_REQUEST['group
 	echo "		</tbody>
 			</table>";
 			
-				//pagination div		
+	//pagination div		
 	echo '
 		<nav aria-label="navigation" style="margin-bottom:0px; float:right;">
 		  <ul class="pagination">';
 		  if ($pag > 0) {
-		    echo '<li class="page-item"><a href="?pag='.$proximo.'" class="page-link" style="color:#337ab7 !important;"><< '.$labels['Previous'].'</a></li>';
+		    echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag='.$proximo.'" class="page-link" style="color:#337ab7 !important;"><< '.$labels['Previous'].'</a></li>';
 		  }  
 		  
-		  echo '<li class="page-item"><a href="?pag=1" class="page-link" style="color:#337ab7 !important;">'.$labels['Start'].'</a></li>';	  
+		  echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag=1" class="page-link" style="color:#337ab7 !important;">'.$labels['Start'].'</a></li>';	  
 		  
 		  if ($pag < $tp) {
-		    echo '<li class="page-item"><a href="?pag='.$anterior.'" class="page-link" style="color:#337ab7 !important;">'.$labels['Next'].' >></a></li>';
+		    echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag='.$anterior.'" class="page-link" style="color:#337ab7 !important;">'.$labels['Next'].' >></a></li>';
 		  }
 	echo '  
 		  </ul>
@@ -231,6 +195,5 @@ $(document).ready(function() {
 
 </script>
 	
-	</div>	
-	</body>
-</html>
+</div>	
+

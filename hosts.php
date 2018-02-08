@@ -28,8 +28,6 @@ else {
 	$include = "0";
 	$groupID[] = "-1";		
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -42,12 +40,13 @@ else {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv='refresh' content='90'>
 
-<title>Zabbix Hosts</title>
+<title>ZabDash - Hosts Panel</title>
 
 <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
+
 </head>
 
 <body style="background: #3c3c3c !important;">

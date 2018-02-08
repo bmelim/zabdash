@@ -10,7 +10,7 @@
 				
 	$md = 11;	
 	
-	echo "			
+	echo "	
 		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:80px;' >
 				<h3 style='color:#000 !important; margin-top:-2 px; text-align:center;'> " .$groupName."</h3>
 			<table id='tab_hosts' class='box table table-striped table-hover' border='0' >
@@ -44,7 +44,7 @@
 		'sortorder' => 'DESC',
 		'only_true' => '1',
 		'active' => '1', // include trigger state active not active
-		'withUnacknowledgedEvents' => '1' // show only unacknowledgeevents	
+		//'withUnacknowledgedEvents' => '1' // show only unacknowledgeevents	
 		
 		));	
 
@@ -112,8 +112,8 @@
 	}
 
 echo "		</tbody>
-			</table>						
-		</div>\n";
+			</table>							
+		</div>\n";	
 ?>
 
 <script type="text/javascript">
