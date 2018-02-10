@@ -66,7 +66,11 @@ else {
 	
 	<h3 style="color:#000 !important; margin-top:0px; margin-bottom: 20px;"> <?php echo get_hostname($hostid);  ?> </h3>	
 
-	<div class="btn-group row col-md-12 col-sm-12 text-right" id="buttons" style="margin-bottom:20px;">
+	<div class="col-md-12 col-sm-12" id="buttons" style="margin-bottom:20px;">
+	<span class="btn-group row pull-left">
+	  <button type="button" class="btn btn-primary" onclick='history.back();'><i class="fa fa-arrow-left"></i>&nbsp;Voltar</button>
+	</span>  
+	<span class="btn-group row pull-right">
 	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=300&hostid=<?php echo $hostid;?>";'>5m</button>
 	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=900&hostid=<?php echo $hostid;?>";'>15m</button>
 	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=1800&hostid=<?php echo $hostid;?>";'>30m</button>
@@ -78,6 +82,7 @@ else {
 	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=259200&hostid=<?php echo $hostid;?>";'>3d</button>
 	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=604800&hostid=<?php echo $hostid;?>";'>7d</button>
 	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=2592000&hostid=<?php echo $hostid;?>";'>1m</button>
+	</span>
 	</div>
 
 	<div class="row">	

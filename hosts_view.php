@@ -5,18 +5,7 @@ require_once '../include/actions.inc.php';
 
 include('config.php');
 
-require_once 'lib/ZabbixApi.class.php';
-use ZabbixApi\ZabbixApi;
-$api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
 
-if(isset($_REQUEST['groupid']) && $_REQUEST['groupid'] != '' && $_REQUEST['groupid'] != 0) {	
-	$include = 1;
-	$groupID = $_REQUEST['groupid'];		
-}
-
-else {
-	$include = 0;		
-}
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +62,21 @@ else {
 			
 		<div class="row col-md-12 col-sm-12" style="margin-top:40px; margin-bottom: 0px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 		
-			<?php					
+			<?php		
+			
+			require_once 'lib/ZabbixApi.class.php';
+			use ZabbixApi\ZabbixApi;
+			$api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
+			
+			if(isset($_REQUEST['groupid']) && $_REQUEST['groupid'] != '' && $_REQUEST['groupid'] != 0) {	
+				$include = 1;
+				$groupID = $_REQUEST['groupid'];		
+			}
+			
+			else {
+				$include = 0;		
+			}
+									
 			if($include == 0) {
 				include('all_hosts.php');
 			}

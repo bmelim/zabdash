@@ -82,6 +82,19 @@ return $status;
 }
 
 
+function set_status($value) {
+
+	$status = $value;
+	
+	switch ($status) {
+	 case "0": $status = "<span class='label label-success'>&nbsp;&nbsp;&nbsp;&nbsp;". _('OK')."&nbsp;&nbsp;&nbsp;&nbsp;</span>\n"; break;
+	 case "1": $status = "<span class='label label-danger'>". _('Problem')."</span>\n"; break;
+
+	 }
+	 
+	 return $status;
+}
+
 
 function hostIP($hostid) {
 	$dbIP = DBSelect('SELECT DISTINCT ip FROM interface WHERE hostid ='.$hostid);
@@ -107,7 +120,7 @@ function getOS($hostid) {
 		foreach($arrOS as $v) {
 		
 			if (strpos($osShort, $v) !== false) {	
-			$OS = $v;
+				$OS = $v;
 			}
 		} 
 				
@@ -317,20 +330,6 @@ function get_severity($value) {
 	}
 	 
 	 return $severity;
-}
-
-
-function set_status($value) {
-
-	$status = $value;
-	
-	switch ($status) {
-	 case "0": $status = 'OK'; break;
-	 case "1": $status = 'Problem'; break;
-
-	 }
-	 
-	 return $status;
 }
 
 

@@ -44,7 +44,7 @@
 		'sortorder' => 'DESC',
 		'only_true' => '1',
 		'active' => '1', // include trigger state active not active
-		//'withUnacknowledgedEvents' => '1' // show only unacknowledgeevents	
+		'withUnacknowledgedEvents' => '1' // show only unacknowledgeevents	
 		
 		));	
 

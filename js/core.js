@@ -61,7 +61,7 @@ $('.close-right-user').click(function(){
 
       var msg;
 
-msg = Messenger().post({
+/*msg = Messenger().post({
   message: 'Are you sure to clear changes?',
   type: 'info',
   actions: {
@@ -89,7 +89,7 @@ msg = Messenger().post({
       }
     }
   }
-});
+});*/
 
 	});
     init();
@@ -150,7 +150,7 @@ $('.options-holder .fa-links').on('click',function(e){
 }
 
 //input search function
-$('.nav-input-search').typeahead({
+/*$('.nav-input-search').typeahead({
      source: [
         { id: 'dashboard', name: 'dashboard' },
         { id: 'dashboard', name: 'Chat' },
@@ -217,7 +217,7 @@ $('.nav-input-search').typeahead({
 
       ],
         itemSelected: displayResult
-  });
+  });*/
 
 
    });
@@ -338,7 +338,7 @@ function randNum() {
 	return ((Math.floor(Math.random() * (1 + 40 - 20))) + 20) * 1200;
 }
 
-function sortablePortlets()
+/*function sortablePortlets()
 {
 	$(".grid").sortable({
 		//tolerance: 'pointer',
@@ -376,12 +376,12 @@ for (var i = arrValuesForOrder[arrValuesForOrder.length - 1]; i >= 0; i--) {
   		}
 	}
 
-}
+}*/
 
 
 
 //left side bar search box
-function displayResult(item, val, text) 
+/*function displayResult(item, val, text) 
 {
     var container = $('.main-content');
           if(ajax_version)
@@ -393,4 +393,4 @@ function displayResult(item, val, text)
           {
             window.href.location="val"
           }
-} 
+} */

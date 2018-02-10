@@ -86,9 +86,9 @@ $users = $api->userGet(array(
 	<script src="js/media/js/jquery.dataTables.min.js"></script>
 	<link href="js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
 	<script src="js/media/js/dataTables.bootstrap.js"></script>
-<!--	<script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+	<script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
 	<link href="js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
-	<script src="js/extensions/Select/js/dataTables.select.min.js"></script>-->
+	<script src="js/extensions/Select/js/dataTables.select.min.js"></script>
     
 	<!-- <link href="less/style.less" rel="stylesheet"  title="lessCss" id="lessCss"> -->
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -99,8 +99,10 @@ $users = $api->userGet(array(
 	<![endif]-->         
 	<!-- <link href="fonts/fonts.css" rel="stylesheet" type="text/css" /> -->
      
- 	<link rel="stylesheet" type="text/css" href="css/skin-material.css"> 
-	<link rel="stylesheet" type="text/css" href="css/style-material.css">			 	
+  	 <?php 
+ 	 	echo '<link rel="stylesheet" type="text/css" href="css/skin-material.css">'; 
+	 	echo '<link rel="stylesheet" type="text/css" href="css/style-material.css">';				
+ 	 ?>  	
 
 	<style type="text/css">
 		@media screen and (min-width: 1201px) and (max-width: 2200px) {
@@ -126,10 +128,9 @@ $users = $api->userGet(array(
 <?php    
 	$ano = date("Y");
 	$month = date("Y-m");
-	$hoje = date("Y-m-d");	
+	$hoje = date("Y-m-d");
 ?>
-<div id="loader" class="loader"></div>
-     
+<div id="loader" class="loader"></div>    
 <div class="container-fluid">  
 <div class="site-holder">
 <!-- top -->
@@ -295,7 +296,6 @@ setTimeout(function(){
 	      <div id="pie1" style='height:350px !important; background:#fff; '>	 			
 					<?php
 						include ("charts/triggers_unack.inc.php");
-						echo "<script type='text/javascript'>hideCarga(this);</script>";
 					?> 	 						            
 			</div> 
 		</div>
@@ -366,6 +366,5 @@ setTimeout(function(){
 <!-- Remove below two lines in production -->  
 <!--<script src="js/theme-options.js"></script>       
 <script src="js/core.js"></script>-->
-
 </body>
 </html>

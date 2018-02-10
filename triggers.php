@@ -19,7 +19,7 @@ $triggerAll = $api->triggerGet(array(
 	'sortorder' => 'DESC',
 	'only_true' => '1',  //recents
 	'active' => '1', 
-	/*'withUnacknowledgedEvents' => '1',*/ 
+	'withUnacknowledgedEvents' => '1', 
 	'expandDescription' => '1',
 	'selectHosts' => 1								
 ));		
@@ -87,8 +87,8 @@ $triggerAll = $api->triggerGet(array(
 		
 	 foreach($triggerAll as $tu) {  
 	 
-	  	if($tu->value == 0) { $priority = 9; $statColor = '#34AA63';} 	
-	  	else { $priority = $tu->priority; $statColor = '#E33734'; } 	 
+	  	if($tu->value == 0) { $priority = 9; $statColor = '#fff';} 	
+	  	else { $priority = $tu->priority; $statColor = '#fff'; } 	 
 	
 		echo "<tr>";			            
 			echo "<td style='text-align:center; vertical-align: middle !important;' data-order=".$tu->lastchange.">".from_epoch($tu->lastchange)."</td>\n";				            			
@@ -99,7 +99,7 @@ $triggerAll = $api->triggerGet(array(
 					</td>";				            
 			echo "<td style='text-align:left; vertical-align: middle !important;'><a href='../zabdash/host_detail.php?hostid=".$tu->hosts[0]->hostid."' target='_blank'>". get_hostname($tu->hosts[0]->hostid)."</a></td>";
 			echo "<td style='text-align:center; vertical-align: middle !important; color:".$statColor." !important;'>"._(set_status($tu->value))."</td>";				            						            			            						            
-			echo "<td style='text-align:left; vertical-align: middle !important;'>".$tu->description."</td>";				            						            
+			echo "<td style='text-align:left; vertical-align: middle !important; padding-left:12px;'>".$tu->description."</td>";				            						            
 		echo "</tr>\n";			            
 			
 	 }

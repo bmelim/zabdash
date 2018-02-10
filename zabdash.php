@@ -62,13 +62,15 @@ if($headers[0] != '') {
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 	 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />    
     <link href="css/bootstrap.css" rel="stylesheet">     
+    <link href="css/bootstrap.css.map" rel="stylesheet">     
+    <script src="js/jquery.min.js"></script> 
 
     <!-- Styles -->   
     <!-- Color theme -->       		   
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     
      <!-- this page specific styles -->
-    <link rel="stylesheet" href="css/compiled/index.css" type="text/css" media="screen" />    
+<!--    <link rel="stylesheet" href="css/index.css" type="text/css" media="screen" />    -->
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -93,7 +95,6 @@ if($headers[0] != '') {
  	<link rel="stylesheet" type="text/css" href="./css/skin-material.css"> 
  	<link rel="stylesheet" type="text/css" href="./css/style-material.css">
  	<link href="css/font-awesome.css" rel="stylesheet">  	 
- 	<script src="js/jquery.min.js"></script> 
  	 
  	 <script type="text/javascript">
 		function scrollWin()
@@ -103,7 +104,7 @@ if($headers[0] != '') {
  	 </script>
 
 <style type="text/css">
-.loader { height: 140% !important;}
+	.loader { height: 140% !important;}
 </style>
 
 <link href="css/loader.css" type="text/css" rel="stylesheet" />
@@ -119,8 +120,8 @@ jQuery(window).load(function () {
 
 <body>
 <div id="loader" class="loader"></div>
-   <div class="site-holder">
    <div class='container-fluidx'>
+   <div class="site-holder">
        <!-- .navbar -->
        <nav class="navbar navbar-default nav-delighted navbar-fixed-top shad2" role="navigation" >
            <a href="#" class="toggle-left-sidebar">
@@ -200,39 +201,46 @@ jQuery(window).load(function () {
                        <div class="user-menu" style="background:url('img/web.jpg') !important;">
                            <!--<img src="" alt="" title="" class="avatar" style="margin-left: -8px;" />-->
                            <div class="user-info">
-                               <div class="welcome"><?php //echo _('Welcome'); ?> </div>
+                               <div class="welcome"></div>
                                <div class="username"></a></div>
                                
                            </div>                                  
                        </div>
-                       <!-- User   -->
+                       <!-- User -->
 
                        <!-- Menu -->
                        <ul class="nav nav-list">
                        
-                           <li class=''>
-                           <a href='#' onclick="window.open('zabdash.php','_self'); scrollWin();" data-original-title='Zabdash'>
+                           <li class=' '>
+                           <a href='#' onclick="window.open('zabdash.php','_self'); scrollWin();" data-original-title='ZabDash'>
                                <i class='fa fa-dashboard'></i>
                                <span class='hidden-minibar'>Zabdash</span>
                            </a>
-                           </li>                           
+                           </li>      
+                           
+                           <li class=' '>
+                           <a href='#' onclick="window.open('all_hosts.php','iframe1'); scrollWin();" data-original-title='Hosts'>                               
+                               <i><img src="img/icon/host.png" alt="" style="width:20px;"></img></i>
+                               <span class='hidden-minibar'><?php echo _('Hosts'); ?></span>
+                           </a>  
+                       		</li>                     
                        		                  
-                       		<li class=''>
-                           <a href='#' onclick="window.open('hosts_groups.php','iframe1'); scrollWin();" data-original-title='Hosts'>
+                       		<li class=' '>
+                           <a href='#' onclick="window.open('hosts_groups.php','iframe1'); scrollWin();" data-original-title='Hosts Groups'>
                                <!--<i><img src="img/icon/group.png" alt="" style="width:20px;"></img></i>-->
                                <i class="fa fa-sitemap"></i>
                                <span class='hidden-minibar'><?php echo _('Host groups'); ?></span>
                            </a>  
                        		</li>                              
                        		
-                       	  <li class=''>
+                       	  <li class=' '>
 	                          <a href='#' onclick="window.open('groups.php','iframe1'); scrollWin();" data-original-title='Panel'>
                                <i class="fa fa-desktop" aria-hidden="true"></i>
                                <span class='hidden-minibar'><?php echo $labels['Hosts Panel']; ?></span>
                            </a>  
                        		</li>
                            
-                           <li class='submenu'>
+                         <li class='submenu'>
                               <a class='dropdown' onClick='return false;' href='#' data-original-title='Health'>
                                   <i class='fa fa-medkit'></i>
                                   <span class='hidden-minibar'><?php echo $labels['Hosts Health'];?>
@@ -240,47 +248,47 @@ jQuery(window).load(function () {
                                   </span>
                               </a>
 										<ul  class="animated fadeInDown">
-                               <li class=''>
-                                   <a href='#' onclick="window.open('./hosts_storage.php','iframe1'); scrollWin();" data-original-title=' Storage'>
+                               <li class=' '>
+                                   <a href='#' onclick="window.open('hosts_storage.php','iframe1'); scrollWin();" data-original-title=' Storage'>
                                        <i class="fa fa-angle-right"></i>
                                        <span class='hidden-minibar'> <?php echo $labels['Storage']; ?> </span>
                                    </a>
                                </li>
-                               <li class=''>
-                                    <a href='#' onclick="window.open('./hosts_memory.php','iframe1'); scrollWin();" data-original-title=' Memory'>
+                               <li class=' '>
+                                    <a href='#' onclick="window.open('hosts_memory.php','iframe1'); scrollWin();" data-original-title=' Memory'>
                                        <i class="fa fa-angle-right"></i>
                                        <span class='hidden-minibar'> <?php echo $labels['Memory']; ?> </span>
                                    </a>
                                </li>                                                       
                            	</ul>                                    
-                       </li>
-                         <li class=''>
-                              <a href='#' onclick="window.open('./hosts_disp.php','iframe1'); scrollWin();" data-original-title=' Availability'>
+                         </li>
+                         <li class=' '>
+                              <a href='#' onclick="window.open('hosts_disp.php','iframe1'); scrollWin();" data-original-title=' Availability'>
                                  <i class='fa fa-clock-o'></i>
                                  <span class='hidden-minibar'> <?php echo $labels['Availability']; ?> </span>
                              </a>
                          </li>   
                                   
-                    		<li class=''>
-	                        <a href='#' onclick="window.open('./triggers.php','iframe1'); scrollWin();" data-original-title='Events'>
+                    		<li class=' '>
+	                        <a href='#' onclick="window.open('triggers.php','iframe1'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-edit'></i>
 	                            <span class='hidden-minibar'><?php echo $labels['Triggers']; ?></span>
 	                        </a>  
                     		</li> 
-                    		<li class=''>
+                    		<li class=' '>
 	                        <a href='#' onclick="window.open('map/index.php','iframe1'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-map-marker'></i>
 	                            <span class='hidden-minibar'><?php echo $labels['Hosts Map']; ?></span>
 	                        </a>  
                     		</li>                     	 
-                    		<li class=''>
-                            <a href='#' onclick="window.open('./info.php','iframe1'); scrollWin();" data-original-title='Info'>
+                    		<li class=' '>
+                            <a href='#' onclick="window.open('info.php','iframe1'); scrollWin();" data-original-title='Info'>
                                <i class='fa fa-info-circle'></i>
                                <span class='hidden-minibar'><?php echo $labels['About']; ?></span>
                            </a>  
                         </li> 
                   		
-					    		<li class=''>
+					    		<li class=' '>
 	                        <a href='#' onclick="window.open('logout.php','_self'); scrollWin();" data-original-title='Events'>
 	                            <i class='fa fa-sign-out'></i>
 	                            <span class='hidden-minibar'><?php echo $labels['Exit']; ?></span>
@@ -288,9 +296,9 @@ jQuery(window).load(function () {
                     		</li>                                		                                                                                     												                                                                                                        
 	 						<li></li>                                                                                                                               
    				</ul>
-  		<!-- /.Menu -->
+  		<!-- Menu -->
   		</div>
-		<!-- /.left-sidebar Holder-->
+		<!-- left-sidebar Holder-->
 		<?php
 		 
 		if(file_exists('/etc/hosts')) { 
@@ -302,7 +310,7 @@ jQuery(window).load(function () {
 						<span class="data-name" >OS:</span>
 						<span class="data-value">'; include './sh/issue.php'; 
 					
-			echo		'</span>
+			echo '</span>
 					</li>
 			
 					<li class="data-row">
@@ -347,7 +355,7 @@ jQuery(window).load(function () {
  <!-- /.left-sidebar -->
 
 <!-- .content -->                        
-<div class="container-fluid " style="margin-top:60px;">            
+<div class="container-fluid" style="margin-top:60px;">            
   
 <script type="text/javascript" >
 	window.odometerOptions = {
@@ -376,6 +384,7 @@ jQuery(window).load(function () {
 
 </div>
 </div>
+</div>
 <!-- /.site-holder -->
  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
  <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -392,8 +401,8 @@ jQuery(window).load(function () {
 <script src="js/jquery.jclock.js"></script>
 
  <!-- Remove below two lines in production -->  
- <!--<script src="js/theme-options.js"></script>       
- <script src="js/core.js"></script>-->
+ <script src="js/theme-options.js"></script>       
+ <script src="js/core.js"></script>
  
 </body>
 </html>
