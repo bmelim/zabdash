@@ -20,9 +20,9 @@ $dbGroups = DBselect( 'SELECT * FROM groups WHERE groupid <> 1 ORDER BY name ASC
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv='refresh' content='90'>
+<!--<meta http-equiv='refresh' content='90'>-->
 
-<title>Zabbix Hosts Groups</title>
+<title>ZabDash - Hosts Groups</title>
 
 <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 <link href="css/bootstrap.css" rel="stylesheet">

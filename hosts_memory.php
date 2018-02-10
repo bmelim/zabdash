@@ -40,7 +40,7 @@ else {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--<meta http-equiv='refresh' content='120'>-->
-	<title>Zabbix Hosts Memory</title>	
+	<title>ZabDash - Hosts Memory</title>	
 
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 	<link href="css/bootstrap.css" rel="stylesheet">
@@ -52,9 +52,22 @@ else {
 	
 	<link href="inc/select2/select2.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="inc/select2/select2.js" language="javascript"></script>	
+
+<link href="css/loader.css" type="text/css" rel="stylesheet" />
+
+<script type="text/javascript">
+ jQuery(window).load(function () {
+	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
+	$("#container-fluid").toggle("fast");    
+});          
+</script>	
+	
 </head>
 
 <body>
+<div id="loader" class="loader"></div>
+ <div class='container-fluid'>
+ 
 	<div class="row col-md-11 col-sm-11" style="margin-top:0px; margin-bottom: 70px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 
 	<form id="form1" name="form1" class="form_rel" method="post" action="hosts_memory.php?sel=1" style="margin-top:30px; margin-bottom: -10px;" onchange='javascript:form1.submit();'>	
@@ -79,6 +92,7 @@ else {
 		include('group_memory.php');
 	}					
 ?>
+</div>
 </div>
 
 <script type="text/javascript">

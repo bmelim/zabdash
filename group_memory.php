@@ -20,7 +20,8 @@ foreach( $groupID as $g ) {
 			
 			if($hosts['status'] == 0 && $hosts['flags'] == 0) {
 								
-				if($hosts['available'] == 1 ) { $keyValue = 'vm.memory.size'; }
+				if($hosts['available'] == 1 ) 
+					{ $keyValue = 'vm.memory.size'; }
 				else { $keyValue = 'inbytes'; }							
 				
 				 // get all items
@@ -29,13 +30,15 @@ foreach( $groupID as $g ) {
 				     'hostids' => $hosts['hostid'],
 				     'search' => array('key_' => $keyValue)
 				 ));
+
+//print_r($mems);
 				 
 				// print Mem				
 				foreach($mems as $mem) {    
 				  	
 				 	if($hosts['available'] == 1 ) { 
 				 	
-					 	$searchValSize = 'total'; $searchValUsed = 'available'; 
+					 	$searchValSize = 'total'; $searchValUsed = 'used'; 
 										           
 					   $memSize = get_item_values($mem->itemid, $searchValSize);
 					   $memUsed = get_item_values($mem->itemid, $searchValUsed);

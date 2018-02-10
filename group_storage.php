@@ -8,11 +8,10 @@ foreach( $groupID as $g ) {
 	$group = get_hostgroup_by_groupid($g);
 	$groupName = $group['name'];	
 
-
 	echo '	
 		<div class="col-md-12 col-sm-12">
-			<h3 style="color:#000 !important; margin-top:15px; margin-bottom:15px;"> ' .$groupName.'</h3>
-		</div>	';
+			<h3 style="color:#000 !important; margin-top: 15px; margin-bottom:15px;"> '.$groupName.'</h3>
+		</div>';
 				
 		$md = 12;											
 
@@ -94,15 +93,15 @@ foreach( $groupID as $g ) {
 						echo "<div class='hostdivx col-md-".$md." col-sm-".$md."' style='margin-bottom:0px;'>";
 									
 						echo "<table class='tabs box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2; '>
-								<thead>								
-								<tr>					
-									<th style='background:".$cor."; width:1%;' title='".$conn."'></th>
-									<th colspan='1' class='linkb' style='width:50%; font-weight:bold; text-align:left;'><a href='host_detail.php?hostid=".$hosts['hostid']."'> ".$hosts['name']." </a></th>
-									<th colspan='1' style='width:18%; text-align:left;'>". $labels['Used'] ."</th>
-									<th colspan='1' style='text-align:left;'> ". _('Total') ." </th>
-									<th colspan='1' style='text-align:left;'> % ". $labels['Used'] ." </th>
-								</tr>
-								</thead>
+									<thead>								
+										<tr>					
+											<th style='background:".$cor."; width:1%;' title='".$conn."'></th>
+											<th colspan='1' class='linkb' style='width:50%; font-weight:bold; text-align:left;'><a href='host_detail.php?hostid=".$hosts['hostid']."'> ".$hosts['name']." </a></th>
+											<th colspan='1' style='width:18%; text-align:left;'>". $labels['Used'] ."</th>
+											<th colspan='1' style='text-align:left;'> ". _('Total') ." </th>
+											<th colspan='1' style='text-align:left;'> % ". $labels['Used'] ." </th>
+										</tr>
+									</thead>
 								<tbody>\n"; 			
 																			
 		

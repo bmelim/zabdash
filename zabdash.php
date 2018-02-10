@@ -57,7 +57,7 @@ if($headers[0] != '') {
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">
-    <meta http-equiv="refresh" content= "600"/>
+<!--    <meta http-equiv="refresh" content= "600"/>-->
     
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 	 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />    

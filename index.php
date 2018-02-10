@@ -85,8 +85,8 @@ if (strlen($login) === 32) {
 				</div>
 	
 				<div class="row" style="">
-					<div class="col-md-12"></div>
-					<div class="col-md-12">
+					<div class="col-md-12 col-sm-12"></div>
+					<div class="col-md-12 col-sm-12">
 						<button id="submit_login" type="submit" name="submit" class="btn btn-primary btn-flat" onclick="javascript:this.form.submit();">
 							<?php echo _('Sign in'); ?>
 						</button>

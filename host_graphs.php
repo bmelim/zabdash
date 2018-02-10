@@ -68,7 +68,7 @@ else {
 
 	<div class="col-md-12 col-sm-12" id="buttons" style="margin-bottom:20px;">
 	<span class="btn-group row pull-left">
-	  <button type="button" class="btn btn-primary" onclick='history.back();'><i class="fa fa-arrow-left"></i>&nbsp;Voltar</button>
+	  <button type="button" class="btn btn-primary" onclick='history.back();'><i class="fa fa-arrow-left"></i>&nbsp; <?php echo $labels['Back'] ;  ?></button>
 	</span>  
 	<span class="btn-group row pull-right">
 	  <button type="button" class="btn btn-primary" onclick='location.href="host_graphs.php?period=300&hostid=<?php echo $hostid;?>";'>5m</button>
