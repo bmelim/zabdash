@@ -76,6 +76,7 @@ return array(
 'Previous' => 'Previous',
 'Next' => 'Next',
 'Start' => 'Start',
+'Back' => 'Back',
 
 );
 ?> 

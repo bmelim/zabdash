@@ -66,7 +66,7 @@ $triggerAll = $api->triggerGet(array(
 	
 </head>
 
-<body style="background-color: #fff !important;" >
+<body>
 <div id="loader" class="loader"></div>
  <div class='container-fluid'>
 	<div class="row col-md-12 col-sm-12" style="margin-top:40px; margin-bottom: 70px; float:none; margin-right:auto; margin-left:auto; text-align:center;">

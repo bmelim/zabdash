@@ -1,5 +1,5 @@
 body {
-	background-color: #fff;
+   background-color: #EBEEF0;
 }
 
 .sorting_asc, .sorting_desc, .sorting {
@@ -832,10 +832,10 @@ table.sortable thead {
     cursor: default;
 }
 
-.striped tbody > tr:nth-child(odd) > td,
+/*.striped tbody > tr:nth-child(odd) > td,
 .striped tbody > tr:nth-child(odd) > th {
   background-color: #F2F2F2;
-}
+}*/
 
 #go-top{
 	background-color:#c1c1c1;
