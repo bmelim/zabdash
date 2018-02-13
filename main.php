@@ -16,17 +16,17 @@ $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .
 $dbHostsCount = DBselect( 'SELECT SUM(case when status = 0 then 1 else 0 end) AS active, SUM(case when status = 1 then 1 else 0 end) AS inactive, SUM(case when status = 3 then 1 else 0 end) AS template FROM hosts WHERE flags = 0');
 $hostsCount = DBFetch($dbHostsCount);	
 
-$dbTrig = DBselect( 'SELECT COUNT(hostid) AS hc FROM hosts WHERE status = 1 AND flags = 0');
-$trigCount = DBFetch($dbTrig);	
+//$dbTrig = DBselect( 'SELECT COUNT(hostid) AS hc FROM hosts WHERE status = 1 AND flags = 0');
+//$trigCount = DBFetch($dbTrig);	
 
 $trigger = $api->triggerGet(array(
 	'output' => 'extend',	
-	'sortfield' => 'priority',
-	'sortorder' => 'DESC',
+	//'sortfield' => 'priority',
+	//'sortorder' => 'DESC',
 	'only_true' => '1',
 	'active' => '1', // include trigger state active not active
 	/*'withUnacknowledgedEvents' => '1', */
-	'expandDescription' => '1',
+	//'expandDescription' => '1',
 	'selectHosts' => 1							
 ));	
 
@@ -44,8 +44,8 @@ $triggerUnack = $api->triggerGet(array(
 
 $hostsGroups = $api->hostgroupGet(array(
 	'output' => 'extend',	
-	'sortfield' => 'name',
-	'sortorder' => 'ASC'
+	//'sortfield' => 'name',
+	//'sortorder' => 'ASC'
 	/*'real_hosts' => '1'*/
 ));
 
@@ -57,7 +57,7 @@ $users = $api->userGet(array(
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Zabdash - Home </title>
+    <title>ZabDash - Home </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">           
@@ -289,7 +289,7 @@ setTimeout(function(){
 	<div class="col-sm-12 col-md-12 align" style="margin-left: 0px;"> 	 				              
 	   <div id="tickets_status" class="widget2 widget-table action-table striped card1" >
 	      <div class="widget-header">                 
-	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Unacknowledged Triggers']; ?></h3>
+	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Unacknowledged Triggers'] ."   (". count($triggerUnack) .")"; ?></h3>
 	      	 <span  class=""></span>               
 	      </div> 
 	      <!-- /widget-header -->      

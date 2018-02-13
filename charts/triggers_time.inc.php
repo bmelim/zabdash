@@ -59,14 +59,25 @@ for($i=0; $i < count($valUn2); $i++) {
 	if($valUn2[$i] == $valAc2[$i]) {			
 		$valDiff[] = 0;
 	}
-	else {
+	else{
 		$valDiff[] = ($valAc2[$i] - $valUn2[$i]); 
-	}
+	}	 
 }	
 
+// remove values < 0
+for($i=0; $i < count($valDiff); $i++) {
+
+	if($valDiff[$i] <= 0) {			
+		$valDiff2[$i] = 0;
+	}
+	else{
+		$valDiff2[$i] = $valDiff[$i]; 
+}
+	}	 
 
 $valuesUn = implode(',',$valUn2);
-$valuesAc = implode(',',$valDiff);
+$valuesAc = implode(',',$valDiff2);
+	
 
 echo "
 <script type='text/javascript'>
@@ -111,14 +122,14 @@ $(function () {
             }
             },
           legend: {
-            align: 'right',
-            x: -30,
-            verticalAlign: 'top',
-            y: -10,
-            floating: true,
+            //align: 'right',
+            x: 0,
+            y: 0,
+            //verticalAlign: 'top',
+            //floating: true,
             backgroundColor:'white',
             borderColor: '#CCC',
-            borderWidth: 1,
+            borderWidth: 0,
             shadow: false
         },
          tooltip: {
@@ -137,10 +148,10 @@ $(function () {
                 }
             },
             series: [{
-                name: 'Unacked',
+                name: '". $labels['Unacknowledged'] ."',
                 data: [$valuesUn]
                 },{
-                name: 'Acked',
+                name: '". $labels['Acknowledged'] ."',
                 data: [$valuesAc]                                   
             }]
         });

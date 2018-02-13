@@ -1,18 +1,5 @@
 <?php
-
-	$triggerUnack = $api->triggerGet(array(
-		'output' => 'extend',
-		/*'hostids' => $hostid,*/
-		'sortfield' => 'lastchange',
-		'sortorder' => 'DESC',
-		'only_true' => '1',
-		'active' => '1', // include trigger state active not active
-		'withUnacknowledgedEvents' => '1', 
-		'expandDescription' => '1',
-		'selectHosts' => 1								
-	));	
 	
-
 echo "				
 		<table id='triggersUnack' class='box table table-striped table-hover table-condensed' border='0' style='background:#fff;'>
 			<thead>
