@@ -110,10 +110,10 @@ if($headers[0] != '') {
 <link href="css/loader.css" type="text/css" rel="stylesheet" />
 
 <script type="text/javascript">
-jQuery(window).load(function () {
-	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
-	$("#container-fluid").toggle("fast");    
-});
+	jQuery(window).load(function () {
+		$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
+		$("#container-fluid").toggle("fast");    
+	});
 </script>
  	  	 
 </head>
@@ -138,7 +138,7 @@ jQuery(window).load(function () {
 		    <li class="logo">
 		        <a href="./zabdash.php" style="margin-top:6px;">           
 		            <span class="name" style="color: #FFF; font-size:14pt;">
-		                Zabdash  
+		                ZabDash  
 		            </span>            
 		        </a>
 		    </li>

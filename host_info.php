@@ -3,7 +3,7 @@
 //get disks
 
 if($host['available'] == 1 ) { $keyValue = 'vfs.fs.size'; }
-else { $keyValue = 'inbytes'; }			 
+else { $keyValue = 'inBytes'; }			 
  
 	$disks = $api->itemGet(array(
      'output' => 'extend',
@@ -67,10 +67,70 @@ for($n=0;$n<count($arrUsed);$n++) {
 }
 
 
-// Memory
+//CPU Load   system.cpu.util[percpu,avg1]
 
-if($host['available'] == 1 ) { $keyValueMem = 'vm.memory.size'; }
-else { $keyValueMem = 'inbytes'; }			 
+if($host['sa'] == 0) { 
+	$keyValueCPU = 'system.cpu.util[,system]'; 
+}
+if($host['sa'] == 1) { 
+	$keyValueCPU = 'hrProcessorLoad'; 
+}
+	
+ 
+$cpus = $api->itemGet(array(
+  'output' => 'extend',
+  'hostids' => $hostid,
+  'search' => array('key_' => $keyValueCPU)     
+));
+
+//print_r($cpus);
+ 
+foreach($cpus as $cpu) {
+	
+	if($host['sa'] == 0) { 
+		$searchValSize = 'system.cpu.util[,system]';
+		$searchValSize1 = 'hrProcessorLoad';
+		$cpuLoad = get_item_values_or($cpu->itemid, $searchValSize, $searchValSize1 );    
+		$arrCPU[] = $cpuLoad['value_max'];  
+		
+		$cpuNum = count($arrCPU); 
+	
+		if($cpuNum > 0) {
+			$avgCPU = round(array_sum($arrCPU)/$cpuNum,1);
+		}
+		else {
+			$avgCPU = 0;
+		}			
+			
+	} 	
+	
+	if($host['sa'] == 1) {
+		$searchValSize = 'hrProcessorLoad';
+		$cpuLoad = get_item_values($cpu->itemid, $searchValSize);    
+		$arrCPU[] = $cpuLoad['value_max']; 
+
+		$cpuNum = count($arrCPU); 
+		
+		if($cpuNum > 0) {
+			$avgCPU = round(array_sum($arrCPU)/$cpuNum,1);
+		}
+		else {
+			$avgCPU = 0;
+		}	
+
+	}
+
+        
+}
+
+
+// Memory
+if($host['available'] == 1) { 
+	$keyValueMem = 'vm.memory.size'; 
+}
+else { 
+	$keyValueMem = 'inBytes'; 
+}			 
  
 $mems = $api->itemGet(array(
   'output' => 'extend',
@@ -78,16 +138,19 @@ $mems = $api->itemGet(array(
   'search' => array('key_' => $keyValueMem)
 ));
 
+//print_r($mems);
 // print Mem
-
 foreach($mems as $mem) {    
   	
  	if($host['available'] == 1 ) { 
  	
-	 	$searchValSize = 'total'; $searchValUsed = 'available'; 
+ 		$searchValSize = 'total'; 
+	 	$searchValSize1 = 'total'; 
+	 	$searchValUsed = 'used'; 
+	 	$searchValUsed1 = 'available'; 
 						           
-	   $memSize = get_item_values($mem->itemid, $searchValSize);
-	   $memUsed = get_item_values($mem->itemid, $searchValUsed);
+	   $memSize = get_item_values_or($mem->itemid, $searchValSize,$searchValSize1);
+	   $memUsed = get_item_values_or($mem->itemid, $searchValUsed,$searchValUsed1); 
 	   //$memUsed = ($memSize['value_max'] - $memUsed['value_max']);
 	
 		//Size				
@@ -107,6 +170,7 @@ foreach($mems as $mem) {
 	else { 
 	
 		$searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; 
+		//$searchValSize = 'sysMemorySizeinBytes'; $searchValUsed = 'sysMemoryUsedinBytes'; 
 	
 	   $memSize = get_item_values($mem->itemid, $searchValSize);
 	   $memUsed = get_item_values($mem->itemid, $searchValUsed);
@@ -149,42 +213,6 @@ for($n=0;$n<count($arrUsedMem);$n++) {
 		}	
 	}
 }
-
-
-//CPU Load
-if($host['available'] == 1 ) { $keyValueCPU = 'system.cpu.util[,system]'; }
-else { $keyValueCPU = 'processorLoad'; }	
- 
-$cpus = $api->itemGet(array(
-  'output' => 'extend',
-  'hostids' => $hostid,
-  'search' => array('key_' => $keyValueCPU)     
-));
-
- 
-foreach($cpus as $cpu) {
-	
- 	if($host['available'] == 1 ) { 
- 		$searchValSize = 'system.cpu.util[,system]';
- 		$cpuLoad = zbx_get_item_values($cpu->itemid, $searchValSize);    
-		$arrCPU[] = $cpuLoad['value_max'];  
- 	 }
-
-	else { 
-		$searchValSize = 'processorload';
-		$cpuLoad = get_item_values($cpu->itemid, $searchValSize);    
-		$arrCPU[] = $cpuLoad['value_max'];  
-	}            
-}
- 
-$cpuNum = count($arrCPU); 
-
-if($cpuNum > 0) {
-	$avgCPU = round(array_sum($arrCPU)/$cpuNum,1);
-}
-else {
-	$avgCPU = 0;
-}	
 
 
 //uptime

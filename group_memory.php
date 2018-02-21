@@ -38,11 +38,20 @@ foreach( $groupID as $g ) {
 				  	
 				 	if($hosts['available'] == 1 ) { 
 				 	
-					 	$searchValSize = 'total'; $searchValUsed = 'used'; 
+/*					 	$searchValSize = 'total'; $searchValUsed = 'used'; 
 										           
 					   $memSize = get_item_values($mem->itemid, $searchValSize);
 					   $memUsed = get_item_values($mem->itemid, $searchValUsed);
 					   //$memUsed = ($memSize['value_max'] - $memUsed['value_max']);
+	*/				   
+				 		$searchValSize = 'total'; 
+					 	$searchValSize1 = 'total'; 
+					 	$searchValUsed = 'used'; 
+					 	$searchValUsed1 = 'available'; 
+										           
+					   $memSize = get_item_values_or($mem->itemid, $searchValSize,$searchValSize1);
+					   $memUsed = get_item_values_or($mem->itemid, $searchValUsed,$searchValUsed1); 
+									   
 					
 						//Size				
 						if($memSize['value_max'] != 0 || get_item_label($memSize['key_']) != '') {						
@@ -61,6 +70,7 @@ foreach( $groupID as $g ) {
 					else { 
 					
 						$searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; 
+						//$searchValSize = 'sysMemorySizeinBytes'; $searchValUsed = 'sysMemoryUsedinBytes'; 
 					
 					   $memSize = get_item_values($mem->itemid, $searchValSize);
 					   $memUsed = get_item_values($mem->itemid, $searchValUsed);

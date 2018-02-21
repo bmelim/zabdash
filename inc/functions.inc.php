@@ -197,6 +197,28 @@ function get_item_values($itemid, $key) {
 }
 
 
+function get_item_values_or($itemid, $key, $key1) {
+
+	$dbItems = DBselect("SELECT i.itemid,i.name,i.key_,i.status,i.type,t.num,t.value_min,t.value_avg,t.value_max,from_unixtime(t.clock)			
+				FROM items i, trends_uint t, hosts h
+				WHERE (i.key_ LIKE '%".$key."%' OR i.key_ LIKE '%".$key1."%')
+				AND i.hostid=h.hostid	
+				AND t.itemid=i.itemid	  	   	
+				AND i.itemid=".$itemid."
+				ORDER BY t.clock DESC			
+				LIMIT 1");
+	
+	$row = DBFetch($dbItems);		
+	
+	if ($row) {
+		return $row;
+	}
+	else {
+		return false;
+	}
+}
+
+
 
 function zbx_get_item_values($itemid, $key) {
 

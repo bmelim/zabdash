@@ -287,13 +287,13 @@ setTimeout(function(){
 	</div>
 	
 	<div class="col-sm-12 col-md-12 align" style="margin-left: 0px;"> 	 				              
-	   <div id="tickets_status" class="widget2 widget-table action-table striped card1" >
+	   <div id="tickets_status" class="widget2 widget-table action-table striped card1" style="background:#fff !important;" >
 	      <div class="widget-header">                 
 	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Unacknowledged Triggers'] ."   (". count($triggerUnack) .")"; ?></h3>
 	      	 <span  class=""></span>               
 	      </div> 
 	      <!-- /widget-header -->      
-	      <div id="pie1" style='height:350px !important; background:#fff; '>	 			
+	      <div id="unack" style='height:350px !important; background:#fff !important; '>	 			
 					<?php
 						include ("charts/triggers_unack.inc.php");
 					?> 	 						            

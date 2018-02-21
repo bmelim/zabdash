@@ -77,6 +77,8 @@ return array(
 'Next' => 'Próximo',
 'Start' => 'Início',
 'Back' => 'Voltar',
+'Unacknowledged' => 'Não Reconhecido',
+'Acknowledged' => 'Reconhecido'
 
 );
 ?> 
