@@ -36,11 +36,7 @@ foreach( $groupID as $g ) {
 									<i class='".$icon."'></i>
 								</td>
 								<td class='link'>
-<<<<<<< HEAD
-									<a href='".$zabURL."tr_status.php?fullscreen=0&groupid=0&source=0&hostid=".$hosts['hostid']."' target='_blank' >".$hosts['name']."</a>
-=======
 									<a href='".$zabURL."zabbix.php?action=problem.view&page=1&filter_hostids[]=".$hosts['hostid']."&filter_show=1&filter_application=&filter_name=&filter_severity=0&filter_inventory[0][field]=type&filter_inventory[0][value]=&filter_evaltype=0&filter_tags[0][tag]=&filter_tags[0][operator]=0&filter_tags[0][value]=&filter_show_tags=3&filter_tag_name_format=0&filter_tag_priority=&filter_set=1' target='_blank' >".$hosts['name']."</a>
->>>>>>> 1.1.2
 								</td>
 								<td rowspan='2' style='font-size:20px;' width='22px' height='50%'>
 									<img src='img/os/".getOS($hosts['hostid']).".png' alt=''/>
@@ -97,11 +93,7 @@ foreach( $groupID as $g ) {
 												<i class='".$icon."'></i>
 											</td>
 											<td class='link". $hostdivprio ."'>
-<<<<<<< HEAD
-												<a href='".$zabURL."tr_status.php?fullscreen=0&groupid=0&source=0&hostid=".$hosts['hostid']."' target='_blank' >".$hosts['name']."</a>
-=======
 												<a href='".$zabURL."zabbix.php?action=problem.view&page=1&filter_hostids[]=".$hosts['hostid']."&filter_show=1&filter_application=&filter_name=&filter_severity=0&filter_inventory[0][field]=type&filter_inventory[0][value]=&filter_evaltype=0&filter_tags[0][tag]=&filter_tags[0][operator]=0&filter_tags[0][value]=&filter_show_tags=3&filter_tag_name_format=0&filter_tag_priority=&filter_set=1' target='_blank' >".$hosts['name']."</a>
->>>>>>> 1.1.2
 											</td>
 											<td rowspan='2' style='font-size:20px;' width='22px' height='50%'>
 												<img src='img/os/".getOS($hosts['hostid']).".png' alt=''/>
@@ -126,11 +118,7 @@ foreach( $groupID as $g ) {
 										<i class='".$icon."'></i>
 									</td>
 									<td class='link'>
-<<<<<<< HEAD
-										<a href='".$zabURL."tr_status.php?fullscreen=0&groupid=0&source=0&hostid=".$hosts['hostid']."' target='_blank' >".$hosts['name']."</a>
-=======
 										<a href='".$zabURL."zabbix.php?action=problem.view&page=1&filter_hostids[]=".$hosts['hostid']."&filter_show=1&filter_application=&filter_name=&filter_severity=0&filter_inventory[0][field]=type&filter_inventory[0][value]=&filter_evaltype=0&filter_tags[0][tag]=&filter_tags[0][operator]=0&filter_tags[0][value]=&filter_show_tags=3&filter_tag_name_format=0&filter_tag_priority=&filter_set=1' target='_blank' >".$hosts['name']."</a>
->>>>>>> 1.1.2
 									</td>
 									<td rowspan='2' style='font-size:20px;' width='22px' height='50%'>
 										<img src='img/os/".getOS($hosts['hostid']).".png' alt=''/>

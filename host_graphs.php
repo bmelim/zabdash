@@ -27,12 +27,8 @@ if(isset($hostid)) {
  $graphs = $api->graphGet(array(
      'output' => 'extend',
      'hostids' => $hostid,     
-<<<<<<< HEAD
-     'sortfield' => 'name'
-=======
      'sortfield' => 'name',
 	  'sortorder' => 'ASC'
->>>>>>> 1.1.2
  ));
 }
 
@@ -51,11 +47,7 @@ else {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<<<<<<< HEAD
-<meta http-equiv='refresh' content='60'>
-=======
 <meta http-equiv='refresh' content='300'>
->>>>>>> 1.1.2
 
 <title>Zabbix Host Graphs</title>
 
@@ -98,15 +90,6 @@ else {
 		<?php	
 			foreach($graphs as $g) {
 			
-<<<<<<< HEAD
-			echo "<div class='col-lg-3 col-md-4 col-xs-6 thumb' style='padding: 6px !important; margin-bottom:0px; height:165px; '>";
-				echo '<a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-caption="" data-image="../chart2.php?graphid='.$g->graphid.'&period='.$period.'&height=300" alt="" data-target="#image-gallery">';
-					echo '<img class="img-responsive ximg-thumbnail ximg-rounded" src="../chart2.php?graphid='.$g->graphid.'&period='.$period.'&height=280" />';
-				echo '</a>';
-			echo "</div>\n";
-			
-			}
-=======
 			echo "<div class='col-lg-6 col-md-6 col-xs-6 thumb' style='padding: 6px !important; margin-bottom:0px; height:260px; '>";
 				echo '<a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-caption="" data-image="../chart2.php?graphid='.$g->graphid.'&period='.$period.'&height=300" alt="" data-target="#image-gallery">';
 					echo '<img class="img-responsive ximg-thumbnail ximg-rounded" src="'.$zabURL.'chart2.php?graphid='.$g->graphid.'&period='.$period.'&height=280" />';
@@ -114,7 +97,6 @@ else {
 			echo "</div>\n";
 			
 			}		
->>>>>>> 1.1.2
 		?>	
 	</div>
 	
@@ -133,22 +115,14 @@ else {
             <div class="modal-footer">
 
                 <div class="col-md-2">
-<<<<<<< HEAD
-                    <button type="button" class="btn btn-primary" id="show-previous-image">Previous</button>
-=======
                     <button type="button" class="btn btn-primary" id="show-previous-image"><?php echo $labels['Previous']; ?></button>
->>>>>>> 1.1.2
                 </div>
 
                 <div class="col-md-8 text-justify" id="image-gallery-caption">                    
                 </div>
 
                 <div class="col-md-2">
-<<<<<<< HEAD
-                    <button type="button" id="show-next-image" class="btn btn-default">Next</button>
-=======
                     <button type="button" id="show-next-image" class="btn btn-default"><?php echo $labels['Next']; ?></button>
->>>>>>> 1.1.2
                 </div>
             </div>
         </div>

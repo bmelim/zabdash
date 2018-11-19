@@ -30,28 +30,11 @@ for($i=0; $i <= $conta; $i++) {
 
 	if($hostid <> '') {
 		$hosts[get_hostname($hostid)] = count($triggerHost);					
-<<<<<<< HEAD
-=======
 		$hosts_ids[$hostid] = count($triggerHost);					
->>>>>>> 1.1.2
 	}				
 }
 
 arsort($hosts);
-<<<<<<< HEAD
-
-$hosts = array_slice($hosts,0,10);
-
-$names2 = array_keys($hosts) ;
-$names1 = implode("','",$names2);
-$names = "'$names1'";
-
-$values1 = array_values($hosts) ;
-
-
-foreach($values1 as $v) {
-	$values2[] = '{y:'.$v.', url: \'../tr_status.php\'}' ;
-=======
 arsort($hosts_ids);
 
 $hosts = array_slice($hosts,0,10);
@@ -74,7 +57,6 @@ var_dump($ids2);*/
 
 foreach ($values1 as $key => $v) {
     $values2[] = '{y:'.$v.', url: \'../zabbix.php?action=problem.view&page=1&filter_show=1&filter_application=&filter_name=&filter_severity=0&filter_inventory[0][field]=type&filter_inventory[0][value]=&filter_evaltype=0&filter_tags[0][tag]=&filter_tags[0][operator]=0&filter_tags[0][value]=&filter_show_tags=3&filter_tag_name_format=0&filter_tag_priority=&filter_show_timeline=1&filter_set=1&filter_hostids[]='.$ids[$key].'\'}' ;
->>>>>>> 1.1.2
 }
 
 $values = implode(',',$values2);

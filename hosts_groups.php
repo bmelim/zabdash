@@ -59,12 +59,6 @@ include('config.php');
 				
 	$md = 10;		
 	
-<<<<<<< HEAD
-	$dbgroupsCount = DBselect( 'SELECT COUNT(groupid) AS hc FROM groups');
-	$groupsCount = DBFetch($dbgroupsCount);	
-	
-	$dbGroups = DBselect( 'SELECT groupid, name FROM groups ORDER BY name ASC'	);
-=======
 	$dbgroupsCount = DBselect( 'SELECT COUNT(groupid) AS hc FROM hstgrp');
 	$groupsCount = DBFetch($dbgroupsCount);	
 	
@@ -77,7 +71,6 @@ include('config.php');
 	}
 		
 	$dbGroups = DBselect( 'SELECT * FROM '.$grps.' WHERE groupid <> 1 ORDER BY name ASC');
->>>>>>> 1.1.2
 	
 	$dbHostsCount = DBselect( 'SELECT COUNT(h.hostid) AS hc FROM hosts h WHERE h.status <> 3 AND h.flags = 0');
 	$hostsCount = DBFetch($dbHostsCount);

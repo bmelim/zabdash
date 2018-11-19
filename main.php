@@ -166,11 +166,7 @@ $users = $api->userGet(array(
 					   			<i  style="vertical-align:middle; margin-top:18px;" class="fa fa-warning fa-3x"></i>
 <!--					   		</span>-->
 					   	</div>										 
-<<<<<<< HEAD
-					   <div class="panel-right right " style='cursor:pointer;' onclick="window.open('../tr_status.php');">	
-=======
 					   <div class="panel-right right " style='cursor:pointer;' onclick="window.open('../triggers.php');">	
->>>>>>> 1.1.2
          				<span class="chamado"><?php echo _('Triggers'); ?></span><br>
 							<div id="odometer2" class="odometer" style="font-size: 25px;">   </div><p></p>
          				<span class="date" title="Ack/Unack"><span style="font-weight:boldx; color:#e33734;"><?php echo "<span style='color:#429e47;'>".(count($trigger) - count($triggerUnack))."</span><span class='date'> / </span> ".count($triggerUnack); ?></span></span>

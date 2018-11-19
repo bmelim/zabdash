@@ -38,10 +38,7 @@ switch (date("w")) {
 $userid = get_userid(CWebUser::getSessionCookie());
 	  
 //check new version 																																																			
-<<<<<<< HEAD
-=======
 /*
->>>>>>> 1.1.2
 $urlv = "https://sourceforge.net/p/zabdash/screenshot/".$version.".png";
 $headers = get_headers($urlv, 1);										
 
@@ -51,11 +48,7 @@ if($headers[0] != '') {
 		$newversion = "<a href='https://sourceforge.net/projects/zabdash/' target='_blank' style='margin-top:10px; margin-right: 12px; color:#fff;' class='blink_me'><i class='fa fa-refresh'></i><span>&nbsp;&nbsp;".  $labels['New version avaliable']. " </span></a>";		
 	}
 }  
-<<<<<<< HEAD
-  
-=======
   */
->>>>>>> 1.1.2
 ?>
 
 <!DOCTYPE html>

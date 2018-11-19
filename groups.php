@@ -8,9 +8,6 @@ if(isset($_REQUEST['sel']) && $_REQUEST['sel'] != '' && $_REQUEST['sel'] == 1) {
 	$group = $_POST['groupid'];
 }	
 
-<<<<<<< HEAD
-$dbGroups = DBselect( 'SELECT * FROM groups WHERE groupid <> 1 ORDER BY name ASC'	);
-=======
 //check version
 if(ZABBIX_EXPORT_VERSION >= '4.0'){
 	$grps = 'hstgrp';
@@ -20,7 +17,6 @@ else {
 }
 	
 $dbGroups = DBselect( 'SELECT * FROM '.$grps.' WHERE groupid <> 1 ORDER BY name ASC');
->>>>>>> 1.1.2
 
 ?>
 

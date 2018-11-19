@@ -115,11 +115,7 @@ function getOS($hostid) {
 		
 		strtolower($osShort);
 		
-<<<<<<< HEAD
-		$arrOS = array('ubuntu','suse','opensuse','debian','slackware','redhat','freebsd','centos');
-=======
 		$arrOS = array('ubuntu','suse','opensuse','debian','slackware','redhat','freebsd','centos','3COM','H3C');
->>>>>>> 1.1.2
 		
 		foreach($arrOS as $v) {
 		
@@ -136,11 +132,7 @@ function getOS($hostid) {
 		$osFull = $dbOS['os_full'];
 		$hard = $dbOS['hardware'];
 		
-<<<<<<< HEAD
-		$arrOS = array('Linux','Windows','VMware','Cisco','H3C','HP','3Com','Dell');	
-=======
 		$arrOS = array('Linux','Windows','VMware','Cisco','H3C','HP','3COM','Dell');	
->>>>>>> 1.1.2
 		
 		foreach($arrOS as $v) {
 			
@@ -423,15 +415,8 @@ function get_revent($eventid) {
 function event_time($eventid) {
 
 	$dbGetEvent = DBselect( 'SELECT clock FROM events WHERE eventid ="'.$eventid.'"');
-<<<<<<< HEAD
-	$dbeventtime = DBFetch($dbGetEvent);	
-	
-	$eventtime = $dbeventtime['clock'];
-	
-=======
 	$dbeventtime = DBFetch($dbGetEvent);		
 	$eventtime = $dbeventtime['clock'];	
->>>>>>> 1.1.2
 	return $eventtime;
 }
 
@@ -452,8 +437,4 @@ function revent_time($reventid) {
 }
 
 
-<<<<<<< HEAD
 ?>
-=======
-?>
->>>>>>> 1.1.2
