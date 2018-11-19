@@ -1,6 +1,10 @@
 
 <?php
+<<<<<<< HEAD
 /*require_once '../include/config.inc.php';
+=======
+require_once '../include/config.inc.php';
+>>>>>>> 1.1.2
 require_once '../include/hosts.inc.php';
 require_once '../include/actions.inc.php';
 
@@ -9,19 +13,41 @@ include('config.php');
 require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
 $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
+<<<<<<< HEAD
 */
 $sel_id = $_REQUEST['groupid'];
 //$sel_id = 8;
+=======
+
+$sel_id = $_REQUEST['groupid'];
+
+>>>>>>> 1.1.2
 
 if(isset($sel_id) && $sel_id != '' && $sel_id != 0) {	
 	$include = "1";
 	$groupID = $sel_id;			
 }
+<<<<<<< HEAD
+=======
+
+//check version
+if(ZABBIX_EXPORT_VERSION >= '4.0'){
+	$grps = 'hstgrp';
+}
+else {
+	$grps = 'groups';
+}
+
+>>>>>>> 1.1.2
 ?>
 
 	<div class="row col-md-12 col-sm-12" style="margin-top:10px; margin-bottom: 35px; float:none; margin-right:auto; margin-left:auto; text-align:center;">
 	
 	<?php	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> 1.1.2
 	//days interval
 	if(isset($_REQUEST['int']) && $_REQUEST['int'] != '' && $_REQUEST['int'] != 0) {	
 		$int = $_REQUEST['int'];			
@@ -50,7 +76,11 @@ if(isset($sel_id) && $sel_id != '' && $sel_id != 0) {
    $dbHostsCount = DBselect( 'SELECT COUNT(h.hostid) AS hc FROM hosts h, hosts_groups hg WHERE h.status <> 3 AND h.flags = 0 AND h.hostid = hg.hostid AND hg.groupid = '.$groupID );
 	$hostsCount = DBFetch($dbHostsCount);	
 	
+<<<<<<< HEAD
 	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags, g.name AS gname FROM hosts h, hosts_groups hg, groups g WHERE h.status <> 3 AND h.flags = 0 AND h.hostid = hg.hostid AND g.groupid = hg.groupid AND hg.groupid = '.$groupID.' ORDER BY h.name ASC'	);
+=======
+	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags, g.name AS gname FROM hosts h, hosts_groups hg, '.$grps.' g WHERE h.status <> 3 AND h.flags = 0 AND h.hostid = hg.hostid AND g.groupid = hg.groupid AND hg.groupid = '.$groupID.' ORDER BY h.name ASC');
+>>>>>>> 1.1.2
 				
 	$md = 11;	
 	
@@ -62,7 +92,11 @@ if(isset($sel_id) && $sel_id != '' && $sel_id != 0) {
 	
 	echo "			
 		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:0px;' >
+<<<<<<< HEAD
 			<h3 style='color:#000 !important; margin-top:-2 px; margin-bottom: -5px; text-align:center;'> " .$groupName."</h3>";
+=======
+			<h3 style='color:#000 !important; margin-top:-2 px; margin-bottom:-5px; text-align:center;'> " .$groupName."</h3>";
+>>>>>>> 1.1.2
 	
 	//pagination div		
 	echo '
@@ -72,7 +106,11 @@ if(isset($sel_id) && $sel_id != '' && $sel_id != 0) {
 		    echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag='.$proximo.'" class="page-link" style="color:#337ab7 !important;"><< '.$labels['Previous'].'</a></li>';
 		  }  
 		  
+<<<<<<< HEAD
 		  echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag=1" class="page-link" style="color:#337ab7 !important;">'.$labels['Start'].'</a></li>';	  
+=======
+		  echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag=1" class="page-link" style="color:#337ab7 !important;"> &nbsp;'.$labels['Start'].'</a></li>';	  
+>>>>>>> 1.1.2
 		  
 		  if ($pag < $tp) {
 		    echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag='.$anterior.'" class="page-link" style="color:#337ab7 !important;">'.$labels['Next'].' >></a></li>';
@@ -139,8 +177,13 @@ if(isset($sel_id) && $sel_id != '' && $sel_id != 0) {
 						echo "<td style='text-align:center; vertical-align:middle'>\n";
 
 						if($obj[0]->value == 1) {
+<<<<<<< HEAD
 							echo "<img src='img/error128.png' alt='Off' width='18' />\n" ;
 							//echo "<img src='img/error128.png' alt='Off' title='". from_epoch(event_time($obj[0]->eventid)) ."  -  ". from_epoch(revent_time($obj[0]->r_eventid)) ."' width='18' />\n" ;
+=======
+							echo "<a href='disp_host.php?hostid=".$hosts['hostid']."' target='_self' ><img src='img/error128.png' alt='Off' width='18' /></a>\n" ;
+							//echo "<img src='img/error128.png' alt='Off' width='18' />\n" ;							
+>>>>>>> 1.1.2
 						}
 						else { echo "";}	
 				 }	
@@ -161,7 +204,11 @@ if(isset($sel_id) && $sel_id != '' && $sel_id != 0) {
 		    echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag='.$proximo.'" class="page-link" style="color:#337ab7 !important;"><< '.$labels['Previous'].'</a></li>';
 		  }  
 		  
+<<<<<<< HEAD
 		  echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag=1" class="page-link" style="color:#337ab7 !important;">'.$labels['Start'].'</a></li>';	  
+=======
+		  echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag=1" class="page-link" style="color:#337ab7 !important;">&nbsp;'.$labels['Start'].'</a></li>';	  
+>>>>>>> 1.1.2
 		  
 		  if ($pag < $tp) {
 		    echo '<li class="page-item"><a href="?sel=1&groupid='.$groupID.'&pag='.$anterior.'" class="page-link" style="color:#337ab7 !important;">'.$labels['Next'].' >></a></li>';
@@ -188,7 +235,11 @@ $(document).ready(function() {
         "order": [[ 1, "asc" ]],
         pagingType: "full_numbers",        
 		  displayLength: 25,
+<<<<<<< HEAD
         lengthMenu: [[25, 50, 100, -1], [25, 50, 100, "All"]],	    	    	   
+=======
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]   	    	   
+>>>>>>> 1.1.2
     
     });
 });

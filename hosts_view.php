@@ -34,6 +34,7 @@ include('config.php');
 <link href="js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
 <script src="js/media/js/dataTables.bootstrap.js"></script>
 
+<<<<<<< HEAD
 <!--<script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
 <script src="js/extensions/Buttons/js/buttons.html5.min.js"></script>
 <script src="js/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
@@ -42,6 +43,8 @@ include('config.php');
 <script src="js/media/vfs_fonts.js"></script>
 <script src="js/media/jszip.min.js"></script>-->
 
+=======
+>>>>>>> 1.1.2
 <script src="js/extensions/Select/js/dataTables.select.min.js"></script>
 <link href="js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />
 

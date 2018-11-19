@@ -1295,15 +1295,25 @@ box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
 .eventdate {
 	vertical-align: middle !important;		
 	display: inline;	
+<<<<<<< HEAD
 	font-size: 8pt;
+=======
+	font-size: 6pt;
+>>>>>>> 1.1.2
 	font-family: 'RobotoDraft','Helvetica',sans-serif !important;
 }
 
 .severity {
 	vertical-align: middle !important;				
+<<<<<<< HEAD
 	font-size: 9pt;
 	text-align: center !important;
 	margin-top: 0px !important;
+=======
+	font-size: 8pt;
+	text-align: center !important;
+	margin-top: 1px !important;
+>>>>>>> 1.1.2
 	color: #000;
 	font-family: 'RobotoDraft','Helvetica',sans-serif !important;
 }

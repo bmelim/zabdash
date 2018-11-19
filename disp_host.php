@@ -10,8 +10,11 @@ require_once 'lib/ZabbixApi.class.php';
 use ZabbixApi\ZabbixApi;
 $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
 
+<<<<<<< HEAD
 //$_REQUEST['hostid'] = 10111;
 
+=======
+>>>>>>> 1.1.2
 if(isset($_REQUEST['hostid']) && $_REQUEST['hostid'] != '' && $_REQUEST['hostid'] != 0) {	
 	$include = "1";
 	$hostid = $_REQUEST['hostid'];			

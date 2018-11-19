@@ -119,8 +119,12 @@ foreach($cpus as $cpu) {
 		}	
 
 	}
+<<<<<<< HEAD
 
         
+=======
+       
+>>>>>>> 1.1.2
 }
 
 
@@ -128,6 +132,11 @@ foreach($cpus as $cpu) {
 if($host['available'] == 1) { 
 	$keyValueMem = 'vm.memory.size'; 
 }
+<<<<<<< HEAD
+=======
+ 
+//if($host['available'] == 1) {
+>>>>>>> 1.1.2
 else { 
 	$keyValueMem = 'inBytes'; 
 }			 
@@ -138,18 +147,30 @@ $mems = $api->itemGet(array(
   'search' => array('key_' => $keyValueMem)
 ));
 
+<<<<<<< HEAD
 //print_r($mems);
+=======
+//var_dump($mems);
+>>>>>>> 1.1.2
 // print Mem
 foreach($mems as $mem) {    
   	
  	if($host['available'] == 1 ) { 
  	
  		$searchValSize = 'total'; 
+<<<<<<< HEAD
 	 	$searchValSize1 = 'total'; 
 	 	$searchValUsed = 'used'; 
 	 	$searchValUsed1 = 'available'; 
 						           
 	   $memSize = get_item_values_or($mem->itemid, $searchValSize,$searchValSize1);
+=======
+	 	//$searchValSize1 = 'total'; 
+	 	$searchValUsed = 'free'; 
+	 	$searchValUsed1 = 'available'; 
+						           
+	   $memSize = get_item_values($mem->itemid, $searchValSize);
+>>>>>>> 1.1.2
 	   $memUsed = get_item_values_or($mem->itemid, $searchValUsed,$searchValUsed1); 
 	   //$memUsed = ($memSize['value_max'] - $memUsed['value_max']);
 	
@@ -167,7 +188,12 @@ foreach($mems as $mem) {
 		$zbx_agent = 1;
 	}	
 	
+<<<<<<< HEAD
 	else { 
+=======
+ 	//if($host['sa'] == 1 ) {
+ 		else {	  
+>>>>>>> 1.1.2
 	
 		$searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; 
 		//$searchValSize = 'sysMemorySizeinBytes'; $searchValUsed = 'sysMemoryUsedinBytes'; 

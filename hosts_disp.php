@@ -16,6 +16,7 @@ use ZabbixApi\ZabbixApi;
 
 $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
 
+<<<<<<< HEAD
 $dbGroups = DBselect( 'SELECT * FROM groups WHERE groupid <> 1 ORDER BY name ASC'	);
 
 if(isset($_REQUEST['sel']) && $_REQUEST['sel'] != '' && $_REQUEST['sel'] == 1) {
@@ -30,6 +31,31 @@ if(isset($_REQUEST['sel']) && $_REQUEST['sel'] != '' && $_REQUEST['sel'] == 1) {
 		else {		
 			$include = 1;
 		}
+=======
+//check version
+if(ZABBIX_EXPORT_VERSION >= '4.0'){
+	$grps = 'hstgrp';
+}
+else {
+	$grps = 'groups';
+}
+	
+$dbGroups = DBselect( 'SELECT * FROM '.$grps.' WHERE groupid <> 1 ORDER BY name ASC');
+
+
+if(isset($_REQUEST['sel']) && $_REQUEST['sel'] != '' && $_REQUEST['sel'] == 1) {
+		
+	$group = $_POST['groupid'];
+	$groupID = explode(",",$group);
+	
+	if(in_array(-1, $groupID)) {		
+		$include = 0;				
+	}
+	
+	else {		
+		$include = 1;
+	}
+>>>>>>> 1.1.2
 }	
 
 else {
@@ -55,11 +81,16 @@ else {
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
+<<<<<<< HEAD
+=======
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+>>>>>>> 1.1.2
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 	
 	<link href="inc/select2/select2.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="inc/select2/select2.js" language="javascript"></script>	
 	
+<<<<<<< HEAD
 	
 <script src="js/media/js/jquery.dataTables.min.js"></script>
 <link href="js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
@@ -76,6 +107,24 @@ else {
 	$("#container-fluid").toggle("fast");    
 });          
 </script>
+=======
+	<script src="js/media/js/jquery.dataTables.min.js"></script>
+	<link href="js/media/css/dataTables.bootstrap.css" type="text/css" rel="stylesheet" />
+	<script src="js/media/js/dataTables.bootstrap.js"></script>
+	<script src="js/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+	
+<!--	<script src="js/extensions/Select/js/dataTables.select.min.js"></script>
+	<link href="js/extensions/Select/css/select.bootstrap.css" type="text/css" rel="stylesheet" />-->
+	
+	<link href="css/loader.css" type="text/css" rel="stylesheet" />
+	
+	<script type="text/javascript">
+	 jQuery(window).load(function () {
+		$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
+		$("#container-fluid").toggle("fast");    
+	});          
+	</script>
+>>>>>>> 1.1.2
 </head>
 
 <body>
@@ -90,11 +139,18 @@ else {
 			<option value='-1'> <?php echo _('All'); ?> </option>
 			<?php
 				while ($groups = DBFetch($dbGroups)) {
+<<<<<<< HEAD
 					echo "<option value='".$groups['groupid']."'>".$groups['name']."</option>\n";
 									
 				}											
 			?>
 		</select><br><br><p>		
+=======
+					echo "<option value='".$groups['groupid']."'>".$groups['name']."</option>\n";									
+				}											
+			?>
+		</select><br><br><p>	
+>>>>>>> 1.1.2
 	</form>
 	<?php 		
 	
@@ -103,6 +159,7 @@ else {
 		}
 					
 		if($include == 1) {
+<<<<<<< HEAD
 			include('disp.php');			
 		}					
 	?>
@@ -120,5 +177,20 @@ else {
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.2.custom.min.js"></script>
 
+=======
+			include('disp.php');
+		}					
+	?>
+	</div>
+</div>
+		
+	<script type="text/javascript">
+		$("#groupid").select2({
+			placeholder: "<?php echo $labels['Select group']; ?>",
+			allowClear: false	  
+		});
+	</script>
+
+>>>>>>> 1.1.2
 </body>
 </html>

@@ -9,7 +9,19 @@ use ZabbixApi\ZabbixApi;
 
 $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .'');
 
+<<<<<<< HEAD
 $dbGroups = DBselect( 'SELECT * FROM groups WHERE groupid <> 1 ORDER BY name ASC'	);
+=======
+//check version
+if(ZABBIX_EXPORT_VERSION >= '4.0'){
+	$grps = 'hstgrp';
+}
+else {
+	$grps = 'groups';
+}
+	
+$dbGroups = DBselect( 'SELECT * FROM '.$grps.' WHERE groupid <> 1 ORDER BY name ASC');
+>>>>>>> 1.1.2
 
 if(isset($_REQUEST['sel']) && $_REQUEST['sel'] != '' && $_REQUEST['sel'] == 1) {
 		

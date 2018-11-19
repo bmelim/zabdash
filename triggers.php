@@ -93,8 +93,13 @@ $triggerAll = $api->triggerGet(array(
 		echo "<tr>";			            
 			echo "<td style='text-align:center; vertical-align: middle !important;' data-order=".$tu->lastchange.">".from_epoch($tu->lastchange)."</td>\n";				            			
 			echo "<td style='vertical-align: middle !important;'>
+<<<<<<< HEAD
 						<div class='hostdiv nok". $priority ." hostevent trig_radius' style='height:21px !important; margin-top:0px; !important;' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=". $tu->hosts[0]->hostid ."&show_triggers=1')\">
 						<p class='severity' style='margin-top: -2px;'>". _(get_severity($tu->priority)) ."</p>									
+=======
+						<div class='hostdiv nok". $priority ." hostevent trig_radius' style='height:21px !important; margin-top:5px; !important;' onclick=\"window.open('".$zabURL."zabbix.php?action=problem.view&page=1&filter_hostids[]=". $tu->hosts[0]->hostid. "&filter_show=1&filter_application=&filter_name=&filter_severity=0&filter_inventory[0][field]=type&filter_inventory[0][value]=&filter_evaltype=0&filter_tags[0][tag]=&filter_tags[0][operator]=0&filter_tags[0][value]=&filter_show_tags=3&filter_tag_name_format=0&filter_tag_priority=&filter_set=1')\">
+						<p class='severity'>". _(get_severity($tu->priority)) ."</p>									
+>>>>>>> 1.1.2
 						</div>
 					</td>";				            
 			echo "<td style='text-align:left; vertical-align: middle !important;'><a href='../zabdash/host_detail.php?hostid=".$tu->hosts[0]->hostid."' target='_blank'>". get_hostname($tu->hosts[0]->hostid)."</a></td>";
