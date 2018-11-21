@@ -74,13 +74,14 @@ include('host_info.php');
     	var period = document.getElementById("period").value;    	    	
     	window.location.href = 'host_graphs.php?period='+period+'&hostid=<?php echo $hostid; ?>';    	
     }
+    
 </script>
 
 <link href="css/loader.css" type="text/css" rel="stylesheet" />
 
 <script type="text/javascript">
  jQuery(window).load(function () {
-	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
+	$(".loader").fadeOut("slow"); 
 	$("#container-fluid").toggle("fast");    
 });          
 </script>
@@ -110,7 +111,7 @@ include('host_info.php');
 				<tr>
 					<td style='background:".$cor."; width:12px;' title='".$conn."'></td>
 					<td class='link2' style='vertical-align:middle; text-align:left; padding:5px;'>
-						<a href='".$zabURL."tr_status.php?fullscreen=0&source=0&hostid=".$host['hostid']."' target='_blank' >".$host['name']."</a>
+						<a href='".$zabURL."hosts.php?form=update&hostid=".$host['hostid']."' target='_blank' >".$host['name']."</a>
 					</td>
 					<td style='text-align:center;'>
 						<img src='img/os/".$hostOS.".png' alt='' title='".$hostOS."' alt=''/>

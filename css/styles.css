@@ -1295,15 +1295,15 @@ box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
 .eventdate {
 	vertical-align: middle !important;		
 	display: inline;	
-	font-size: 8pt;
+	font-size: 6pt;
 	font-family: 'RobotoDraft','Helvetica',sans-serif !important;
 }
 
 .severity {
 	vertical-align: middle !important;				
-	font-size: 9pt;
+	font-size: 8pt;
 	text-align: center !important;
-	margin-top: 0px !important;
+	margin-top: 1px !important;
 	color: #000;
 	font-family: 'RobotoDraft','Helvetica',sans-serif !important;
 }

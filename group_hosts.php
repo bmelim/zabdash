@@ -5,8 +5,16 @@
 
    $dbHostsCount = DBselect( 'SELECT COUNT(h.hostid) AS hc FROM hosts h,  hosts_groups hg WHERE h.status <> 3 AND h.flags = 0 AND h.hostid = hg.hostid AND hg.groupid = '.$groupID );
 	$hostsCount = DBFetch($dbHostsCount);	
-	
-	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags, g.name AS gname FROM hosts h, hosts_groups hg, groups g WHERE h.status <> 3 AND h.flags = 0 AND h.hostid = hg.hostid AND g.groupid = hg.groupid AND hg.groupid = '.$groupID.' ORDER BY h.name ASC'	);
+
+	//check version
+	if(ZABBIX_EXPORT_VERSION >= '4.0'){
+		$grps = 'hstgrp';
+	}
+	else {
+		$grps = 'groups';
+	}
+			
+	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags, g.name AS gname FROM hosts h, hosts_groups hg, '.$grps.' g WHERE h.status <> 3 AND h.flags = 0 AND h.hostid = hg.hostid AND g.groupid = hg.groupid AND hg.groupid = '.$groupID.' ORDER BY h.name ASC'	);
 				
 	$md = 11;	
 	
@@ -74,7 +82,7 @@
 							".$IP['ip']."
 						</td>
 						<td style='text-align:center; width:155px;'>
-							<div class='hostdiv nok". $hostdivprio ." hostevent trig_radius' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=".$hosts['hostid']."&show_triggers=1')\">
+							<div class='hostdiv nok". $hostdivprio ." hostevent trig_radius' onclick=\"window.open('".$zabURL."zabbix.php?action=problem.view&page=1&filter_hostids[]=".$hosts['hostid']."&filter_show=1&filter_application=&filter_name=&filter_severity=0&filter_inventory[0][field]=type&filter_inventory[0][value]=&filter_evaltype=0&filter_tags[0][tag]=&filter_tags[0][operator]=0&filter_tags[0][value]=&filter_show_tags=3&filter_tag_name_format=0&filter_tag_priority=&filter_set=1')\">
 								<span class='eventdate'>". from_epoch($trigger[0]->lastchange)."</span>								
 							</div>
 						</td>
@@ -99,7 +107,7 @@
 							".$IP['ip']."
 						</td>
 						<td style='text-align:center; width:155px;'>
-							<div class='hostdiv ok hostevent trig_radius' onclick=\"window.open('/zabbix/tr_status.php?filter_set=1&hostid=".$hosts['hostid']."&show_triggers=1')\">
+							<div class='hostdiv ok hostevent trig_radius' onclick=\"window.open('".$zabURL."zabbix.php?action=problem.view&page=1&filter_hostids[]=".$hosts['hostid']."&filter_show=1&filter_application=&filter_name=&filter_severity=0&filter_inventory[0][field]=type&filter_inventory[0][value]=&filter_evaltype=0&filter_tags[0][tag]=&filter_tags[0][operator]=0&filter_tags[0][value]=&filter_show_tags=3&filter_tag_name_format=0&filter_tag_priority=&filter_set=1')\">
 								<span class='eventdate' style='color:#fff !important;'> <i class='fa fa-check'></i> </span>
 							</div>
 						</td>

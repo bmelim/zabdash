@@ -16,17 +16,17 @@ $api = new ZabbixApi($zabURL.'api_jsonrpc.php', ''. $zabUser .'', ''. $zabPass .
 $dbHostsCount = DBselect( 'SELECT SUM(case when status = 0 then 1 else 0 end) AS active, SUM(case when status = 1 then 1 else 0 end) AS inactive, SUM(case when status = 3 then 1 else 0 end) AS template FROM hosts WHERE flags = 0');
 $hostsCount = DBFetch($dbHostsCount);	
 
-//$dbTrig = DBselect( 'SELECT COUNT(hostid) AS hc FROM hosts WHERE status = 1 AND flags = 0');
-//$trigCount = DBFetch($dbTrig);	
+$dbTrig = DBselect( 'SELECT COUNT(hostid) AS hc FROM hosts WHERE status = 1 AND flags = 0');
+$trigCount = DBFetch($dbTrig);	
 
 $trigger = $api->triggerGet(array(
 	'output' => 'extend',	
-	//'sortfield' => 'priority',
-	//'sortorder' => 'DESC',
+	'sortfield' => 'priority',
+	'sortorder' => 'DESC',
 	'only_true' => '1',
 	'active' => '1', // include trigger state active not active
 	/*'withUnacknowledgedEvents' => '1', */
-	//'expandDescription' => '1',
+	'expandDescription' => '1',
 	'selectHosts' => 1							
 ));	
 
@@ -44,20 +44,21 @@ $triggerUnack = $api->triggerGet(array(
 
 $hostsGroups = $api->hostgroupGet(array(
 	'output' => 'extend',	
-	//'sortfield' => 'name',
-	//'sortorder' => 'ASC'
+	'sortfield' => 'name',
+	'sortorder' => 'ASC'
 	/*'real_hosts' => '1'*/
 ));
 
 $users = $api->userGet(array(
 	'output' => 'extend'	
-));
+));	
+
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ZabDash - Home </title>
+    <title>Zabdash - Home </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <meta http-equiv="Pragma" content="public">           
@@ -66,7 +67,7 @@ $users = $api->userGet(array(
 	 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />    
     <link href="css/bootstrap.css" rel="stylesheet">        		   
     <link rel="stylesheet" type="text/css" href="css/layout.css">
-    <meta http-equiv="refresh" content= "600"/>
+    <meta http-equiv="refresh" content= "300"/>
     
      <!-- this page specific styles 
     <link rel="stylesheet" href="css/compiled/index.css" type="text/css" media="screen" /> -->    
@@ -113,15 +114,7 @@ $users = $api->userGet(array(
 		}
 		.triggersUnack_filter { display:none !important; }
 	</style>	
-
-<link href="css/loader.css" type="text/css" rel="stylesheet" />
-
-<script type="text/javascript">
- jQuery(window).load(function () {
-	$(".loader").fadeOut("slow"); //retire o delay quando for copiar!  delay(1500).
-	$("#container-fluid").toggle("fast");    
-});          
-</script>	
+	
 </head>
 
 <body>	 
@@ -130,16 +123,17 @@ $users = $api->userGet(array(
 	$month = date("Y-m");
 	$hoje = date("Y-m-d");
 ?>
-<div id="loader" class="loader"></div>    
-<div class="container-fluid">  
+
 <div class="site-holder">
 <!-- top -->
 <!-- .box-holder -->
 <!-- .content -->
 <div class="content animated fadeInBig corpo col-md-12 col-sm-12 align">
+<div class="container-fluid">  
 <div id='content-main' class="container-fluid1 align col-md-12 col-sm-12 row">      
     <!-- main-content 
-   <div class="main-content masked-relative masked"> -->      
+   <div class="main-content masked-relative masked"> -->
+      
 	<div id="panels" class="row" style="margin-top: 1%; margin-left: 0%; margin-right:-1%;">
 		<!-- COLUMN 1 -->															
 			  <div class="col-sm-3 col-md-3">
@@ -226,42 +220,41 @@ setTimeout(function(){
 </script> 
   
 <div id="widgets2" class="row">
-	<div class="col-sm-6 col-md-6 align" style="float:left; margin-left: 0px;"> 	 				              
+	<div class="col-sm-12 col-md-6 align" style="float:left; margin-left:-5px;"> 	 				              
 	   <div id="tickets_status" class="widget2 widget-table action-table striped card1" >
 	      <div class="widget-header">                 
 	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Triggers by host - Top 10']; ?></h3>
 	      	 <span class=""></span>               
 	      </div> 
 	      <!-- /widget-header -->      
-	      <div id="graflinhas1" class="col-md-12 col-sm-12" style='height:400px !important; background:#fff;'>	 			
-					<?php						
+	      <div id="graflinhas1" class="" style='height:400px !important; background:#fff;'>	 			
+					<?php
 						include ("charts/triggers_hosts.inc.php");
 					?> 	 						            
 			</div> 
 		</div>
 	</div>
 	
-	<div class="col-sm-6 col-md-6 align" style="float:left; margin-left: 0px; height:400px !important; "> 	 				              
+	<div class="col-sm-6 col-md-6 align" style="float:left;"> 	 				              
 	   <div id="triggers_severity" class="widget2 widget-table action-table striped card1" >
 			<div class="widget-header">                 
 	      	<h3><i class="fa fa-pie-chart" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Triggers by Severity']; ?></h3>
 	      	 <span  class=""></span>               
 	      </div>
 	      <!-- /widget-header -->      
-	      <div id="severity1" style="height:400px !important; background:#fff;">
-	      	<div id="severity" class="align" style="height:280px !important; background:#fff;">	      	 			
+	      <div id="severity1" class="align" style="height:400px !important; background:#fff;">
+	      	<div id="severity" class="" style="height:280px !important; background:#fff;">	      	 			
 					<?php
 						include ("charts/triggers_severity.inc.php");
 					?> 	 						            
 				</div>
-				<div id="legend" class="col-sm-12 col-md-12 align" style="margin-top:35px; text-align:center; display:block;">
+				<div id="legend" class="align" style="margin-top:35px; text-align:center; display:block;">
 		  		  <span class="label label-primary" style="background: #97AAB3 !important; border: 1px solid #97AAB3;"><?php echo _('Not classified'); ?></span>
 		  		  <span class="label label-success" style="background: #7499FF !important; border: 1px solid #7499FF;"><?php echo _('Information'); ?></span>
 	           <span class="label label-success" style="background: #FFC859 !important; border: 1px solid #FFC859; width:70px;"><?php echo _('Warning'); ?></span>
 	           <span class="label label-danger"  style="background: #FFA059 !important; border: 1px solid #FFA059; width:70px;"><?php echo _('Average'); ?></span>
 	           <span class="label label-warning" style="background: #E97659 !important; border: 1px solid #E97659; width:70px;"><?php echo _('High'); ?></span>
-	           <span class="label label-warning" style="background: #B10505 !important; border: 1px solid #B10505; width:70px;"><?php echo _('Disaster'); ?></span>
-	           		  		  
+	           <span class="label label-warning" style="background: #B10505 !important; border: 1px solid #B10505; width:70px;"><?php echo _('Disaster'); ?></span>	           		  		  
 				</div>  
 			</div>  
 		</div>
@@ -271,7 +264,7 @@ setTimeout(function(){
 
 <div id="widgets" class="row" style="margin-top: 0px;">	
 
-	<div class="col-sm-12 col-md-12 align" style="margin-left: 0px;"> 	 				              
+	<div class="col-sm-12 col-md-12 align" style=""> 	 				              
 	   <div id="time" class="widget2 widget-table action-table striped card1" >
 	      <div class="widget-header">                 
 	      	<h3><i class="fa fa-calendar" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Triggers last 7 days']; ?></h3>
@@ -287,13 +280,13 @@ setTimeout(function(){
 	</div>
 	
 	<div class="col-sm-12 col-md-12 align" style="margin-left: 0px;"> 	 				              
-	   <div id="tickets_status" class="widget2 widget-table action-table striped card1" style="background:#fff !important;" >
+	   <div id="tickets_status" class="widget2 widget-table action-table striped card1" >
 	      <div class="widget-header">                 
-	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Unacknowledged Triggers'] ."   (". count($triggerUnack) .")"; ?></h3>
+	      	<h3><i class="fa fa-list" style="margin-left:7px;">&nbsp;&nbsp;&nbsp;</i><?php echo $labels['Unacknowledged Triggers']; ?></h3>
 	      	 <span  class=""></span>               
 	      </div> 
 	      <!-- /widget-header -->      
-	      <div id="unack" style='height:350px !important; background:#fff !important; '>	 			
+	      <div id="pie1" style='height:350px !important; background:#fff; '>	 			
 					<?php
 						include ("charts/triggers_unack.inc.php");
 					?> 	 						            
@@ -329,6 +322,7 @@ setTimeout(function(){
 	    
 	    });
 	});
+
 </script>	
 
 <div id="go-top" class="go-top" onclick="scrollWin()">
@@ -337,7 +331,6 @@ setTimeout(function(){
  	
 </div> <!-- end content -->   
 
-</div>
 </div>
 <!-- /.site-holder -->
 
@@ -364,7 +357,7 @@ setTimeout(function(){
 <script src="js/export-csv.js"></script>
 -->
 <!-- Remove below two lines in production -->  
-<!--<script src="js/theme-options.js"></script>       
-<script src="js/core.js"></script>-->
+<script src="js/theme-options.js"></script>       
+<script src="js/core.js"></script>
 </body>
 </html>
