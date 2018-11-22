@@ -5,7 +5,6 @@ require_once '../include/actions.inc.php';
 
 include('config.php');
 
-
 ?>
 
 <!DOCTYPE html>

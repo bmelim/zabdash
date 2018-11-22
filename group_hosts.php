@@ -14,9 +14,11 @@
 		$grps = 'groups';
 	}
 			
-	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags, g.name AS gname FROM hosts h, hosts_groups hg, '.$grps.' g WHERE h.status <> 3 AND h.flags = 0 AND h.hostid = hg.hostid AND g.groupid = hg.groupid AND hg.groupid = '.$groupID.' ORDER BY h.name ASC'	);
+	$dbHosts = DBselect( 'SELECT h.hostid, h.name, h.status, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags, g.name AS gname, h.maintenance_status AS ms FROM hosts h, hosts_groups hg, '.$grps.' g WHERE h.status <> 3 AND h.flags = 0 AND h.hostid = hg.hostid AND g.groupid = hg.groupid AND hg.groupid = '.$groupID.' ORDER BY h.name ASC');
 				
 	$md = 11;	
+
+   //echo 'SELECT h.hostid, h.name, h.status, h.snmp_available AS sa, h.snmp_disable_until AS sd, h.flags, g.name AS gname FROM hosts h, hosts_groups hg, '.$grps.' g WHERE h.status <> 3 AND h.flags = 0 AND h.hostid = hg.hostid AND g.groupid = hg.groupid AND hg.groupid = '.$groupID.' ORDER BY h.name ASC'	;	
 	
 	echo "	
 		<div class='align col-md-".$md." col-sm-".$md."' style='margin-bottom:80px;' >
@@ -87,7 +89,7 @@
 							</div>
 						</td>
 						<td style='text-align:center; vertical-align:middle'>
-							". hostStatus($hosts['status']) ."
+							". hostStatus($hosts['status'],$hosts['ms']) ."
 						</td>
 					</tr>";								
 			}
@@ -112,7 +114,7 @@
 							</div>
 						</td>
 						<td style='text-align:center; vertical-align:middle'>
-							". hostStatus($hosts['status']) ."
+							". hostStatus($hosts['status'],$hosts['ms']) ."
 						</td>
 					</tr>";	
 				

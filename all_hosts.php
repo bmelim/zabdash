@@ -67,7 +67,7 @@ include('config.php');
 	$dbHostsCount = DBselect( 'SELECT COUNT(hostid) AS hc FROM hosts WHERE status <> 3 AND flags = 0');
 	$hostsCount = DBFetch($dbHostsCount);	
 	
-	$dbHosts = DBselect('SELECT hostid, name, status, snmp_available AS sa, snmp_disable_until AS sd, flags FROM hosts WHERE status <> 3 AND flags = 0 ORDER BY name ASC');
+	$dbHosts = DBselect('SELECT hostid, name, status, snmp_available AS sa, snmp_disable_until AS sd, flags, maintenance_status AS ms FROM hosts WHERE status <> 3 AND flags = 0 ORDER BY name ASC');
 				
 	$md = 11;	
 	
@@ -128,7 +128,7 @@ include('config.php');
 							</td>
 
 							<td style='text-align:center; vertical-align:middle'>
-								". hostStatus($hosts['status']) ."
+								". hostStatus($hosts['status'],$hosts['ms']) ."
 							</td>
 						</tr>";								
 				}
@@ -149,7 +149,7 @@ include('config.php');
 							</td>
 
 							<td style='text-align:center; vertical-align:middle'>
-								". hostStatus($hosts['status']) ."
+								". hostStatus($hosts['status'],$hosts['ms']) ."
 							</td>
 						</tr>";					
 				}						

@@ -12,3 +12,10 @@
 
 
 To add a menu item for ZabDash see README.txt file in menu folder.
+
+
+
+Zabbix API Needs php-posix.
+In debian/ubuntu is in php-common package.
+yum install php-process - redhat/centos
+zypper install php-posix - OpenSuse
