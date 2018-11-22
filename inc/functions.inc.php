@@ -68,15 +68,19 @@ function formatBytesNet($bytes, $precision = 2)
 }
 
 
-function hostStatus($stat) {
+function hostStatus($stat,$ms) {
 
-	if($stat == 0) {
+	if($stat == 0 && $ms == 0) {
 		$status = "<span class='label label-success'>". _('Enabled')."</span>\n";	
 	}	
-	else {
+	if($stat == 1) {
 		$status = "<span class='label label-danger'>". _('Disabled')."</span>\n";
 	}
 
+	if($stat == 0 && $ms == 1) {
+		$status = "<span class='label label-warning'>". _('Maintenance')."</span>\n";
+	}
+	
 return $status;
 
 }
