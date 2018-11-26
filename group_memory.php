@@ -18,10 +18,9 @@ foreach( $groupID as $g ) {
 
 		while ($hosts = DBFetch($dbHosts)) {
 			
-			if($hosts['status'] == 0 && $hosts['flags'] == 0) {
+			//if($hosts['status'] == 0 && $hosts['flags'] == 0) {
 								
-				if($hosts['available'] == 1 ) 
-					{ $keyValue = 'vm.memory.size'; }
+				if($hosts['available'] == 1 ) { $keyValue = 'vm.memory.size'; }
 				else { $keyValue = 'inbytes'; }							
 				
 				 // get all items
@@ -30,20 +29,12 @@ foreach( $groupID as $g ) {
 				     'hostids' => $hosts['hostid'],
 				     'search' => array('key_' => $keyValue)
 				 ));
-
-//print_r($mems);
-				 
+			 
 				// print Mem				
 				foreach($mems as $mem) {    
 				  	
-				 	if($hosts['available'] == 1 ) { 
-				 	
-/*					 	$searchValSize = 'total'; $searchValUsed = 'used'; 
-										           
-					   $memSize = get_item_values($mem->itemid, $searchValSize);
-					   $memUsed = get_item_values($mem->itemid, $searchValUsed);
-					   //$memUsed = ($memSize['value_max'] - $memUsed['value_max']);
-	*/				   
+				 	if($hosts['available'] == 1  ) { 
+				 				   
 				 		$searchValSize = 'total'; 
 					 	$searchValSize1 = 'total'; 
 					 	$searchValUsed = 'used'; 
@@ -69,7 +60,8 @@ foreach( $groupID as $g ) {
 					
 					else { 
 					
-						$searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; 
+						$searchValSize = 'hrStorageSizeinBytes'; 
+						$searchValUsed = 'hrStorageUsedinBytes'; 
 						//$searchValSize = 'sysMemorySizeinBytes'; $searchValUsed = 'sysMemoryUsedinBytes'; 
 					
 					   $memSize = get_item_values($mem->itemid, $searchValSize);
@@ -114,8 +106,7 @@ foreach( $groupID as $g ) {
 					}
 				}
 					
-					echo "
-					<div class='col-md-".$md." col-sm-".$md."'>";
+					//echo " <div class='col-md-".$md." col-sm-".$md."'>";
 					
 					if($arrSizeMem[0] != '') {
 							
@@ -125,6 +116,7 @@ foreach( $groupID as $g ) {
 						$dbIP = DBSelect('SELECT DISTINCT ip FROM interface WHERE hostid ='.$hosts['hostid']);
 						$IP = DBFetch($dbIP);
 						
+						echo "<div class='col-md-".$md." col-sm-".$md."' style='margin-bottom:0px;'>";
 									
 						echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2;'>
 								<thead>
@@ -177,19 +169,20 @@ foreach( $groupID as $g ) {
 							if($zbx_agent == 0) {$usada = formatBytes($u[1],1);}	
 							if($zbx_agent == 1) {$usada = formatBytes($s[1] - $u[1],1);}			
 											
-							echo "<tr style='text-align:left;'>";	
-							echo "	<td colspan='2'>". $memName ."</td>";
-							echo "	<td colspan='1'>". $usada ."</td>";
-							echo "	<td colspan='1'>". formatBytes($s[1],1) ."</td>";
+							echo "<tr style='text-align:left;'>\n";	
+							echo "	<td colspan='2'>". $memName ."</td>\n";
+							echo "	<td colspan='1'>". $usada ."</td>\n";
+							echo "	<td colspan='1'>". formatBytes($s[1],1) ."</td>\n";
 							echo "<td width='15%' style='padding-right:15px; '>
 										<div style='font-size:13px; position:absolute; vertical-align:middle; color:".$perc_cor.";'>&nbsp;".$barra."%</div>
 										<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barraValue."%;'>&nbsp; </div>
-			   					</td>";
+			   					</td>\n";
 							echo "</tr>\n";						
 							//}
-						}
-					}
-												
+						//}
+					//}
+					}		
+									
 					unset($arrSizeMem);				
 					unset($arrSizeMem2);				
 					unset($arrUsedMem);				
@@ -197,8 +190,43 @@ foreach( $groupID as $g ) {
 					unset($arrUsedMem3);
 									
 					echo "</tbody></table>\n";										
-					echo "</div>\n";									
+					echo "</div>\n";		
+					echo "<div style='margin-bottom:60px;'></div>\n";	
 				}
+
+				else {
+
+					//hosts 				
+					if($hosts['sd'] <> 0) { $conn = "Offline"; $cor = "#E3573F"; } else { $conn = "Online"; $cor = "#4BAC64"; }				
+										
+					echo "<div class='col-md-".$md." col-sm-".$md."' style='margin-bottom:0px;'>";
+								
+					echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2; '>
+							<thead>
+								<tr>					
+									<th style='background:".$cor."; width:1%;' title='".$conn."'></th>
+									<th colspan='1' class='linkb' style='width:50%; font-weight:bold; text-align:left;'><a href='host_detail.php?hostid=".$hosts['hostid']."'> ".$hosts['name']." </a></th>
+									<th colspan='1' style='width:18%; text-align:left;'>". $labels['Used'] ."</th>
+									<th colspan='1' style='text-align:left;'> ". _('Total') ." </th>
+									<th colspan='1' style='text-align:left;'> % ". $labels['Used'] ." </th>
+								</tr>
+							</thead>
+							<tbody>\n"; 			
+																		
+											
+					echo "<tr style='text-align:left;'>";	
+					echo "	<td colspan='2'>No data</td>";
+					echo "	<td colspan='1'></td>";
+					echo "	<td colspan='1'></td>";
+					echo "<td width='15%' style='padding-right:15px;'></td>";
+					echo "</tr>\n";	
+		
+					echo "</tbody></table>\n";
+					echo "</div>\n";	
+					echo "<div style='margin-bottom:60px;'></div>\n";	
+												
+				}				
+								
 			}								
 }	
 ?>

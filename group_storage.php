@@ -77,30 +77,14 @@ foreach( $groupID as $g ) {
 				sort($arrSize);
 				sort($arrUsed);
 
-//var_dump($arrSize)."<br>";				
-//var_dump($arrUsed)."<br>";
-				
-				//print disks size
-/*				for($n=0;$n<count($arrUsed);$n++) {
-				
-					$u = explode(",",$arrUsed[$n]); 		
-					
-					if($u[0] != 0 || $u[0] != '') {	
-						if(strchr($u[0],":") == '') {				
-							$arrUsed2[] = $u[0].",".$u[1];
-						}	
-					}
-				}*/
-				
-//var_dump($arrUsed2);
 
 					if($arrSize[0] != '') {
 							
 						//hosts 				
 						if($hosts['sd'] <> 0) { $conn = "Offline"; $cor = "#E3573F"; } else { $conn = "Online"; $cor = "#4BAC64"; }				
 					
-						$dbIP = DBSelect('SELECT DISTINCT ip FROM interface WHERE hostid ='.$hosts['hostid']);
-						$IP = DBFetch($dbIP);
+						//$dbIP = DBSelect('SELECT DISTINCT ip FROM interface WHERE hostid ='.$hosts['hostid']);
+						//$IP = DBFetch($dbIP);
 						
 						echo "<div class='hostdivx col-md-".$md." col-sm-".$md."' style='margin-bottom:0px;'>";
 									
@@ -127,7 +111,7 @@ foreach( $groupID as $g ) {
 								$u[1] = $u[2];
 							}						
 						
-							if( stripos($s[0] , 'Memory') != true ) {
+							//if( stripos($s[0] , 'Memory') != true ) {
 								
 								if($s[1] != 0) {
 									$barra = round((100*$u[1])/$s[1],1);	
@@ -142,28 +126,62 @@ foreach( $groupID as $g ) {
 								if($barra >= 0 and $barra <= 25) { $cor = "progress-bar-success"; $perc_cor = "#000";}	
 								if($barra < 0) { $cor = "progress-bar-danger"; $barra = 0; }			
 												
-								echo "<tr style='text-align:left;'>";	
-								echo "	<td colspan='2'>". $s[0] ."</td>";
-								echo "	<td colspan='1'>". formatBytes($u[1],1) ."</td>";
-								echo "	<td colspan='1'>". formatBytes($s[1],1) ."</td>";
+								echo "<tr style='text-align:left;'>\n";	
+								echo "	<td colspan='2'>". $s[0] ."</td>\n";
+								echo "	<td colspan='1'>". formatBytes($u[1],1) ."</td>\n";
+								echo "	<td colspan='1'>". formatBytes($s[1],1) ."</td>\n";
 								echo "<td width='15%' style='padding-right:15px; '>
 											<div style='font-size:13px; position:absolute; vertical-align:middle; color:".$perc_cor.";'>&nbsp;".$barra."%</div>
 											<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barra."%;'>&nbsp; </div>
-				   					</td>";
+				   					</td>\n";
 								echo "</tr>\n";	
 													
-							}
-						}
+							//}
 						
+						}
 						unset($arrSize);				
 						unset($arrUsed);				
-						//unset($arrUsed2);
+						unset($arrUsed2);
 										
 						echo "</tbody></table>\n";
 						echo "</div>\n";	
 						echo "<div style='margin-bottom:60px;'></div>\n";								
 					}
-				//}
-			}				
+					
+					else {
+
+						//hosts 				
+						if($hosts['sd'] <> 0) { $conn = "Offline"; $cor = "#E3573F"; } else { $conn = "Online"; $cor = "#4BAC64"; }				
+
+						echo "<div class='col-md-".$md." col-sm-".$md."' style='margin-bottom:0px;'>\n";
+									
+						echo "<table class='tabs box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2; '>
+									<thead>								
+										<tr>					
+											<th style='background:".$cor."; width:1%;' title='".$conn."'></th>
+											<th colspan='1' class='linkb' style='width:50%; font-weight:bold; text-align:left;'><a href='host_detail.php?hostid=".$hosts['hostid']."'> ".$hosts['name']." </a></th>
+											<th colspan='1' style='width:18%; text-align:left;'>". $labels['Used'] ."</th>
+											<th colspan='1' style='text-align:left;'> ". _('Total') ." </th>
+											<th colspan='1' style='text-align:left;'> % ". $labels['Used'] ." </th>
+										</tr>
+									</thead>
+								<tbody>\n"; 			
+																			
+												
+							echo "<tr style='text-align:left;'>\n";	
+							echo "	<td colspan='2'>No data</td>\n";
+							echo "	<td colspan='1'></td>\n";
+							echo "	<td colspan='1'></td>\n";
+							echo "<td width='15%' style='padding-right:15px;'></td>\n";
+							echo "</tr>\n";	
+											
+							echo "</tbody></table>\n";
+							echo "</div>\n";	
+							echo "<div style='margin-bottom:60px;'></div>\n";	
+													
+					}
+					
+				}
+			
 }	
 ?>
