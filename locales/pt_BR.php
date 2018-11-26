@@ -39,7 +39,7 @@ return array(
 'Memory' => 'Memória',
 'Storage' => 'Armazenamento',
 'Hosts' => 'Hosts',
-'Host Groups' => 'Grupos de Hosts',
+'Hosts Groups' => 'Grupos de Hosts',
 'Hosts Health' => 'Estado dos Hosts',
 'Hosts Panel' => 'Painel Hosts',
 'Setup' => 'Configuração',

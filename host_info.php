@@ -1,26 +1,32 @@
 <?php
 
 //get disks
-
-if($host['available'] == 1 ) { $keyValue = 'vfs.fs.size'; }
-else { $keyValue = 'inBytes'; }			 
+//if($host['status'] == 0 && $host['flags'] == 0) {
+	
+if($host['available'] == 1 && $host['sa'] == 0 ) { $keyValue = 'vfs.fs.size'; }
+else { $keyValue = 'inbytes'; }			 
  
 	$disks = $api->itemGet(array(
      'output' => 'extend',
      'hostids' => $hostid,
-     'search' => array('key_' => $keyValue)
-     
+     'search' => array('key_' => $keyValue)     
 ));
 
 // print disks ID with graph name
 foreach($disks as $disk) {    
  
- 	//if($host['available'] == 1 && $host['sa'] == 0) { $searchValSize = 'total'; $searchValUsed = 'used'; }
- 	if($host['available'] == 1 ) { $searchValSize = 'total'; $searchValUsed = 'used'; }
-	else { $searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; }
-					           
-   $diskSize = get_item_values($disk->itemid, $searchValSize);
-   $diskUsed = get_item_values($disk->itemid, $searchValUsed);
+ 	if($hosts['available'] == 1 && $hosts['sa'] == 0 ) { 
+ 		$searchValSize = 'total'; 
+ 		$searchValUsed = 'used'; 
+ 		$diskSize = get_item_values($disk->itemid, $searchValSize);
+   	$diskUsed = get_item_values($disk->itemid, $searchValUsed);	
+ 	}
+	else { 
+		$searchValSize = 'hrStorageSizeinBytes';
+		$searchValUsed = 'hrStorageUsedinBytes'; 									           
+   	$diskSize = get_item_values($disk->itemid, $searchValSize);
+   	$diskUsed = get_item_values_storage($disk->itemid, $searchValUsed);				
+	}
 
 	//Size
 	if(strchr(get_item_label($diskSize['key_']),"A:") != '') {
@@ -54,8 +60,9 @@ foreach($disks as $disk) {
 sort($arrSize);
 sort($arrUsed);
 
+//}
 //print disks size
-for($n=0;$n<count($arrUsed);$n++) {
+/*for($n=0;$n<count($arrUsed);$n++) {
 
 	$u = explode(",",$arrUsed[$n]); 		
 	
@@ -64,8 +71,7 @@ for($n=0;$n<count($arrUsed);$n++) {
 			$arrUsed2[] = $u[0].",".$u[1];
 		}	
 	}
-}
-
+}*/
 
 //CPU Load   system.cpu.util[percpu,avg1]
 

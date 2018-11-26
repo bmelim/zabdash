@@ -76,7 +76,7 @@ $users = $api->userGet(array(
     <![endif]-->
  	<script src="js/jquery.min.js"></script> 
    <link href="css/styles.css" rel="stylesheet" type="text/css" />
-   <link href="css/style-dash.css" rel="stylesheet" type="text/css" />    
+<!--   <link href="css/style-dash.css" rel="stylesheet" type="text/css" />    -->
     
     <!-- odometer -->
 	<link href="css/odometer.css" rel="stylesheet">
@@ -185,7 +185,7 @@ $users = $api->userGet(array(
 <!--					   </span>-->
 				   	</div>	
 					   <div class="panel-right right" style='cursor:pointer;' onclick="window.open('../hostgroups.php');">
-         				<span class="chamado"><?php echo _('Host groups'); ?></span><br>
+         				<span class="chamado"><?php echo _('Hosts groups'); ?></span><br>
 							<div id="odometer3" class="odometer" style="font-size: 25px;">   </div><p></p>
          				<span class="date"><b>&nbsp;</b></span>
 					   </div>										   

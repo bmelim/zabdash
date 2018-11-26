@@ -200,6 +200,28 @@ function get_item_values($itemid, $key) {
 	}
 }
 
+function get_item_values_storage($itemid, $key) {
+
+	$dbItems = DBselect("SELECT i.itemid,i.name,i.key_,i.status,i.type,t.num,t.value_min,t.value_avg,t.value_max,from_unixtime(t.clock)			
+				FROM items i, trends_uint t, hosts h
+				WHERE `key_` NOT LIKE '%hrStorageUsedInBytesPerc%'
+				AND `key_` LIKE '%hrStorageUsedInBytes%'  				
+				AND t.itemid=i.itemid			
+				AND i.hostid=h.hostid	  	   	
+				AND i.itemid=".$itemid."
+				ORDER BY t.clock DESC			
+				LIMIT 1");
+	
+	$row = DBFetch($dbItems);		
+	
+	if ($row) {
+		return $row;
+	}
+	else {
+		return false;
+	}
+}
+
 
 function get_item_values_or($itemid, $key, $key1) {
 

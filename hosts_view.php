@@ -4,6 +4,7 @@ require_once '../include/hosts.inc.php';
 require_once '../include/actions.inc.php';
 
 include('config.php');
+require_once 'inc/functions.inc.php';
 
 ?>
 

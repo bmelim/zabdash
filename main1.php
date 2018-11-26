@@ -77,7 +77,7 @@ $users = $api->userGet(array(
     <![endif]-->
  	<script src="js/jquery.min.js"></script> 
    <link href="css/styles.css" rel="stylesheet" type="text/css" />
-   <link href="css/style-dash.css" rel="stylesheet" type="text/css" />    
+<!--   <link href="css/style-dash.css" rel="stylesheet" type="text/css" />    -->
     
     <!-- odometer -->
 	<link href="css/odometer.css" rel="stylesheet">

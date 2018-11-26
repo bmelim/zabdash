@@ -77,7 +77,7 @@ if($headers[0] != '') {
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href="css/styles.css" rel="stylesheet" type="text/css" />
-    <link href="css/style-dash.css" rel="stylesheet" type="text/css" />    
+<!--    <link href="css/style-dash.css" rel="stylesheet" type="text/css" />    -->
     
     <!-- odometer -->
 	<link href="css/odometer.css" rel="stylesheet">
@@ -230,7 +230,7 @@ if($headers[0] != '') {
                            <a href='#' onclick="window.open('hosts_groups.php','iframe1'); scrollWin();" data-original-title='Hosts Groups'>
                                <!--<i><img src="img/icon/group.png" alt="" style="width:20px;"></img></i>-->
                                <i class="fa fa-sitemap"></i>
-                               <span class='hidden-minibar'><?php echo _('Host groups'); ?></span>
+                               <span class='hidden-minibar'><?php echo _('Hosts groups'); ?></span>
                            </a>  
                        		</li>                              
                        		

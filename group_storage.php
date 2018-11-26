@@ -17,9 +17,9 @@ foreach( $groupID as $g ) {
 
 		while ($hosts = DBFetch($dbHosts)) {
 			
-			if($hosts['status'] == 0 && $hosts['flags'] == 0) {
+			//if($hosts['status'] == 0 && $hosts['flags'] == 0) {
 				
-				if($hosts['available'] == 1 ) { $keyValue = 'vfs.fs.size'; }
+				if($hosts['available'] == 1 && $hosts['sa'] == 0 ) { $keyValue = 'vfs.fs.size'; }
 				else { $keyValue = 'inbytes'; }						
 				
 				 // get all items
@@ -28,16 +28,23 @@ foreach( $groupID as $g ) {
 				     'hostids' => $hosts['hostid'],
 				     'search' => array('key_' => $keyValue)
 				 ));
-				
+			
 				 // print disks ID with graph name
 				foreach($disks as $disk) {    
 				 				 	
-				 	if($hosts['available'] == 1 ) { $searchValSize = 'total'; $searchValUsed = 'used'; }
-					else { $searchValSize = 'hrStorageSizeinBytes'; $searchValUsed = 'hrStorageUsedinBytes'; }
-									           
-				   $diskSize = get_item_values($disk->itemid, $searchValSize);
-				   $diskUsed = get_item_values($disk->itemid, $searchValUsed);
-				
+				 	if($hosts['available'] == 1 && $hosts['sa'] == 0 ) { 
+				 		$searchValSize = 'total'; 
+				 		$searchValUsed = 'used'; 
+				 		$diskSize = get_item_values($disk->itemid, $searchValSize);
+				   	$diskUsed = get_item_values($disk->itemid, $searchValUsed);	
+				 	}
+					else { 
+						$searchValSize = 'hrStorageSizeinBytes';
+						$searchValUsed = 'hrStorageUsedinBytes'; 									           
+				   	$diskSize = get_item_values($disk->itemid, $searchValSize);
+				   	$diskUsed = get_item_values_storage($disk->itemid, $searchValUsed);				
+					}
+					
 					//Size
 					if(strchr(get_item_label($diskSize['key_']),"A:") != '') {
 						if($diskSize['value_max'] != 0) {							
@@ -69,9 +76,12 @@ foreach( $groupID as $g ) {
 				 
 				sort($arrSize);
 				sort($arrUsed);
+
+//var_dump($arrSize)."<br>";				
+//var_dump($arrUsed)."<br>";
 				
 				//print disks size
-				for($n=0;$n<count($arrUsed);$n++) {
+/*				for($n=0;$n<count($arrUsed);$n++) {
 				
 					$u = explode(",",$arrUsed[$n]); 		
 					
@@ -80,7 +90,9 @@ foreach( $groupID as $g ) {
 							$arrUsed2[] = $u[0].",".$u[1];
 						}	
 					}
-				}
+				}*/
+				
+//var_dump($arrUsed2);
 
 					if($arrSize[0] != '') {
 							
@@ -145,13 +157,13 @@ foreach( $groupID as $g ) {
 						
 						unset($arrSize);				
 						unset($arrUsed);				
-						unset($arrUsed2);
+						//unset($arrUsed2);
 										
 						echo "</tbody></table>\n";
 						echo "</div>\n";	
 						echo "<div style='margin-bottom:60px;'></div>\n";								
 					}
-				}
+				//}
 			}				
 }	
 ?>

@@ -56,7 +56,7 @@ else {
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--<meta http-equiv='refresh' content='120'>-->	
-	<title>ZabDash - Hosts Storage</title>	
+	<title>ZabDash - <?php echo $labels['Hosts Storage']; ?> </title>	
 	
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
 	<link href="css/bootstrap.css" rel="stylesheet">

@@ -189,9 +189,9 @@ include('host_info.php');
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2;'>
 				<tr>\n";					
 			echo "<td colspan='1' style='width:50%; font-weight:bold;'><img src='img/icon/memory_slot-24.png' alt=''/>  ". $labels['Memory']." </td>				 															
-					<td> ". $labels['Used']." </td>
-					<td> ". _('Total')." </td>
-					<td> % ".$labels['Used']." </td>
+					<td style='font-weight:bold;'> ". $labels['Used']." </td>
+					<td style='font-weight:bold;'> ". _('Total')." </td>
+					<td style='font-weight:bold;'> % ".$labels['Used']." </td>
 				</tr>\n"; 
 
 
@@ -252,11 +252,11 @@ include('host_info.php');
 				<tr>					
 					<td colspan='1' style='width:50%; font-weight:bold;'><img src='img/icon/HDD-24.png' alt=''/> ".$labels['Storage']." </td>\n";													
 		echo "					
-					<td> ".$labels['Used']." </td>
-					<td> ". _('Total')." </td>
-					<td> % ".$labels['Used']." </td>
+					<td style='font-weight:bold;'> ".$labels['Used']." </td>
+					<td style='font-weight:bold;'> ". _('Total')." </td>
+					<td style='font-weight:bold;'> % ".$labels['Used']." </td>
 				</tr>\n"; 		
-		
+
 		for($i=0;$i<count($arrUsed);$i++) {
 		
 			$s = explode(",",$arrSize[$i]);
@@ -267,7 +267,7 @@ include('host_info.php');
 				$u[1] = $u[2];
 			}
 				
-			if( stripos($s[0] , 'Memory') != true ) {								
+		//	if( stripos($s[0] , 'Memory') != true ) {								
 				
 				if($s[1] != 0) {
 					$barra = round((100*$u[1])/$s[1],1);	
@@ -291,7 +291,7 @@ include('host_info.php');
 								<div class='progress-bar ". $cor ." progress-bar ' role='progressbar' aria-valuenow='".$barra."' aria-valuemin='0' aria-valuemax='100' style='text-align:left; width: ".$barra."%;'>&nbsp; </div>
 					      </td>";
 				echo "</tr>\n";						
-			}
+			//}
 		}
 		
 		echo "</table>\n";
@@ -345,8 +345,8 @@ include('host_info.php');
 		echo "<table class='box table table-striped table-hover table-condensed' border='0' width='50%' style='border:1px solid #f2f2f2; margin-bottom:80px;'>
 					<tr>					
 						<td colspan='1' style='width:50%; font-weight:bold;'><img src='img/icon/ethernet_off-24.png' alt=''/> ".$labels['Network Interfaces']." </td>																		
-						<td> In </td>
-						<td> Out </td>												
+						<td style='font-weight:bold;'> In </td>
+						<td style='font-weight:bold;'> Out </td>												
 					</tr>\n";
 			
 			//foreach($arrIfSize as $k){

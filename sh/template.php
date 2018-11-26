@@ -113,7 +113,7 @@ if($theme == '') {
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->    
-    <link href="css/style-dash.css" rel="stylesheet" type="text/css" />
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
     <link href="css/dashboard.css" rel="stylesheet" type="text/css" />
    <!-- <link href="less/style.less" rel="stylesheet"  title="lessCss" id="lessCss"> -->
 
