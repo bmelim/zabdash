@@ -2,10 +2,10 @@
 
 require_once 'inc/functions.inc.php';
 
-$zabServer = "zabbix.mpro.mp.br";
-$zabUser = "deare";
-$zabPass = ".#deare#.";
-$zabURL = "https://zabbix.mpro.mp.br/zabbix/";
+$zabServer = "server.example.com";
+$zabUser = "Admin";
+$zabPass = "zabbix";
+$zabURL = "https://server.example.com/zabbix/";
 
 $useridlang = get_userid(CWebUser::getSessionCookie());
 $lang = get_user_lang($useridlang);
