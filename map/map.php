@@ -80,7 +80,7 @@ while ($row = DBFetch($dbLoc)) {
 
   $id = $row['hostid'];
   $title = $row['host'];  
-  $url = "../../tr_status.php?form=update&hostid=".$id;   	
+  $url = "../../zabbix.php?action=problem.view&filter_hostids%5B%5D=".$id ."&filter_set=1";
   $host = "<a href=". $url ." target=_blank >" . $title . " (".$id.")</a>";  
   $status = $row['conta'];  
   $local = $row['location']; 
